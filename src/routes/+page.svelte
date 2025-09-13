@@ -47,27 +47,27 @@
 			</div>
 
 			<div class="flex flex-row flex-wrap justify-center gap-8">
-				<div class="card">
+				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🔋 Batteries Included</p>
 					<p class="text-sm">
 						The Mupen64 repack comes with plugins to get you started right away.
 					</p>
 				</div>
-				<div class="card">
+				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">⌛ Rerecording</p>
 					<p class="text-sm">
 						Movie recording, playback, savestates - all the basics, but also advanced tools like
 						Piano Roll and Seeking.
 					</p>
 				</div>
-				<div class="card">
+				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">⚡ High Performance</p>
 
 					<p class="text-sm">
 						Optimized for TASing workloads and delivers consistently high performance.
 					</p>
 				</div>
-				<div class="card">
+				<div class="card w-80 max-w-72">
 					<p class="flex flex-row items-center gap-2 text-xl font-semibold">
 						<img src={lua} alt="Lua Logo" class="w-8" />
 						Lua Integration
@@ -77,31 +77,68 @@
 						Contains a comprehensive Lua API which allows automating your TASing workflow.
 					</p>
 				</div>
-				<div class="card">
+				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🌳 Rich Ecosystem</p>
 					<p class="text-sm">
 						Rich ecosystem of advanced TASing tools and plugins, some of which are even first-party!
 					</p>
 				</div>
-				<div class="card">
+				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🔌 Extendable</p>
 					<p class="text-sm">The GUI can be extended seamlessly using the Lua Actions API.</p>
 				</div>
-				<div class="card">
+				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">💪 Poweruser-Friendly</p>
 					<p class="text-sm">
 						Featuring a Command Palette and a hotkey for each action, Mupen64 gives powerusers
 						freedom.
 					</p>
 				</div>
-				<div class="card">
+				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🎥 Video Capture</p>
 					<p class="text-sm">Capture video directly from the emulator using VFW and FFmpeg.</p>
 				</div>
-				<div class="card">
+				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🎮 GameShark</p>
 					<p class="text-sm">Support for GameShark cheats and GS button emulation.</p>
 				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="projects" class="p-16">
+		<div class="mx-auto max-w-6xl">
+			<div class="mb-12 flex flex-row items-center justify-center gap-4 text-3xl font-bold">
+				<hr class="w-15 border-2 border-dashed border-red-600" />
+				<p>Projects</p>
+				<hr class="w-15 border-2 border-dashed border-red-600" />
+			</div>
+
+			<div class="flex w-full flex-col items-center justify-center gap-8">
+				<p class="text-center">
+					In addition to Mupen64 itself, the Mupen64 organization also officially maintains <br />
+					plugins and TAS utilities.
+				</p>
+				<p class="italic opacity-50">Section under construction, check back later!</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="projects" class="p-16">
+		<div class="mx-auto max-w-6xl">
+			<div class="mb-12 flex flex-row items-center justify-center gap-4 text-3xl font-bold">
+				<hr class="w-15 border-2 border-dashed border-red-600" />
+				<p>About Us</p>
+				<hr class="w-15 border-2 border-dashed border-red-600" />
+			</div>
+
+			<div class="flex w-full flex-col items-center justify-center gap-8">
+				<p class="text-center">
+					The Mupen64 Organization is a shared-ownership organization maintained by developers
+					around the world.
+					<br />
+					Feel free to contribute!
+				</p>
 			</div>
 		</div>
 	</section>
