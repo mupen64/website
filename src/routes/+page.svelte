@@ -35,7 +35,7 @@
 					</div>
 					<p class="text-lg">Advanced N64 TASing emulator.</p>
 					<div class="flex flex-wrap items-center justify-center gap-4">
-						<a href="https://repack.skazzy3.com" class="button primary">Download Repack</a>
+						<a href="https://github.com/mupen64/repack/archive/refs/heads/main.zip" class="button primary">Download Repack</a>
 						<a href="https://github.com/mupen64/mupen64-rr-lua" class="button">
 							<img src={github} alt="Github Logo" class="invert" />
 							<p>See on GitHub</p>
