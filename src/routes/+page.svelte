@@ -5,14 +5,6 @@
 	import { fly, slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { cubicInOut, cubicOut, quadOut } from 'svelte/easing';
-
-	let version_visible = $state(false);
-
-	onMount(() => {
-		setTimeout(() => {
-			version_visible = true;
-		}, 100);
-	});
 </script>
 
 <main>
@@ -23,19 +15,19 @@
 				<div class="flex flex-col gap-4">
 					<div class="flex flex-row items-center gap-2 text-5xl leading-tight font-bold">
 						<p>Mupen64</p>
-						{#if version_visible}
-							<p
-								in:fly={{ y: 20, duration: 300, easing: quadOut }}
-								class="bg-gradient-to-b from-white to-black bg-clip-text text-transparent"
-								style="-webkit-text-stroke: 1px white;"
-							>
-								1.3.0-2
-							</p>
-						{/if}
+						<p
+							class="bg-gradient-to-b from-white to-black bg-clip-text text-transparent"
+							style="-webkit-text-stroke: 1px white;"
+						>
+							1.3.0-2
+						</p>
 					</div>
 					<p class="text-lg">Advanced N64 TASing emulator.</p>
 					<div class="flex flex-wrap items-center justify-center gap-4">
-						<a href="https://github.com/mupen64/repack/archive/refs/heads/main.zip" class="button primary">Download Repack</a>
+						<a
+							href="https://github.com/mupen64/repack/archive/refs/heads/main.zip"
+							class="button primary">Download Repack</a
+						>
 						<a href="https://github.com/mupen64/mupen64-rr-lua" class="button">
 							<img src={github} alt="Github Logo" class="invert" />
 							<p>See on GitHub</p>
@@ -48,9 +40,10 @@
 
 	<section id="features" class="p-16">
 		<div class="mx-auto max-w-6xl">
-			<div class="mb-12 text-center">
-				<h2 class="text-3xl font-bold">Features</h2>
-				<p class="mt-2"></p>
+			<div class="mb-12 flex flex-row items-center justify-center gap-4 text-3xl font-bold">
+				<hr class="w-15 border-2 border-dashed border-red-600" />
+				<p>Features</p>
+				<hr class="w-15 border-2 border-dashed border-red-600" />
 			</div>
 
 			<div class="flex flex-row flex-wrap justify-center gap-8">
