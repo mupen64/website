@@ -19,7 +19,7 @@
 							class="bg-gradient-to-b from-white to-black bg-clip-text text-transparent"
 							style="-webkit-text-stroke: 1px white;"
 						>
-							1.3.0-2
+							1.3.0-3
 						</p>
 					</div>
 					<p class="text-lg">Advanced N64 TASing emulator.</p>
