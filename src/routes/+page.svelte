@@ -38,7 +38,7 @@
 		</div>
 	</section>
 
-	<section id="features" class="p-16">
+	<section id="features" class="p-16 pb-0">
 		<div class="mx-auto max-w-6xl">
 			<div class="mb-12 flex flex-row items-center justify-center gap-4 text-3xl font-bold">
 				<hr class="w-15 border-2 border-dashed border-red-600" />
@@ -106,7 +106,25 @@
 		</div>
 	</section>
 
-	<section id="projects" class="p-16">
+	<section id="wiki" class="p-16 pb-0">
+		<div class="mx-auto max-w-6xl">
+			<div class="mb-12 flex flex-row items-center justify-center gap-4 text-3xl font-bold">
+				<hr class="w-15 border-2 border-dashed border-red-600" />
+				<p>Wiki</p>
+				<hr class="w-15 border-2 border-dashed border-red-600" />
+			</div>
+
+			<div class="flex flex-row flex-wrap justify-center gap-8">
+				<p>
+					Visit the <a class="link" href="https://github.com/mupen64/mupen64-rr-lua/wiki"
+						>Mupen64 Wiki</a
+					> for documentation about Mupen64.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="projects" class="p-16 pb-0">
 		<div class="mx-auto max-w-6xl">
 			<div class="mb-12 flex flex-row items-center justify-center gap-4 text-3xl font-bold">
 				<hr class="w-15 border-2 border-dashed border-red-600" />
