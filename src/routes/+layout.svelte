@@ -11,7 +11,7 @@
 
 {@render children?.()}
 
-<footer class="w-screen">
+<footer class="w-full">
 	<hr class="border-dashed border-gray-500" />
 	<div class="mt-10 mb-10 flex flex-col items-center justify-center text-center">
 		<div class="flex flex-row items-center gap-2 mb-5">
