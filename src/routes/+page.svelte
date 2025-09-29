@@ -61,21 +61,23 @@
 				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🔋 Batteries Included</p>
 					<p class="text-sm">
-						The Mupen64 repack comes with plugins to get you started right away.
+						The Mupen64 Repack comes with plugins, Lua scripts, and more to get you TASing right
+						away.
 					</p>
 				</div>
 				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">⌛ Rerecording</p>
 					<p class="text-sm">
-						Movie recording, playback, savestates - all the basics, but also advanced tools like
-						Piano Roll and Seeking.
+						Features the basics like movies and savestates, but also advanced tools like Piano Roll
+						and Seeking.
 					</p>
 				</div>
 				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">⚡ High Performance</p>
 
 					<p class="text-sm">
-						Optimized for TASing workloads and delivers consistently high performance.
+						Mupen64 and its first-party plugins are optimized for TASing workloads and deliver
+						consistently high performance.
 					</p>
 				</div>
 				<div class="card w-80 max-w-72">
@@ -85,32 +87,36 @@
 					</p>
 
 					<p class="text-sm">
-						Contains a comprehensive Lua API which allows automating your TASing workflow.
+						Contains a comprehensive Lua API which allows automating and enhancing your TASing
+						workflow.
 					</p>
 				</div>
 				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🌳 Rich Ecosystem</p>
 					<p class="text-sm">
-						Rich ecosystem of advanced TASing tools and plugins, some of which are even first-party!
+						Rich ecosystem of advanced TASing tools and plugins geared towards increasing TASer
+						productivity.
 					</p>
 				</div>
 				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🔌 Extendable</p>
-					<p class="text-sm">The GUI can be extended seamlessly using the Lua Actions API.</p>
+					<p class="text-sm">The GUI can be extended seamlessly using Lua APIs.</p>
 				</div>
 				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">💪 Poweruser-Friendly</p>
 					<p class="text-sm">
-						Featuring a Command Palette and a hotkey for each action, Mupen64 gives powerusers
-						freedom.
+						Features a Command Palette and a hotkey for each action to give powerusers the freedom
+						they need.
 					</p>
 				</div>
 				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🎥 Video Capture</p>
-					<p class="text-sm">Capture video directly from the emulator using VFW and FFmpeg.</p>
+					<p class="text-sm">
+						Capture stable and perfectly synchronized video directly from the emulator faster than realtime using VFW or FFmpeg.
+					</p>
 				</div>
 				<div class="card w-80 max-w-72">
-					<p class="text-xl font-semibold">🎮 GameShark</p>
+					<p class="text-xl font-semibold">🎮 Cheats</p>
 					<p class="text-sm">Support for GameShark cheats and GS button emulation.</p>
 				</div>
 			</div>
