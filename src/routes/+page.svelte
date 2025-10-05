@@ -112,7 +112,8 @@
 				<div class="card w-80 max-w-72">
 					<p class="text-xl font-semibold">🎥 Video Capture</p>
 					<p class="text-sm">
-						Capture stable and perfectly synchronized video directly from the emulator faster than realtime using VFW or FFmpeg.
+						Capture stable and perfectly synchronized video directly from the emulator faster than
+						realtime using VFW or FFmpeg.
 					</p>
 				</div>
 				<div class="card w-80 max-w-72">
@@ -149,12 +150,14 @@
 				<hr class="w-15 border-2 border-dashed border-red-600" />
 			</div>
 
-			<div class="flex w-full flex-col items-center justify-center gap-8">
-				<p class="text-center">
+			<div class="flex w-full flex-col items-center justify-center gap-4 [&>*]:min-w-50 [&>*]:text-center">
+				<p>
 					In addition to Mupen64 itself, the Mupen64 organization also officially maintains <br />
 					plugins and TAS utilities.
 				</p>
-				<p class="italic opacity-50">Section under construction, check back later!</p>
+
+				<a class="link" href="/ugui">ugui</a>
+				<a class="link" href="/sm64luaredux">SM64 Lua Redux</a>
 			</div>
 		</div>
 	</section>
