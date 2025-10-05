@@ -1,38 +1,20 @@
 <script lang="ts">
 	import ugui from '$lib/assets/ugui.png';
 	import github from '$lib/assets/github.svg';
+	import Hero from '$lib/components/Hero.svelte';
 </script>
 
 <main>
-	<section class="bg-hero p-16 shadow-md">
-		<div class="mx-auto max-w-6xl">
-			<div class="flex flex-row flex-wrap items-center justify-center gap-12 text-white">
-				<img
-					src={ugui}
-					alt="Mupen64 Logo"
-					class="object-fit w-48"
-				/>
-				<div class="flex flex-col gap-4">
-					<div class="flex flex-row items-center gap-2 text-5xl leading-tight font-bold">
-						<p>ugui</p>
-						<p
-							class="bg-gradient-to-b from-white to-black bg-clip-text text-transparent"
-							style="-webkit-text-stroke: 1px white;"
-						>
-							2.0.0
-						</p>
-					</div>
-					<p class="text-lg">Flexible immediate-mode Lua GUI library.</p>
-					<div class="flex flex-wrap items-center justify-center gap-4">
-						<a href="https://github.com/mupen64/ugui" class="button">
-							<img src={github} alt="Github Logo" class="invert" />
-							<p>See on GitHub</p>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<Hero
+		name="ugui"
+		description="Flexible immediate-mode Lua GUI library."
+		version="2.0.0"
+		logo={ugui}
+		repository="https://github.com/mupen64/ugui"
+		bg_color_from="#0000ff"
+		bg_color_to="rgb(39, 17, 209)"
+		dark={true}
+	></Hero>
 
 	<section id="about" class="mb-12 p-16 pb-0">
 		<div class="mx-auto max-w-6xl">
@@ -50,9 +32,3 @@
 		</div>
 	</section>
 </main>
-
-<style lang="tailwindcss">
-	.bg-hero {
-		background: linear-gradient(0deg, #0000ff, rgb(39, 17, 209));
-	}
-</style>

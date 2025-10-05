@@ -1,40 +1,27 @@
 <script lang="ts">
 	import mupen64 from '$lib/assets/mupen64.svg';
-	import github from '$lib/assets/github.svg';
 	import lua from '$lib/assets/lua.svg';
 	import demo from '$lib/assets/demo.png';
+	import Hero from '$lib/components/Hero.svelte';
 </script>
 
 <main>
-	<section class="bg-hero p-16 shadow-md">
-		<div class="mx-auto max-w-6xl">
-			<div class="flex flex-row flex-wrap items-center justify-center gap-12 text-white">
-				<img src={mupen64} alt="Mupen64 Logo" class="object-fit w-48" />
-				<div class="flex flex-col gap-4">
-					<div class="flex flex-row items-center gap-2 text-5xl leading-tight font-bold">
-						<p>Mupen64</p>
-						<p
-							class="bg-gradient-to-b from-white to-black bg-clip-text text-transparent"
-							style="-webkit-text-stroke: 1px white;"
-						>
-							1.3.0-4
-						</p>
-					</div>
-					<p class="text-lg">Advanced N64 TASing emulator.</p>
-					<div class="flex flex-wrap items-center justify-center gap-4">
-						<a
-							href="https://github.com/mupen64/repack/archive/refs/heads/main.zip"
-							class="button primary">Download Repack</a
-						>
-						<a href="https://github.com/mupen64/mupen64-rr-lua" class="button">
-							<img src={github} alt="Github Logo" class="invert" />
-							<p>See on GitHub</p>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<Hero
+		name="Mupen64"
+		description="Advanced N64 TASing emulator."
+		version="1.3.0-4"
+		logo={mupen64}
+		repository="https://github.com/mupen64/mupen64-rr-lua"
+		bg_color_from="#ff0000"
+		bg_color_to="rgb(141, 12, 12)"
+		dark={true}
+	>
+		{#snippet button()}
+			<a href="https://github.com/mupen64/repack/archive/refs/heads/main.zip" class="button primary"
+				>Download Repack</a
+			>
+		{/snippet}
+	</Hero>
 
 	<section id="showcase" class="p-16 pb-0">
 		<div class="mx-auto max-w-6xl">
@@ -150,7 +137,9 @@
 				<hr class="w-15 border-2 border-dashed border-red-600" />
 			</div>
 
-			<div class="flex w-full flex-col items-center justify-center gap-4 [&>*]:min-w-50 [&>*]:text-center">
+			<div
+				class="flex w-full flex-col items-center justify-center gap-4 [&>*]:min-w-50 [&>*]:text-center"
+			>
 				<p>
 					In addition to Mupen64 itself, the Mupen64 organization also officially maintains <br />
 					plugins and TAS utilities.
@@ -181,9 +170,3 @@
 		</div>
 	</section>
 </main>
-
-<style lang="tailwindcss">
-	.bg-hero {
-		background: linear-gradient(45deg, #ff0000, rgb(141, 12, 12));
-	}
-</style>
