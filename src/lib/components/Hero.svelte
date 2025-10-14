@@ -26,7 +26,7 @@
 		>
 			<img src={logo} alt="{name} Logo" class="object-fit w-48" />
 			<div class="flex flex-col gap-4">
-				<div class="flex flex-col items-center gap-2 text-5xl leading-tight font-bold md:flex-row">
+				<div class="flex flex-col items-center gap-2 text-5xl leading-tight font-bold md:flex-row text-center">
 					<p>{name}</p>
 					<p
 						class="bg-gradient-to-b from-white to-black bg-clip-text text-transparent"
@@ -36,7 +36,7 @@
 					</p>
 				</div>
 				<p class="text-center text-lg md:text-left">{description}</p>
-				<div class="flex flex-wrap items-center justify-center gap-4">
+				<div class="flex flex-wrap items-center justify-center md:justify-start gap-4">
 					{#if button}
 						{@render button()}
 					{/if}
