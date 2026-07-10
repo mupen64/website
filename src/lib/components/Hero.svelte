@@ -4,7 +4,6 @@
 	let {
 		name,
 		description,
-		version,
 		logo,
 		repository,
 		button = undefined,
@@ -31,12 +30,6 @@
 					class="flex flex-col items-center gap-2 text-center text-5xl leading-tight font-bold md:flex-row"
 				>
 					<p>{name}</p>
-					<p
-						class="bg-gradient-to-b from-white to-black bg-clip-text text-transparent"
-						style="-webkit-text-stroke: 1px white;"
-					>
-						{version}
-					</p>
 				</div>
 				<p class="text-center text-lg md:text-left">{description}</p>
 				<div class="flex flex-wrap items-center justify-center gap-4 md:justify-start">

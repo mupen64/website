@@ -8,7 +8,6 @@
 	<Hero
 		name="ugui"
 		description="Flexible immediate-mode Lua GUI library."
-		version="3.1.2"
 		logo={ugui}
 		repository="https://github.com/mupen64/ugui"
 		bg_color_from="#0000ff"
