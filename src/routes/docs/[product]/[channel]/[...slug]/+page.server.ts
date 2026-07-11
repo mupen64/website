@@ -3,14 +3,15 @@ import { Marked } from 'marked';
 import type { PageServerLoad } from './$types';
 import { doc_name_to_friendly_name } from '$lib/helpers/DocNameConverter';
 import {
-	buildDocHref,
-	getDocContent,
-	getDocsChannelLinks,
-	getDocsProductLabel,
-	isDocsChannel,
-	isDocsProduct,
-	listDocSlugs
-} from '$lib/server/docs';
+		buildDocHref,
+		getDocContent,
+		getDocsChannelLinks,
+		getDocsNavItems,
+		getDocsProductLabel,
+		isDocsChannel,
+		isDocsProduct,
+		listDocSlugs
+	} from '$lib/server/docs';
 
 function renderDoc(content: string, product: string) {
 	const marked = new Marked({
@@ -77,6 +78,8 @@ export const load: PageServerLoad = async ({ params }) => {
 		product_label: getDocsProductLabel(params.product),
 		channel: params.channel,
 		channel_links: await getDocsChannelLinks(params.product, slug),
+		docs: await getDocsNavItems(params.product, params.channel),
+		current_doc_href: buildDocHref(params.product, params.channel, slug),
 		content: await renderDoc(content, params.product),
 		title: doc_name_to_friendly_name(slug)
 	};
