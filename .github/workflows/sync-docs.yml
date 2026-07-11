@@ -1,0 +1,92 @@
+name: Sync docs
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-docs
+  cancel-in-progress: false
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Resolve latest release tags
+        id: refs
+        run: |
+          set -euo pipefail
+
+          api_headers=(
+            -H "Accept: application/vnd.github+json"
+            -H "Authorization: Bearer ${GITHUB_TOKEN}"
+            -H "X-GitHub-Api-Version: 2022-11-28"
+          )
+
+          mupen_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/mupen64/mupen64-rr-lua/releases/latest | jq -r '.tag_name')"
+          redux_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/mupen64/SM64LuaRedux/releases/latest | jq -r '.tag_name')"
+
+          if [ -z "${mupen_release_tag}" ] || [ "${mupen_release_tag}" = "null" ]; then
+            echo "Failed to resolve latest release tag for mupen64/mupen64-rr-lua" >&2
+            exit 1
+          fi
+
+          if [ -z "${redux_release_tag}" ] || [ "${redux_release_tag}" = "null" ]; then
+            echo "Failed to resolve latest release tag for mupen64/SM64LuaRedux" >&2
+            exit 1
+          fi
+
+          {
+            echo "mupen_release_tag=${mupen_release_tag}"
+            echo "redux_release_tag=${redux_release_tag}"
+          } >> "${GITHUB_OUTPUT}"
+
+      - name: Sync upstream docs
+        run: |
+          set -euo pipefail
+
+          workdir="${RUNNER_TEMP}/sync-docs"
+          rm -rf "${workdir}"
+          mkdir -p "${workdir}"
+
+          git clone --depth 1 --branch "${{ steps.refs.outputs.mupen_release_tag }}" https://github.com/mupen64/mupen64-rr-lua.git "${workdir}/mupen64-stable"
+          git clone --depth 1 --branch main https://github.com/mupen64/mupen64-rr-lua.git "${workdir}/mupen64-nightly"
+          git clone --depth 1 --branch "${{ steps.refs.outputs.redux_release_tag }}" https://github.com/mupen64/SM64LuaRedux.git "${workdir}/redux-stable"
+          git clone --depth 1 --branch main https://github.com/mupen64/SM64LuaRedux.git "${workdir}/redux-nightly"
+
+          mkdir -p static/docs/mupen64/stable
+          mkdir -p static/docs/mupen64/nightly
+          mkdir -p static/docs/redux/stable
+          mkdir -p static/docs/redux/nightly
+
+          rsync -a --delete "${workdir}/mupen64-stable/docs/win/." static/docs/mupen64/stable/
+          rsync -a --delete "${workdir}/mupen64-nightly/docs/win/." static/docs/mupen64/nightly/
+          rsync -a --delete "${workdir}/redux-stable/docs/." static/docs/redux/stable/
+          rsync -a --delete "${workdir}/redux-nightly/docs/." static/docs/redux/nightly/
+
+      - name: Commit and push changes
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add static/docs/mupen64/stable static/docs/mupen64/nightly static/docs/redux/stable static/docs/redux/nightly
+
+          if git diff --cached --quiet; then
+            echo "No documentation changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Sync upstream docs"
+          git push
