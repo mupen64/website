@@ -1,8 +1,25 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import sm64luaredux from '$lib/assets/sm64luaredux.png';
 
-	let { data } = $props();
+	type DocsPageData = {
+		product: 'mupen64' | 'redux';
+		product_label: string;
+		channel: 'stable' | 'nightly';
+		channel_links: Array<{ channel: 'stable' | 'nightly'; href: string; available: boolean }>;
+		docs: Array<{ slug: string; title: string; href: string; channel: 'stable' | 'nightly' }>;
+		current_doc_href: string;
+		content: string;
+		title: string;
+	};
+
+	let { data }: { data: DocsPageData } = $props();
+
+	function handle_doc_change(event: Event) {
+		const target = event.currentTarget as HTMLSelectElement;
+		window.location.assign(target.value);
+	}
 </script>
 
 <main>
@@ -22,13 +39,22 @@
 					class="mt-3 block h-px w-16 rounded-full"
 					style:background-color={data.product === 'mupen64' ? '#ff0000' : '#ffffff'}
 				></span>
-				<h1 class="mt-4 text-3xl font-bold">{data.title}</h1>
+				<select
+					class="select select-bordered mt-4 w-full max-w-md bg-base-100"
+					aria-label="Choose a document"
+					value={data.current_doc_href}
+					onchange={handle_doc_change}
+				>
+					{#each data.docs as doc (doc.href)}
+						<option value={doc.href}>{doc.title}</option>
+					{/each}
+				</select>
 			</div>
 
 			<div class="join self-start">
 				{#each data.channel_links as link, i (i)}
 					<a
-						href={link.href}
+						href={resolve(link.href)}
 						class={`btn btn-sm join-item ${link.channel === data.channel ? 'btn-active' : 'btn-ghost'}`}
 					>
 						{link.channel}
