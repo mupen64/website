@@ -55,6 +55,21 @@ jobs:
         run: |
           set -euo pipefail
 
+          sync_if_exists() {
+            src="$1"
+            dest="$2"
+            label="$3"
+
+            mkdir -p "${dest}"
+
+            if [ ! -d "${src}" ]; then
+              echo "Skipping ${label}: source directory not found at ${src}"
+              return 0
+            fi
+
+            rsync -a --delete "${src}/." "${dest}/"
+          }
+
           workdir="${RUNNER_TEMP}/sync-docs"
           rm -rf "${workdir}"
           mkdir -p "${workdir}"
@@ -64,15 +79,10 @@ jobs:
           git clone --depth 1 --branch "${{ steps.refs.outputs.redux_release_tag }}" https://github.com/mupen64/SM64LuaRedux.git "${workdir}/redux-stable"
           git clone --depth 1 --branch main https://github.com/mupen64/SM64LuaRedux.git "${workdir}/redux-nightly"
 
-          mkdir -p static/docs/mupen64/stable
-          mkdir -p static/docs/mupen64/nightly
-          mkdir -p static/docs/redux/stable
-          mkdir -p static/docs/redux/nightly
-
-          rsync -a --delete "${workdir}/mupen64-stable/docs/win/." static/docs/mupen64/stable/
-          rsync -a --delete "${workdir}/mupen64-nightly/docs/win/." static/docs/mupen64/nightly/
-          rsync -a --delete "${workdir}/redux-stable/docs/." static/docs/redux/stable/
-          rsync -a --delete "${workdir}/redux-nightly/docs/." static/docs/redux/nightly/
+          sync_if_exists "${workdir}/mupen64-stable/docs/win" static/docs/mupen64/stable "mupen64 stable docs"
+          sync_if_exists "${workdir}/mupen64-nightly/docs/win" static/docs/mupen64/nightly "mupen64 nightly docs"
+          sync_if_exists "${workdir}/redux-stable/docs" static/docs/redux/stable "redux stable docs"
+          sync_if_exists "${workdir}/redux-nightly/docs" static/docs/redux/nightly "redux nightly docs"
 
       - name: Commit and push changes
         run: |
