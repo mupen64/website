@@ -7,18 +7,18 @@
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 
+	const download_url = 'https://github.com/mupen64/repack/archive/refs/heads/main.zip';
+
 	function handle_download(event: MouseEvent) {
 			event.preventDefault();
-
-			const download_url = "https://github.com/mupen64/repack/archive/refs/heads/main.zip";
-
+	
 			const iframe = document.createElement('iframe');
 			iframe.style.display = 'none';
 			iframe.src = download_url;
 			document.body.appendChild(iframe);
 
 			setTimeout(() => {
-				goto(resolve('/docs/mupen64/win/1.%20Getting-Started'));
+				goto(resolve('/docs/mupen64/stable'));
 				setTimeout(() => iframe.remove(), 1000);
 			}, 300);
 		}
@@ -36,7 +36,7 @@
 	>
 		{#snippet button()}
 	  	<a
-			href="#"
+			href={download_url}
 			class="btn"
 			onclick={handle_download}>
 			<span class="material-symbols-sharp">window</span>

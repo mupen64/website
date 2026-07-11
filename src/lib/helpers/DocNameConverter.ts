@@ -1,6 +1,6 @@
 export function doc_name_to_friendly_name(name: string) {
-	name = name.substring(3);
-	name = name.split('-').join(' ');
-	name = name.charAt(0).toUpperCase() + name.slice(1);
-	return name;
+	const baseName = name.split('/').pop() ?? name;
+	const friendlyName = baseName.replace(/^\d+\.\s*/, '').split('-').join(' ');
+
+	return friendlyName.charAt(0).toUpperCase() + friendlyName.slice(1);
 }

@@ -1,7 +1,9 @@
-import { get_doc_names } from '$lib/helpers/DocFetcher';
-import type { PageServerLoad } from './$types';
-export const load: PageServerLoad = async () => {
+import { getDocsNavItems } from '$lib/server/docs';
+import type { LayoutServerLoad } from './$types';
+
+export const load: LayoutServerLoad = async () => {
 	return {
-		doc_names: await get_doc_names()
+		mupen64_docs: await getDocsNavItems('mupen64', 'stable'),
+		redux_docs: await getDocsNavItems('redux', 'stable')
 	};
 };

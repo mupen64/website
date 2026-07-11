@@ -1,9 +1,6 @@
 <script lang="ts">
 	import '../app.css';
 	import mupen64 from '$lib/assets/mupen64.svg';
-	import sm64luaredux from '$lib/assets/sm64luaredux.png';
-	import ugui from '$lib/assets/ugui.png';
-	import { doc_name_to_friendly_name } from '$lib/helpers/DocNameConverter';
 	import { resolve } from '$app/paths';
 
 	let { children, data } = $props();
@@ -31,14 +28,25 @@
 								<span>Home</span>
 							</a>
 						</li>
+						<li>
+							<a href={resolve('/docs/mupen64/stable')}>
+								<span>Docs</span>
+							</a>
+						</li>
 
-						{#each data.doc_names as name, i (i)}
+						{#each data.mupen64_docs as doc, i (i)}
 							<li>
-								<a href={resolve(`/docs/mupen64/win/${name}`)}>
-									<span>{doc_name_to_friendly_name(name)}</span>
+								<a href={doc.href}>
+									<span>{doc.title}</span>
 								</a>
 							</li>
 						{/each}
+
+						{#if data.mupen64_docs.length === 0}
+							<li>
+								<span class="px-4 py-2 text-sm opacity-70">No stable docs yet</span>
+							</li>
+						{/if}
 					</ul>
 				</details>
 			</li>
@@ -52,6 +60,25 @@
 								<span>Home</span>
 							</a>
 						</li>
+						<li>
+							<a href={resolve('/docs/redux/stable')}>
+								<span>Docs</span>
+							</a>
+						</li>
+
+						{#each data.redux_docs as doc, i (i)}
+							<li>
+								<a href={doc.href}>
+									<span>{doc.title}</span>
+								</a>
+							</li>
+						{/each}
+
+						{#if data.redux_docs.length === 0}
+							<li>
+								<span class="px-4 py-2 text-sm opacity-70">No stable docs yet</span>
+							</li>
+						{/if}
 					</ul>
 				</details>
 			</li>
