@@ -28,11 +28,6 @@
 								<span>Home</span>
 							</a>
 						</li>
-						<li>
-							<a href={resolve('/docs/mupen64/stable')}>
-								<span>Docs</span>
-							</a>
-						</li>
 
 						{#each data.mupen64_docs as doc, i (i)}
 							<li>
@@ -58,11 +53,6 @@
 						<li>
 							<a href={resolve('/sm64luaredux')}>
 								<span>Home</span>
-							</a>
-						</li>
-						<li>
-							<a href={resolve('/docs/redux/stable')}>
-								<span>Docs</span>
 							</a>
 						</li>
 
