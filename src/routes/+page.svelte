@@ -18,7 +18,7 @@
 			document.body.appendChild(iframe);
 
 			setTimeout(() => {
-				goto(resolve('/docs/win/1.%20Getting-Started'));
+				goto(resolve('/docs/mupen64/win/1.%20Getting-Started'));
 				setTimeout(() => iframe.remove(), 1000);
 			}, 300);
 		}

@@ -1,4 +1,4 @@
-const modules = import.meta.glob('/static/docs/win/*.md', { as: 'raw' });
+const modules = import.meta.glob('/static/docs/mupen64/win/*.md', { as: 'raw' });
 const docs = await Promise.all(
 	Object.entries(modules).map(async ([path, loader]) => ({
 		name: path.split('/').pop()?.replace('.md', ''),

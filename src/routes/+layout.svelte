@@ -34,7 +34,7 @@
 
 						{#each data.doc_names as name, i (i)}
 							<li>
-								<a href={resolve(`/docs/win/${name}`)}>
+								<a href={resolve(`/docs/mupen64/win/${name}`)}>
 									<span>{doc_name_to_friendly_name(name)}</span>
 								</a>
 							</li>

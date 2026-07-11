@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	const doc_names = await get_doc_names();
 
 	if (params.slug == '') {
-		redirect(307, `/docs/win/${doc_names[0]}`);
+		redirect(307, `/docs/mupen64/win/${doc_names[0]}`);
 	}
 
 	const content = (await get_doc_by_name(params.slug))!;
