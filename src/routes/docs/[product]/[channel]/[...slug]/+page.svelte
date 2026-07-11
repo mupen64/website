@@ -1,4 +1,7 @@
 <script lang="ts">
+	import mupen64 from '$lib/assets/mupen64.svg';
+	import sm64luaredux from '$lib/assets/sm64luaredux.png';
+
 	let { data } = $props();
 </script>
 
@@ -6,8 +9,20 @@
 	<section id="wiki" class="mx-auto max-w-6xl p-4 py-16">
 		<div class="mx-auto mb-8 flex max-w-4xl flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
 			<div>
-				<p class="text-sm uppercase tracking-wide opacity-70">{data.product_label}</p>
-				<h1 class="text-3xl font-bold">{data.title}</h1>
+				<p class="flex items-center gap-2 text-sm uppercase tracking-wide opacity-70">
+					<img
+						src={data.product === 'mupen64' ? mupen64 : sm64luaredux}
+						alt=""
+						class="h-5 w-5 object-contain"
+					/>
+					<span>{data.product_label}</span>
+				</p>
+				<span
+					aria-hidden="true"
+					class="mt-3 block h-px w-16 rounded-full"
+					style:background-color={data.product === 'mupen64' ? '#ff0000' : '#ffffff'}
+				></span>
+				<h1 class="mt-4 text-3xl font-bold">{data.title}</h1>
 			</div>
 
 			<div class="join self-start">

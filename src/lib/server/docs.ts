@@ -19,8 +19,13 @@ export type DocsChannelLink = {
 	available: boolean;
 };
 
+const DOCS_PRODUCT_LABELS: Record<DocsProduct, string> = {
+	mupen64: 'Mupen64',
+	redux: 'SM64 Lua Redux'
+};
+
 export function getDocsProductLabel(product: DocsProduct) {
-	return product === 'mupen64' ? 'Mupen64' : 'SM64 Lua Redux';
+	return DOCS_PRODUCT_LABELS[product];
 }
 
 type IndexedDoc = {
