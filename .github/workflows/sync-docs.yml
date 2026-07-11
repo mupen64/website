@@ -98,5 +98,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Sync upstream docs"
+          git commit -m "chore: sync docs"
           git push
