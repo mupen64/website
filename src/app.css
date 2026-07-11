@@ -78,3 +78,12 @@ html {
 	background-color: var(--color-base-content);
 	opacity: 15%;
 }
+
+#wiki img.panel-shot {
+	display: inline-block;
+	max-height: 400px;
+	width: auto;
+	vertical-align: top;
+	margin: 0 0.5rem 0.5rem 0;
+	border-radius: 0.25rem;
+}

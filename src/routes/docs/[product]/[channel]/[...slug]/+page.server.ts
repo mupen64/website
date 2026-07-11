@@ -12,7 +12,7 @@ import {
 	listDocSlugs
 } from '$lib/server/docs';
 
-function renderDoc(content: string) {
+function renderDoc(content: string, product: string) {
 	const marked = new Marked({
 		hooks: {
 			postprocess(html) {
@@ -35,6 +35,10 @@ function renderDoc(content: string) {
 					'<table class="my-4 w-full overflow-hidden table table-zebra bg-base-300"'
 				);
 				html = html.replaceAll('<ol', '<ol class="ol"');
+
+				if (product === 'redux') {
+					html = html.replaceAll('<img', '<img class="panel-shot"');
+				}
 
 				return html;
 			}
@@ -73,7 +77,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		product_label: getDocsProductLabel(params.product),
 		channel: params.channel,
 		channel_links: await getDocsChannelLinks(params.product, slug),
-		content: await renderDoc(content),
+		content: await renderDoc(content, params.product),
 		title: doc_name_to_friendly_name(slug)
 	};
 };
