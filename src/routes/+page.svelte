@@ -7,7 +7,7 @@
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 
-	const stable_download_url = 'https://github.com/mupen64/repack/archive/refs/heads/main.zip';
+	const stable_download_url = 'https://github.com/mupen64/repack-stable/archive/refs/heads/main.zip';
 	const nightly_download_url = 'https://github.com/mupen64/repack-nightly/archive/refs/heads/main.zip';
 
 	function handle_download(event: MouseEvent, url: string, channel: 'stable' | 'nightly') {
