@@ -7,21 +7,22 @@
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 
-	const download_url = 'https://github.com/mupen64/repack/archive/refs/heads/main.zip';
+	const stable_download_url = 'https://github.com/mupen64/repack/archive/refs/heads/main.zip';
+	const nightly_download_url = 'https://github.com/mupen64/repack-nightly/archive/refs/heads/main.zip';
 
-	function handle_download(event: MouseEvent) {
-			event.preventDefault();
-	
-			const iframe = document.createElement('iframe');
-			iframe.style.display = 'none';
-			iframe.src = download_url;
-			document.body.appendChild(iframe);
+	function handle_download(event: MouseEvent, url: string, channel: 'stable' | 'nightly') {
+		event.preventDefault();
 
-			setTimeout(() => {
-				goto(resolve('/docs/mupen64/stable'));
-				setTimeout(() => iframe.remove(), 1000);
-			}, 300);
-		}
+		const iframe = document.createElement('iframe');
+		iframe.style.display = 'none';
+		iframe.src = url;
+		document.body.appendChild(iframe);
+
+		setTimeout(() => {
+			goto(resolve(`/docs/mupen64/${channel}`));
+			setTimeout(() => iframe.remove(), 1000);
+		}, 300);
+	}
 </script>
 
 <main>
@@ -35,13 +36,34 @@
 		dark={true}
 	>
 		{#snippet button()}
-	  	<a
-			href={download_url}
-			class="btn"
-			onclick={handle_download}>
-			<span class="material-symbols-sharp">window</span>
-			<p>Download for Windows</p>
-			    </a>
+			<div class="join">
+				<a
+					href={stable_download_url}
+					class="btn join-item"
+					onclick={(event) => handle_download(event, stable_download_url, 'stable')}
+				>
+					<span class="material-symbols-sharp">window</span>
+					<p>Download for Windows</p>
+				</a>
+
+				<details class="dropdown dropdown-end">
+					<summary class="btn join-item" aria-label="More download options">
+						<span class="material-symbols-sharp">arrow_drop_down</span>
+					</summary>
+					<ul class="dropdown-content menu z-10 mt-2 w-72 rounded-box border border-base-300 bg-base-100 p-2 shadow">
+						<li>
+							<a
+								href={nightly_download_url}
+								class="btn btn-sm justify-start"
+								onclick={(event) => handle_download(event, nightly_download_url, 'nightly')}
+							>
+						         <span class="material-symbols-sharp">window</span>
+						         <p>Download nightly (beta) for Windows</p>
+							</a>
+						</li>
+					</ul>
+				</details>
+			</div>
 		{/snippet}
 	</Hero>
 
