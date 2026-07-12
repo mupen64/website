@@ -93,16 +93,15 @@ export function buildDocsChannelHref(product: DocsProduct, channel: DocsChannel)
 }
 
 export function buildDocHref(product: DocsProduct, channel: DocsChannel, slug: string) {
-	const encodedSlug = normalizeSlug(slug)
-		.split('/')
-		.map(encodeURIComponent)
-		.join('/');
+	const encodedSlug = normalizeSlug(slug).split('/').map(encodeURIComponent).join('/');
 
 	return `/docs/${product}/${channel}/${encodedSlug}`;
 }
 
 export async function listDocSlugs(product: DocsProduct, channel: DocsChannel) {
-	return docs.filter((doc) => doc.product === product && doc.channel === channel).map((doc) => doc.slug);
+	return docs
+		.filter((doc) => doc.product === product && doc.channel === channel)
+		.map((doc) => doc.slug);
 }
 
 export async function hasDocs(product: DocsProduct, channel: DocsChannel) {
@@ -115,7 +114,9 @@ export async function getFirstDocSlug(product: DocsProduct, channel: DocsChannel
 
 export async function getDefaultDocHref(product: DocsProduct) {
 	const firstSlug = await getFirstDocSlug(product, 'stable');
-	return firstSlug ? buildDocHref(product, 'stable', firstSlug) : buildDocsChannelHref(product, 'stable');
+	return firstSlug
+		? buildDocHref(product, 'stable', firstSlug)
+		: buildDocsChannelHref(product, 'stable');
 }
 
 export async function getDocsNavItems(
@@ -141,9 +142,10 @@ export async function getDocsChannelLinks(
 	return Promise.all(
 		DOCS_CHANNELS.map(async (channel) => {
 			const available = await hasDocs(product, channel);
-			const href = normalizedSlug && (await getDocContent(product, channel, normalizedSlug))
-				? buildDocHref(product, channel, normalizedSlug)
-				: buildDocsChannelHref(product, channel);
+			const href =
+				normalizedSlug && (await getDocContent(product, channel, normalizedSlug))
+					? buildDocHref(product, channel, normalizedSlug)
+					: buildDocsChannelHref(product, channel);
 
 			return {
 				channel,
@@ -160,8 +162,9 @@ export async function getDocContent(product: string, channel: string, slug: stri
 	}
 
 	const normalizedSlug = normalizeSlug(slug);
-	return docs.find((doc) => doc.product === product && doc.channel === channel && doc.slug === normalizedSlug)
-		?.content;
+	return docs.find(
+		(doc) => doc.product === product && doc.channel === channel && doc.slug === normalizedSlug
+	)?.content;
 }
 
 export async function getDocHrefForSlug(product: DocsProduct, slug: string) {

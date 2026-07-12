@@ -3,15 +3,15 @@ import { Marked } from 'marked';
 import type { PageServerLoad } from './$types';
 import { doc_name_to_friendly_name } from '$lib/helpers/DocNameConverter';
 import {
-		buildDocHref,
-		getDocContent,
-		getDocsChannelLinks,
-		getDocsNavItems,
-		getDocsProductLabel,
-		isDocsChannel,
-		isDocsProduct,
-		listDocSlugs
-	} from '$lib/server/docs';
+	buildDocHref,
+	getDocContent,
+	getDocsChannelLinks,
+	getDocsNavItems,
+	getDocsProductLabel,
+	isDocsChannel,
+	isDocsProduct,
+	listDocSlugs
+} from '$lib/server/docs';
 
 function renderDoc(content: string) {
 	const marked = new Marked({

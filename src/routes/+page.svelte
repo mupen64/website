@@ -9,14 +9,18 @@
 
 	const stable_download_url = 'https://github.com/mupen64/repack-stable/archive/refs/heads/main.zip';
 	const nightly_download_url = 'https://github.com/mupen64/repack-nightly/archive/refs/heads/main.zip';
+	const experiments_download_url = 'https://github.com/mupen64/repack-experiments/archive/refs/heads/main.zip';
 
-	function handle_download(event: MouseEvent, url: string, channel: 'stable' | 'nightly') {
+	function handle_download(event: MouseEvent, url: string, channel: 'stable' | 'nightly' | 'experiments') {
 		event.preventDefault();
 
 		const iframe = document.createElement('iframe');
 		iframe.style.display = 'none';
 		iframe.src = url;
 		document.body.appendChild(iframe);
+
+		if(channel === 'experiments')
+			return;
 
 		setTimeout(() => {
 			goto(resolve(`/docs/mupen64/${channel}`));
@@ -50,18 +54,33 @@
 					<summary class="btn join-item" aria-label="More download options">
 						<span class="material-symbols-sharp">arrow_drop_down</span>
 					</summary>
-					<ul class="dropdown-content menu z-10 mt-2 w-72 rounded-box border border-base-300 bg-base-100 p-2 shadow">
+					<ul class="dropdown-content menu z-10 mt-2 w-72 rounded-box border border-base-300 bg-base-100 p-2 shadow gap-2">
 						<li>
 							<a
 								href={nightly_download_url}
-								class="btn btn-sm justify-start"
+								class="btn btn-sm h-auto min-h-0 items-start justify-start py-2"
 								onclick={(event) => handle_download(event, nightly_download_url, 'nightly')}
 							>
-						         <span class="material-symbols-sharp">window</span>
-						         <p>Download nightly (beta) for Windows</p>
+					           <div class="flex w-full flex-col items-start text-left leading-tight">
+									<p class="text-base">Download nightly</p>
+									<p class="text-xs opacity-70 font-light">Beta - updated nightly and may be unstable</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a
+								href={experiments_download_url}
+								class="btn btn-sm h-auto min-h-0 items-start justify-start py-2"
+								onclick={(event) => handle_download(event, experiments_download_url, 'experiments')}
+							>
+						         <div class="flex w-full flex-col items-start text-left leading-tight">
+									<p class="text-base">Download experiments</p>
+									<p class="text-xs opacity-70 font-light">Experimental variations with cutting-edge features</p>
+								</div>
 							</a>
 						</li>
 					</ul>
+
 				</details>
 			</div>
 		{/snippet}
