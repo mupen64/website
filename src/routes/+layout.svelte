@@ -2,105 +2,108 @@
 	import '../app.css';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import { resolve } from '$app/paths';
+	import { MegaMenu, NavBrand, NavHamburger, NavLi, Navbar, NavUl } from 'flowbite-svelte';
 
 	let { children, data } = $props();
+
+	const mupen64Items = $derived([
+		{ name: 'Home', href: resolve('/') },
+		...(data.mupen64_docs ?? []).map((doc) => ({ name: doc.title, href: doc.href }))
+	]);
+
+	const reduxItems = $derived([
+		{ name: 'Home', href: resolve('/sm64luaredux') },
+		...(data.redux_docs ?? []).map((doc) => ({ name: doc.title, href: doc.href }))
+	]);
+
+	const uguiItems = [{ name: 'Home', href: resolve('/ugui') }];
+	const stroopItems = [{ name: 'Home', href: resolve('/stroop') }];
 </script>
 
 <svelte:head>
 	<link rel="icon" href={mupen64} />
 </svelte:head>
 
-<div class="navbar flex-wrap bg-base-100 shadow-sm sm:flex-nowrap">
-	<div class="navbar-start">
-		<a class="btn text-xl btn-ghost" href={resolve('/')}>
+<div
+	class="grid-300-45 sticky top-0 z-50 w-full border-b border-dashed border-gray-500 bg-base-200/80 shadow-sm backdrop-blur-md"
+>
+	<Navbar class="bg-transparent">
+		<NavBrand href={resolve('/')} class="text-base-content text-xl font-semibold">
 			<img src={mupen64} alt="Mupen64 Logo" class="object-fit w-8 pr-1" />
 			<span>Mupen64 Organization</span>
-		</a>
-	</div>
-	<div class="navbar-center flex">
-		<ul class="menu menu-horizontal px-1">
-			<li>
-				<details>
-					<summary>Mupen64</summary>
-					<ul class="z-1 w-40 bg-base-100 p-2">
-						<li>
-							<a href={resolve('/')}>
-								<span>Home</span>
-							</a>
-						</li>
+		</NavBrand>
 
-						{#each data.mupen64_docs as doc, i (i)}
-							<li>
-								<a href={doc.href}>
-									<span>{doc.title}</span>
-								</a>
-							</li>
-						{/each}
+		<NavHamburger class="text-base-content" menuClass="text-base-content" />
 
-						{#if data.mupen64_docs.length === 0}
-							<li>
-								<span class="px-4 py-2 text-sm opacity-70">No stable docs yet</span>
-							</li>
-						{/if}
-					</ul>
-				</details>
-			</li>
+		<NavUl
+			class="items-center gap-1"
+			ulClass="flex flex-col gap-1 rounded-lg border border-dashed border-gray-500 bg-base-200/90 p-2 md:border-0 md:bg-transparent md:p-0"
+		>
+			<NavLi class="text-base-content! hover:bg-base-300/60! hover:text-orange-600!">Mupen64</NavLi>
+			<MegaMenu
+				items={mupen64Items}
+				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border border-dashed border-gray-500 bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
+				ulClass="flex w-fit min-w-max flex-col gap-1"
+			>
+				{#snippet children({ item })}
+					<a
+						href={item.href}
+						class="block w-fit whitespace-nowrap rounded-lg px-3 py-2 text-sm text-base-content transition-colors hover:text-orange-600"
+					>
+						{item.name}
+					</a>
+				{/snippet}
+			</MegaMenu>
 
-			<li>
-				<details>
-					<summary>SM64 Lua Redux</summary>
-					<ul class="z-1 w-40 bg-base-100 p-2">
-						<li>
-							<a href={resolve('/sm64luaredux')}>
-								<span>Home</span>
-							</a>
-						</li>
+			<NavLi class="text-base-content! hover:bg-base-300/60! hover:text-orange-600!">SM64 Lua Redux</NavLi>
+			<MegaMenu
+				items={reduxItems}
+				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border border-dashed border-gray-500 bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
+				ulClass="flex w-fit min-w-max flex-col gap-1"
+			>
+				{#snippet children({ item })}
+					<a
+						href={item.href}
+						class="block w-fit whitespace-nowrap rounded-lg px-3 py-2 text-sm text-base-content transition-colors hover:text-orange-600"
+					>
+						{item.name}
+					</a>
+				{/snippet}
+			</MegaMenu>
 
-						{#each data.redux_docs as doc, i (i)}
-							<li>
-								<a href={doc.href}>
-									<span>{doc.title}</span>
-								</a>
-							</li>
-						{/each}
+			<NavLi class="text-base-content! hover:bg-base-300/60! hover:text-orange-600!">ugui</NavLi>
+			<MegaMenu
+				items={uguiItems}
+				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border border-dashed border-gray-500 bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
+				ulClass="flex w-fit min-w-max flex-col gap-1"
+			>
+				{#snippet children({ item })}
+					<a
+						href={item.href}
+						class="block w-fit whitespace-nowrap rounded-lg px-3 py-2 text-sm text-base-content transition-colors hover:text-orange-600"
+					>
+						{item.name}
+					</a>
+				{/snippet}
+			</MegaMenu>
 
-						{#if data.redux_docs.length === 0}
-							<li>
-								<span class="px-4 py-2 text-sm opacity-70">No stable docs yet</span>
-							</li>
-						{/if}
-					</ul>
-				</details>
-			</li>
-
-			<li>
-				<details>
-					<summary>ugui</summary>
-					<ul class="z-1 w-40 bg-base-100 p-2">
-						<li>
-							<a href={resolve('/ugui')}>
-								<span>Home</span>
-							</a>
-						</li>
-					</ul>
-				</details>
-			</li>
-
-			<li>
-				<details>
-					<summary>STROOP</summary>
-					<ul class="z-1 w-40 bg-base-100 p-2">
-						<li>
-							<a href={resolve('/stroop')}>
-								<span>Home</span>
-							</a>
-						</li>
-					</ul>
-				</details>
-			</li>
-		</ul>
-	</div>
-	<div class="navbar-end"></div>
+			<NavLi class="text-base-content! hover:bg-base-300/60! hover:text-orange-600!">STROOP</NavLi>
+			<MegaMenu
+				items={stroopItems}
+				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border border-dashed border-gray-500 bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
+				ulClass="flex w-fit min-w-max flex-col gap-1"
+			>
+				{#snippet children({ item })}
+					<a
+						href={item.href}
+						class="block w-fit whitespace-nowrap rounded-lg px-3 py-2 text-sm text-base-content transition-colors hover:text-orange-600"
+					>
+						{item.name}
+					</a>
+				{/snippet}
+			</MegaMenu>
+		</NavUl>
+	</Navbar>
 </div>
 
 <div class="flex min-h-screen flex-col">

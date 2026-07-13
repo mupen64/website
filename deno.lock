@@ -11,6 +11,9 @@
     "npm:eslint-config-prettier@^10.1.8": "10.1.8_eslint@9.39.4",
     "npm:eslint-plugin-svelte@^3.20.0": "3.20.0_eslint@9.39.4_svelte@5.56.4",
     "npm:eslint@^9.39.4": "9.39.4",
+    "npm:flowbite-svelte-icons@^3.1.0": "3.1.0_svelte@5.56.4",
+    "npm:flowbite-svelte@^1.33.1": "1.33.1_svelte@5.56.4_tailwindcss@4.3.2",
+    "npm:flowbite@^4.0.2": "4.0.2",
     "npm:globals@^16.5.0": "16.5.0",
     "npm:gray-matter@^4.0.3": "4.0.3",
     "npm:marked@^18.0.6": "18.0.6",
@@ -25,6 +28,9 @@
     "npm:vite@^7.3.6": "7.3.6"
   },
   "npm": {
+    "@alloc/quick-lru@5.2.0": {
+      "integrity": "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw=="
+    },
     "@esbuild/aix-ppc64@0.28.1": {
       "integrity": "sha512-Svl7tq8k/08+p6CXPpRjQ1fKX+1odH/BQbb48fV6fj3CWHhsoIOoY87w1oHXm0qEpkIK3ZfVgp0hed3XBXzXMQ==",
       "os": ["aix"],
@@ -222,6 +228,22 @@
         "levn"
       ]
     },
+    "@floating-ui/core@1.8.0": {
+      "integrity": "sha512-0CIZ5itps/8x7BG8dEIhs53BvCUH2PCoogtakwRTut+Arm58sJooJ0AuZhLw2HJYIR5cMLNPBSS728sPho2khQ==",
+      "dependencies": [
+        "@floating-ui/utils"
+      ]
+    },
+    "@floating-ui/dom@1.8.0": {
+      "integrity": "sha512-yXSrzeHZBTZadLOlfyhCkJHNeLJnHRnRInwdZ40L7ZiaAtrBwoYlsDrX3v5zB1Utk7CLfzcOVnVVWoXEky7Ceg==",
+      "dependencies": [
+        "@floating-ui/core",
+        "@floating-ui/utils"
+      ]
+    },
+    "@floating-ui/utils@0.2.12": {
+      "integrity": "sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww=="
+    },
     "@humanfs/core@0.19.2": {
       "integrity": "sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==",
       "dependencies": [
@@ -275,6 +297,9 @@
     "@polka/url@1.0.0-next.29": {
       "integrity": "sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww=="
     },
+    "@popperjs/core@2.11.8": {
+      "integrity": "sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A=="
+    },
     "@rollup/plugin-commonjs@29.0.3_rollup@4.62.2": {
       "integrity": "sha512-ZaOxZceP7SOUW7Lqw5IRVweSQYWaeIPnXIGLiB690EBA3FGJTO40EEr2L5yZplJWsgTCogILRSpcAe7+U0Otdg==",
       "dependencies": [
@@ -299,6 +324,16 @@
       ],
       "optionalPeers": [
         "rollup"
+      ]
+    },
+    "@rollup/plugin-node-resolve@15.3.1": {
+      "integrity": "sha512-tgg6b91pAybXHJQMAAwW9VuWBO6Thi+q7BCNARLwSqlmsHz0XYURtGvh/AuwSADXSI4h/2uHbs7s4FzlZDGSGA==",
+      "dependencies": [
+        "@rollup/pluginutils",
+        "@types/resolve",
+        "deepmerge",
+        "is-module",
+        "resolve"
       ]
     },
     "@rollup/plugin-node-resolve@16.0.3_rollup@4.62.2": {
@@ -477,7 +512,7 @@
       "dependencies": [
         "@rollup/plugin-commonjs",
         "@rollup/plugin-json",
-        "@rollup/plugin-node-resolve",
+        "@rollup/plugin-node-resolve@16.0.3_rollup@4.62.2",
         "@rollup/plugin-replace",
         "@sveltejs/kit",
         "rollup"
@@ -618,6 +653,16 @@
         "@tailwindcss/oxide-wasm32-wasi",
         "@tailwindcss/oxide-win32-arm64-msvc",
         "@tailwindcss/oxide-win32-x64-msvc"
+      ]
+    },
+    "@tailwindcss/postcss@4.3.2": {
+      "integrity": "sha512-rjVWYCa7Ngbi5AarT6k8TkxUG3Wl1QKzHdIZVsjZSzf36Jmo2IKZt/NHRAwly8oDkbBOH0YTu+CHuf9jPxMc+g==",
+      "dependencies": [
+        "@alloc/quick-lru",
+        "@tailwindcss/node",
+        "@tailwindcss/oxide",
+        "postcss",
+        "tailwindcss"
       ]
     },
     "@tailwindcss/vite@4.3.2_vite@7.3.6": {
@@ -767,6 +812,9 @@
         "color-convert"
       ]
     },
+    "apexcharts@5.16.0": {
+      "integrity": "sha512-ULO3Gqrm0/26uwBcYz49u181uIp8Fy6BQQgg9QUDajs+JAs/EbXxiAmdc6BLy1JY29/JXroM7P0j0t2JPDApdg=="
+    },
     "argparse@1.0.10": {
       "integrity": "sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==",
       "dependencies": [
@@ -852,6 +900,9 @@
     },
     "daisyui@5.6.16": {
       "integrity": "sha512-A5/IrcFCXyfzQ7M2fnKVPfMbKCVu0xeM7/G22gK1XRcp2dgA39kvFOeEAK8f2KpJJQJ+s9Jc5pZoJoYsPEJ8JQ=="
+    },
+    "date-fns@4.4.0": {
+      "integrity": "sha512-+1UMbeh68lH1SegH83CGWwpb6OHHbpSgr3+s5Eww5M4CAgswBpoWS0AjTOfEJ33HiYKz1hdj/KTFprzXHmq/6w=="
     },
     "debug@4.4.3": {
       "integrity": "sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==",
@@ -1088,6 +1139,71 @@
     },
     "flatted@3.4.2": {
       "integrity": "sha512-PjDse7RzhcPkIJwy5t7KPWQSZ9cAbzQXcafsetQoD7sOJRQlGikNbx7yZp2OotDnJyrDcbyRq3Ttb18iYOqkxA=="
+    },
+    "flowbite-datepicker@1.3.2": {
+      "integrity": "sha512-6Nfm0MCVX3mpaR7YSCjmEO2GO8CDt6CX8ZpQnGdeu03WUCWtEPQ/uy0PUiNtIJjJZWnX0Cm3H55MOhbD1g+E/g==",
+      "dependencies": [
+        "@rollup/plugin-node-resolve@15.3.1",
+        "flowbite@2.5.2"
+      ]
+    },
+    "flowbite-datepicker@2.0.0": {
+      "integrity": "sha512-m81hl0Bimq45MUg4maJLOnXrX+C9lZ0AkjMb9uotuVUSr729k/YiymWDfVAm63AYDH7g7y3rI3ke3XaBzWWqLw==",
+      "dependencies": [
+        "@rollup/plugin-node-resolve@15.3.1",
+        "@tailwindcss/postcss"
+      ]
+    },
+    "flowbite-svelte-icons@3.1.0_svelte@5.56.4": {
+      "integrity": "sha512-ZKBFlJY6VbORSo0aHvhqP152/QQN+YKU2upZA6lOkIbTN2vHgENerzd+PnZpLA+os3QbJTG2LKK0l7Zeh1vDBQ==",
+      "dependencies": [
+        "clsx",
+        "svelte",
+        "tailwind-merge"
+      ]
+    },
+    "flowbite-svelte@1.33.1_svelte@5.56.4_tailwindcss@4.3.2": {
+      "integrity": "sha512-HIG61H/YvWbfk0JTfirbPFb1F/YRPiJWYlUE7KTlmZ1X/ZTG6NZA9CgRuraO358cdpt0kv1gPYldrAKM1Apx2w==",
+      "dependencies": [
+        "@floating-ui/dom",
+        "@floating-ui/utils",
+        "apexcharts",
+        "clsx",
+        "date-fns",
+        "esm-env",
+        "flowbite@3.1.2",
+        "svelte",
+        "tailwind-merge",
+        "tailwind-variants",
+        "tailwindcss"
+      ]
+    },
+    "flowbite@2.5.2": {
+      "integrity": "sha512-kwFD3n8/YW4EG8GlY3Od9IoKND97kitO+/ejISHSqpn3vw2i5K/+ZI8Jm2V+KC4fGdnfi0XZ+TzYqQb4Q1LshA==",
+      "dependencies": [
+        "@popperjs/core",
+        "flowbite-datepicker@1.3.2",
+        "mini-svg-data-uri"
+      ]
+    },
+    "flowbite@3.1.2": {
+      "integrity": "sha512-MkwSgbbybCYgMC+go6Da5idEKUFfMqc/AmSjm/2ZbdmvoKf5frLPq/eIhXc9P+rC8t9boZtUXzHDgt5whZ6A/Q==",
+      "dependencies": [
+        "@popperjs/core",
+        "flowbite-datepicker@1.3.2",
+        "mini-svg-data-uri",
+        "postcss"
+      ]
+    },
+    "flowbite@4.0.2": {
+      "integrity": "sha512-TxBdfZpd3HktHH4ashiYjirrSZeVPtG1OCRZMKTeXUa9FOlMxSF98zgjMB/AxE49KZ+rlfgWynAlaNpWxrqZmA==",
+      "dependencies": [
+        "@popperjs/core",
+        "flowbite-datepicker@2.0.0",
+        "mini-svg-data-uri",
+        "postcss",
+        "tailwindcss"
+      ]
     },
     "fsevents@2.3.3": {
       "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==",
@@ -1329,6 +1445,10 @@
     },
     "marked@18.0.6": {
       "integrity": "sha512-MrV5puXBfuiy6wl6DLaq3BtIJQAJToAd5zt/ZKhRfGRAuFPALE7/4Y7jnxRQoEgK/pBgurGqLyAuRgZ2xOjr6w==",
+      "bin": true
+    },
+    "mini-svg-data-uri@1.4.4": {
+      "integrity": "sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==",
       "bin": true
     },
     "minimatch@10.2.5": {
@@ -1631,6 +1751,19 @@
         "zimmerframe"
       ]
     },
+    "tailwind-merge@3.6.0": {
+      "integrity": "sha512-uxL7qAVQriqRQPAyK3pj66VqskWqoZ37PW94jwOTwNfq/z9oyu1V+eqrZqtR2+fCiXdYOZe/Modt8GtvqNzu+w=="
+    },
+    "tailwind-variants@3.2.2_tailwind-merge@3.6.0_tailwindcss@4.3.2": {
+      "integrity": "sha512-Mi4kHeMTLvKlM98XPnK+7HoBPmf4gygdFmqQPaDivc3DpYS6aIY6KiG/PgThrGvii5YZJqRsPz0aPyhoFzmZgg==",
+      "dependencies": [
+        "tailwind-merge",
+        "tailwindcss"
+      ],
+      "optionalPeers": [
+        "tailwind-merge"
+      ]
+    },
     "tailwindcss@4.3.2": {
       "integrity": "sha512-WtctNNSH8A9jlMIqxzuYumOHU5uGZyRv0Q5svQl+oEPy5w84YpBxdb7MdqyiSPQge5jTJ6zFQLq0PFygdccSBA=="
     },
@@ -1740,6 +1873,9 @@
         "npm:eslint-config-prettier@^10.1.8",
         "npm:eslint-plugin-svelte@^3.20.0",
         "npm:eslint@^9.39.4",
+        "npm:flowbite-svelte-icons@^3.1.0",
+        "npm:flowbite-svelte@^1.33.1",
+        "npm:flowbite@^4.0.2",
         "npm:globals@^16.5.0",
         "npm:gray-matter@^4.0.3",
         "npm:marked@^18.0.6",
