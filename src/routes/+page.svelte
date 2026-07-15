@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Button } from 'flowbite-svelte';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import lua from '$lib/assets/lua.svg';
 	import demo from '$lib/assets/demo.png';
@@ -39,48 +40,58 @@
 		bg_color_to="#dd0000"
 		dark={true}
 	>
-		{#snippet button()}
-			<div class="join">
-				<a
+		{#snippet button(dark: boolean)}
+			<div class="flex flex-wrap items-center gap-2">
+				<Button
 					href={stable_download_url}
-					class="btn join-item"
+					color={dark ? 'light' : 'dark'}
+					class="inline-flex items-center gap-2"
 					onclick={(event) => handle_download(event, stable_download_url, 'stable')}
 				>
 					<span class="material-symbols-sharp">window</span>
-					<p>Download for Windows</p>
-				</a>
+					<span>Download for Windows</span>
+				</Button>
 
 				<details class="dropdown dropdown-end">
-					<summary class="btn join-item" aria-label="More download options">
-						<span class="material-symbols-sharp">arrow_drop_down</span>
+					<summary class="list-none">
+						<Button
+							color={dark ? 'light' : 'dark'}
+							aria-label="More download options"
+							class="inline-flex items-center justify-center"
+						>
+							<span class="material-symbols-sharp">arrow_drop_down</span>
+						</Button>
 					</summary>
-					<ul class="dropdown-content menu z-10 mt-2 w-72 rounded-box border border-base-300 bg-base-100 p-2 shadow gap-2">
+					<ul class={`dropdown-content menu z-10 mt-2 w-72 gap-2 rounded-box border border-base-300 p-2 shadow ${dark ? 'bg-neutral text-neutral-content' : 'bg-base-100 text-base-content'}`}>
 						<li>
-							<a
+							<Button
 								href={nightly_download_url}
-								class="btn btn-sm h-auto min-h-0 items-start justify-start py-2"
+								color={dark ? 'light' : 'dark'}
+								size="sm"
+								class="h-auto items-start justify-start py-2 text-left"
 								onclick={(event) => handle_download(event, nightly_download_url, 'nightly')}
 							>
-					           <div class="flex w-full flex-col items-start text-left leading-tight">
+								<div class="flex w-full flex-col items-start text-left leading-tight">
 									<p class="text-base">Download nightly</p>
-									<p class="text-xs opacity-70 font-light">Beta - updated nightly and may be unstable</p>
+									<p class="text-xs font-light opacity-70">Beta - updated nightly and may be unstable</p>
 								</div>
-							</a>
+							</Button>
 						</li>
 						<li>
-							<a
+							<Button
 								href={experiments_download_url}
-								class="btn btn-sm h-auto min-h-0 items-start justify-start py-2"
+								color={dark ? 'light' : 'dark'}
+								size="sm"
+								class="h-auto items-start justify-start py-2 text-left"
 								onclick={(event) => handle_download(event, experiments_download_url, 'experiments')}
 							>
-						         <div class="flex w-full flex-col items-start text-left leading-tight">
+								<div class="flex w-full flex-col items-start text-left leading-tight">
 									<p class="text-base">Download experiments</p>
-									<p class="text-xs opacity-70 font-light">Experimental variations with cutting-edge features</p>
+									<p class="text-xs font-light opacity-70">Experimental variations with cutting-edge features</p>
 								</div>
-							</a>
+							</Button>
 						</li>
 					</ul>
-
 				</details>
 			</div>
 		{/snippet}

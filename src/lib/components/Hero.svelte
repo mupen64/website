@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Button } from 'flowbite-svelte';
 	import GithubLogo from '$lib/assets/GithubLogo.svelte';
 
 	let {
@@ -34,13 +35,13 @@
 				<p class="text-center text-lg md:text-left">{description}</p>
 				<div class="flex flex-wrap items-center justify-center gap-4 md:justify-start">
 					{#if button}
-						{@render button()}
+						{@render button(dark)}
 					{/if}
 
-					<a href={repository} class="btn btn-outline">
+					<Button href={repository} color={dark ? 'light' : 'dark'} class="inline-flex items-center gap-2">
 						<GithubLogo class="w-6 h-6"></GithubLogo>
-						<p>See on GitHub</p>
-					</a>
+						<span>See on GitHub</span>
+					</Button>
 				</div>
 			</div>
 		</div>
