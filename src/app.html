@@ -27,6 +27,23 @@
 			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 		/>
 
+		<script>
+			(() => {
+				const root = document.documentElement;
+				const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+				let shouldUseDark = darkQuery.matches;
+
+				try {
+					const storedTheme = localStorage.getItem('theme');
+					if (storedTheme === 'light' || storedTheme === 'dark') {
+						shouldUseDark = storedTheme === 'dark';
+					}
+				} catch {}
+
+				root.classList.toggle('dark', shouldUseDark);
+			})();
+		</script>
+
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

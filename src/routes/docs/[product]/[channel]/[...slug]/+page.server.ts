@@ -25,16 +25,20 @@ function renderDoc(content: string) {
 				html = html.replaceAll('[!WARN---]', '</div>');
 				html = html.replaceAll('[!CAUTION]', '<div class="caution">');
 				html = html.replaceAll('[!CAUTION---]', '</div>');
-				html = html.replaceAll('<p', '<p class="y-2"');
-				html = html.replaceAll('<a', '<a class="link"');
+				html = html.replaceAll('<p', '<p class="my-2"');
+				html = html.replaceAll('<a', '<a class="app-link"');
 				html = html.replaceAll('<h1', '<h1 class="my-4 text-3xl font-bold separator-below"');
 				html = html.replaceAll('<h2', '<h2 class="my-3 text-2xl"');
 				html = html.replaceAll('<h3', '<h3 class="my-2 text-xl"');
-				html = html.replaceAll('<code', '<code class="font-mono bg-base-300 px-1"');
 				html = html.replaceAll(
-					'<table',
-					'<table class="my-4 w-full overflow-hidden table table-zebra bg-base-300"'
+					'<code',
+					'<code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80"'
 				);
+				html = html.replaceAll(
+					'<pre',
+					'<pre class="my-4 w-full overflow-x-auto rounded-xl border border-slate-300 bg-slate-950 p-4 text-slate-100 dark:border-slate-700"'
+				);
+				html = html.replaceAll('<table', '<table class="doc-table"');
 				html = html.replaceAll('<ol', '<ol class="ol"');
 
 				return html;

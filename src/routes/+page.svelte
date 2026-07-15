@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Dropdown, DropdownItem } from 'flowbite-svelte';
+	import { Button, Card, Dropdown, DropdownItem } from 'flowbite-svelte';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import lua from '$lib/assets/lua.svg';
 	import demo from '$lib/assets/demo.png';
@@ -102,29 +102,29 @@
 		<div class="mx-auto max-w-6xl">
 			<Title>Features</Title>
 			<div class="flex flex-row flex-wrap justify-center gap-8">
-				<div class="card2 w-80 max-w-72">
+				<Card class="p-4 w-80 max-w-72">
 					<p class="text-xl font-semibold">🔋 Batteries Included</p>
 					<p class="text-sm">
 						The Mupen64 Repack comes with plugins, Lua scripts, and more to get you TASing right
 						away.
 					</p>
-				</div>
-				<div class="card2 w-80 max-w-72">
+				</Card>
+				<Card class="p-4 w-80 max-w-72">
 					<p class="text-xl font-semibold">⌛ Rerecording</p>
 					<p class="text-sm">
 						Features the basics like movies and savestates, but also advanced tools like Piano Roll
 						and Seeking.
 					</p>
-				</div>
-				<div class="card2 w-80 max-w-72">
+				</Card>
+				<Card class="p-4 w-80 max-w-72">
 					<p class="text-xl font-semibold">⚡ High Performance</p>
 
 					<p class="text-sm">
 						Mupen64 and its first-party plugins are optimized for TASing workloads and deliver
 						consistently high performance.
 					</p>
-				</div>
-				<div class="card2 w-80 max-w-72">
+				</Card>
+				<Card class="p-4 w-80 max-w-72">
 					<p class="flex flex-row items-center gap-2 text-xl font-semibold">
 						<img src={lua} alt="Lua Logo" class="w-8" />
 						Lua Integration
@@ -134,36 +134,36 @@
 						Contains a comprehensive Lua API which allows automating and enhancing your TASing
 						workflow.
 					</p>
-				</div>
-				<div class="card2 w-80 max-w-72">
+				</Card>
+				<Card class="p-4 w-80 max-w-72">
 					<p class="text-xl font-semibold">🌳 Rich Ecosystem</p>
 					<p class="text-sm">
 						Rich ecosystem of advanced TASing tools and plugins geared towards increasing TASer
 						productivity.
 					</p>
-				</div>
-				<div class="card2 w-80 max-w-72">
+				</Card>
+				<Card class="p-4 w-80 max-w-72">
 					<p class="text-xl font-semibold">🔌 Extendable</p>
 					<p class="text-sm">The GUI can be extended seamlessly using Lua APIs.</p>
-				</div>
-				<div class="card2 w-80 max-w-72">
+				</Card>
+				<Card class="p-4 w-80 max-w-72">
 					<p class="text-xl font-semibold">💪 Poweruser-Friendly</p>
 					<p class="text-sm">
 						Features a Command Palette and a hotkey for each action to give powerusers the freedom
 						they need.
 					</p>
-				</div>
-				<div class="card2 w-80 max-w-72">
+				</Card>
+				<Card class="p-4 w-80 max-w-72">
 					<p class="text-xl font-semibold">🎥 Video Capture</p>
 					<p class="text-sm">
 						Capture stable and perfectly synchronized video directly from the emulator faster than
 						realtime using VFW or FFmpeg.
 					</p>
-				</div>
-				<div class="card2 w-80 max-w-72">
+				</Card>
+				<Card class="p-4 w-80 max-w-72">
 					<p class="text-xl font-semibold">🎮 Cheats</p>
 					<p class="text-sm">Support for GameShark cheats and GS button emulation.</p>
-				</div>
+				</Card>
 			</div>
 		</div>
 	</section>

@@ -18,12 +18,12 @@
 	`);
 </script>
 
-<section class="border-b border-base-100 p-16 shadow-lg" style={bg_style}>
+<section class="border-b border-slate-200 p-16 shadow-lg dark:border-slate-700" style={bg_style}>
 	<div class="mx-auto max-w-6xl">
 		<div
 			class="flex flex-row flex-wrap items-center justify-center gap-12 {dark
 				? 'text-white'
-				: 'text-black'}"
+				: 'text-slate-950'}"
 		>
 			<img src={logo} alt="{name} Logo" class="object-fit w-48" />
 			<div class="flex flex-col gap-4">
@@ -38,8 +38,12 @@
 						{@render button(dark)}
 					{/if}
 
-					<Button href={repository} color={dark ? 'light' : 'dark'} class="inline-flex items-center gap-2">
-						<GithubLogo class="w-6 h-6"></GithubLogo>
+					<Button
+						href={repository}
+						color={dark ? 'light' : 'dark'}
+						class="inline-flex items-center gap-2 shadow-sm"
+					>
+						<GithubLogo class="h-6 w-6"></GithubLogo>
 						<span>See on GitHub</span>
 					</Button>
 				</div>

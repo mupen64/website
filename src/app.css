@@ -1,117 +1,167 @@
 @import 'tailwindcss';
-@plugin "daisyui";
 @plugin 'flowbite/plugin';
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-sans: 'Titillium Web', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	--font-sans: 'Titillium Web', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+	--color-primary-50: #fff1f2;
+	--color-primary-100: #ffe4e6;
+	--color-primary-200: #fecdd3;
+	--color-primary-300: #fda4af;
+	--color-primary-400: #fb7185;
+	--color-primary-500: #f43f5e;
+	--color-primary-600: #e11d48;
+	--color-primary-700: #be123c;
+	--color-primary-800: #9f1239;
+	--color-primary-900: #881337;
+
+	--color-secondary-50: #fff1f2;
+	--color-secondary-100: #ffe4e6;
+	--color-secondary-200: #fecdd3;
+	--color-secondary-300: #fda4af;
+	--color-secondary-400: #fb7185;
+	--color-secondary-500: #f43f5e;
+	--color-secondary-600: #e11d48;
+	--color-secondary-700: #be123c;
+	--color-secondary-800: #9f1239;
+	--color-secondary-900: #881337;
+
+	--color-accent-50: #fef2f2;
+	--color-accent-100: #fee2e2;
+	--color-accent-200: #fecaca;
+	--color-accent-300: #fca5a5;
+	--color-accent-400: #f87171;
+	--color-accent-500: #ef4444;
+	--color-accent-600: #dc2626;
+	--color-accent-700: #b91c1c;
+	--color-accent-800: #991b1b;
+	--color-accent-900: #7f1d1d;
+}
+
+:root {
+	color-scheme: light;
+	--surface-100: #f8fafc;
+	--surface-200: #f1f5f9;
+	--surface-300: #e2e8f0;
+	--surface-content: #0f172a;
+}
+
+.dark {
+	color-scheme: dark;
+	--surface-100: #020617;
+	--surface-200: #0f172a;
+	--surface-300: #1e293b;
+	--surface-content: #e2e8f0;
 }
 
 html {
-    background-color: var(--color-base-100);
-    background-image:
-        repeating-linear-gradient(0deg, var(--color-base-200) 0 1px, transparent 1px 20px),
-        repeating-linear-gradient(90deg, var(--color-base-200) 0 1px, transparent 1px 20px);
+	background-color: var(--surface-100);
+	background-image:
+		repeating-linear-gradient(0deg, var(--surface-200) 0 1px, transparent 1px 20px),
+		repeating-linear-gradient(90deg, var(--surface-200) 0 1px, transparent 1px 20px);
+}
+
+body {
+	color: var(--surface-content);
+	@apply antialiased;
 }
 
 .grid-300-45 {
-    background-image:
-        repeating-linear-gradient(45deg, var(--color-base-300) 0 1px, transparent 1px 20px),
-        repeating-linear-gradient(-45deg, var(--color-base-300) 0 1px, transparent 1px 20px);
-}
-
-.card2 {
-    @apply card border-2 border-base-300 bg-base-200 p-4;
+	background-image:
+		repeating-linear-gradient(45deg, var(--surface-300) 0 1px, transparent 1px 20px),
+		repeating-linear-gradient(-45deg, var(--surface-300) 0 1px, transparent 1px 20px);
 }
 
 .material-symbols-sharp {
-    font-variation-settings:
-        'FILL' 1,
-        'wght' 600,
-        'GRAD' 0,
-        'opsz' 24;
+	font-variation-settings:
+		'FILL' 1,
+		'wght' 600,
+		'GRAD' 0,
+		'opsz' 24;
 }
 
 .note::before {
-    content: 'ℹ️ Note';
-    @apply font-bold;
+	content: 'ℹ️ Note';
+	@apply font-bold;
 }
 
 .note {
-    @apply my-2 border-l-2 border-blue-500 bg-blue-300/10 p-2 pr-10 text-blue-500;
+	@apply my-2 border-l-2 border-blue-500 bg-blue-300/10 p-2 pr-10 text-blue-700 dark:border-blue-400 dark:bg-blue-900/20 dark:text-blue-300;
 }
 
 .tip::before {
-    content: '💡 Tip';
-    @apply font-bold;
+	content: '💡 Tip';
+	@apply font-bold;
 }
 
 .tip {
-    @apply my-2 border-l-2 border-green-600 bg-green-300/10 p-2 pr-10 text-green-600;
+	@apply my-2 border-l-2 border-green-600 bg-green-300/10 p-2 pr-10 text-green-700 dark:border-green-400 dark:bg-green-900/20 dark:text-green-300;
 }
 
 .warn::before {
-    content: '⚠️ Warning';
-    @apply font-bold;
+	content: '⚠️ Warning';
+	@apply font-bold;
 }
 
 .warn {
-    @apply my-2 border-l-2 border-yellow-500 bg-yellow-300/10 p-2 pr-10 text-yellow-500;
+	@apply my-2 border-l-2 border-yellow-500 bg-yellow-300/10 p-2 pr-10 text-yellow-700 dark:border-yellow-400 dark:bg-yellow-900/20 dark:text-yellow-300;
 }
 
 .caution::before {
-    content: '🛑 Caution';
-    @apply font-bold;
+	content: '🛑 Caution';
+	@apply font-bold;
 }
 
 .caution {
-    @apply my-2 border-l-2 border-red-500 bg-red-300/10 p-2 pr-10 text-red-500;
+	@apply my-2 border-l-2 border-red-500 bg-red-300/10 p-2 pr-10 text-red-700 dark:border-red-400 dark:bg-red-900/20 dark:text-red-300;
 }
 
 .ol {
-    @apply my-4 list-inside list-decimal pl-2;
+	@apply my-4 list-inside list-decimal pl-2;
 }
 
 .separator-below::after {
-    content: '';
-    display: block;
-    width: 200%;
-    height: 1px;
-    background-color: var(--color-base-content);
-    opacity: 15%;
+	content: '';
+	display: block;
+	width: 200%;
+	height: 1px;
+	background-color: var(--surface-content);
+	opacity: 15%;
 }
 
-@theme {
-    --color-primary-50: #fff5f2;
-    --color-primary-100: #fff1ee;
-    --color-primary-200: #ffe4de;
-    --color-primary-300: #ffd5cc;
-    --color-primary-400: #ffbcad;
-    --color-primary-500: #fe795d;
-    --color-primary-600: #ef562f;
-    --color-primary-700: #eb4f27;
-    --color-primary-800: #cc4522;
-    --color-primary-900: #a5371b;
-
-    --color-secondary-50: #f0f9ff;
-    --color-secondary-100: #e0f2fe;
-    --color-secondary-200: #bae6fd;
-    --color-secondary-300: #7dd3fc;
-    --color-secondary-400: #38bdf8;
-    --color-secondary-500: #0ea5e9;
-    --color-secondary-600: #0284c7;
-    --color-secondary-700: #0369a1;
-    --color-secondary-800: #075985;
-    --color-secondary-900: #0c4a6e;
+.app-link {
+	@apply font-semibold text-primary-700 underline decoration-dotted underline-offset-2 transition-colors hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300;
 }
 
-@source "../node_modules/flowbite-svelte/dist";
-@source "../node_modules/flowbite-svelte-icons/dist";
+.doc-table {
+	@apply my-4 w-full overflow-hidden rounded-xl border border-slate-300 bg-slate-50 text-left text-sm dark:border-slate-700 dark:bg-slate-900/70;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.doc-table th {
+	@apply border-b border-slate-300 bg-slate-200/70 px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-800/80;
+}
+
+.doc-table td {
+	@apply border-b border-slate-200 px-3 py-2 align-top dark:border-slate-800;
+}
+
+.doc-table tr:nth-child(even) td {
+	@apply bg-slate-200/35 dark:bg-slate-800/35;
+}
+
+.doc-table tr:last-child td {
+	@apply border-b-0;
+}
+
+@source '../node_modules/flowbite-svelte/dist';
+@source '../node_modules/flowbite-svelte-icons/dist';
 
 @layer base {
-
-    /* disable chrome cancel button */
-    input[type="search"]::-webkit-search-cancel-button {
-        display: none;
-    }
+	/* disable chrome cancel button */
+	input[type='search']::-webkit-search-cancel-button {
+		display: none;
+	}
 }
