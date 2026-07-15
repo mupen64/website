@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from 'flowbite-svelte';
+	import { Button, Dropdown, DropdownItem } from 'flowbite-svelte';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import lua from '$lib/assets/lua.svg';
 	import demo from '$lib/assets/demo.png';
@@ -11,6 +11,7 @@
 	const stable_download_url = 'https://github.com/mupen64/repack-stable/archive/refs/heads/main.zip';
 	const nightly_download_url = 'https://github.com/mupen64/repack-nightly/archive/refs/heads/main.zip';
 	const experiments_download_url = 'https://github.com/mupen64/repack-experiments/archive/refs/heads/main.zip';
+
 
 	function handle_download(event: MouseEvent, url: string, channel: 'stable' | 'nightly' | 'experiments') {
 		event.preventDefault();
@@ -41,7 +42,7 @@
 		dark={true}
 	>
 		{#snippet button(dark: boolean)}
-			<div class="flex flex-wrap items-center gap-2">
+			<div class="inline-flex flex-wrap items-center gap-2">
 				<Button
 					href={stable_download_url}
 					color={dark ? 'light' : 'dark'}
@@ -52,47 +53,38 @@
 					<span>Download for Windows</span>
 				</Button>
 
-				<details class="dropdown dropdown-end">
-					<summary class="list-none">
-						<Button
-							color={dark ? 'light' : 'dark'}
-							aria-label="More download options"
-							class="inline-flex items-center justify-center"
-						>
-							<span class="material-symbols-sharp">arrow_drop_down</span>
-						</Button>
-					</summary>
-					<ul class={`dropdown-content menu z-10 mt-2 w-72 gap-2 rounded-box border border-base-300 p-2 shadow ${dark ? 'bg-neutral text-neutral-content' : 'bg-base-100 text-base-content'}`}>
-						<li>
-							<Button
-								href={nightly_download_url}
-								color={dark ? 'light' : 'dark'}
-								size="sm"
-								class="h-auto items-start justify-start py-2 text-left"
-								onclick={(event) => handle_download(event, nightly_download_url, 'nightly')}
-							>
-								<div class="flex w-full flex-col items-start text-left leading-tight">
-									<p class="text-base">Download nightly</p>
-									<p class="text-xs font-light opacity-70">Beta - updated nightly and may be unstable</p>
-								</div>
-							</Button>
-						</li>
-						<li>
-							<Button
-								href={experiments_download_url}
-								color={dark ? 'light' : 'dark'}
-								size="sm"
-								class="h-auto items-start justify-start py-2 text-left"
-								onclick={(event) => handle_download(event, experiments_download_url, 'experiments')}
-							>
-								<div class="flex w-full flex-col items-start text-left leading-tight">
-									<p class="text-base">Download experiments</p>
-									<p class="text-xs font-light opacity-70">Experimental variations with cutting-edge features</p>
-								</div>
-							</Button>
-						</li>
-					</ul>
-				</details>
+				<Button
+					type="button"
+					color={dark ? 'light' : 'dark'}
+					aria-label="More download options"
+					class="inline-flex items-center justify-center"
+				>
+					<span class="material-symbols-sharp">arrow_drop_down</span>
+				</Button>
+
+				<Dropdown
+					placement="bottom-end"
+					class="list-none"
+				>
+					<DropdownItem
+						href={nightly_download_url}
+						onclick={(event) => handle_download(event, nightly_download_url, 'nightly')}
+					>
+						<div class="flex w-full flex-col items-start text-left leading-tight">
+							<p class="text-base">Download nightly</p>
+							<p class="text-xs font-light opacity-70">Beta - updated nightly and may be unstable</p>
+						</div>
+					</DropdownItem>
+					<DropdownItem
+						href={experiments_download_url}
+						onclick={(event) => handle_download(event, experiments_download_url, 'experiments')}
+					>
+						<div class="flex w-full flex-col items-start text-left leading-tight">
+							<p class="text-base">Download experiments</p>
+							<p class="text-xs font-light opacity-70">Experimental variations with cutting-edge features</p>
+						</div>
+					</DropdownItem>
+				</Dropdown>
 			</div>
 		{/snippet}
 	</Hero>
