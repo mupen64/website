@@ -37,18 +37,18 @@
 
 		<NavUl
 			class="items-center gap-1"
-			ulClass="flex flex-col gap-1 rounded-lg border border-dashed border-gray-500 bg-base-200/90 p-2 md:border-0 md:bg-transparent md:p-0"
+			ulClass="flex flex-col gap-1 rounded-lg border-b! border-dotted border-base-content bg-base-200/90 p-2 md:border-0 md:bg-transparent md:p-0"
 		>
 			<NavLi class="text-base-content! hover:bg-base-300/60! hover:text-orange-600!">Mupen64</NavLi>
 			<MegaMenu
 				items={mupen64Items}
-				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border border-dashed border-gray-500 bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
-				ulClass="flex w-fit min-w-max flex-col gap-1"
+				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border-b! border-dotted border-base-content bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
+				ulClass="flex w-full min-w-0 flex-col gap-0"
 			>
 				{#snippet children({ item })}
 					<a
 						href={item.href}
-						class="block w-fit whitespace-nowrap rounded-lg px-3 py-2 text-sm text-base-content transition-colors hover:text-orange-600"
+						class="block -mx-2 w-[calc(100%+1rem)] border-b! border-dotted border-base-content/50 px-4 py-2 text-sm text-base-content transition-colors hover:bg-base-300/60 hover:text-orange-600 first:rounded-t-lg last:border-b-0 last:rounded-b-lg"
 					>
 						{item.name}
 					</a>
@@ -58,13 +58,13 @@
 			<NavLi class="text-base-content! hover:bg-base-300/60! hover:text-orange-600!">SM64 Lua Redux</NavLi>
 			<MegaMenu
 				items={reduxItems}
-				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border border-dashed border-gray-500 bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
-				ulClass="flex w-fit min-w-max flex-col gap-1"
+				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border-b! border-dotted border-base-content bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
+				ulClass="flex w-full min-w-0 flex-col gap-0"
 			>
 				{#snippet children({ item })}
 					<a
 						href={item.href}
-						class="block w-fit whitespace-nowrap rounded-lg px-3 py-2 text-sm text-base-content transition-colors hover:text-orange-600"
+						class="block -mx-2 w-[calc(100%+1rem)] border-b! border-dotted border-base-content px-4 py-2 text-sm text-base-content transition-colors hover:bg-base-300/60 hover:text-orange-600 first:rounded-t-lg last:border-b-0 last:rounded-b-lg"
 					>
 						{item.name}
 					</a>
@@ -74,13 +74,13 @@
 			<NavLi class="text-base-content! hover:bg-base-300/60! hover:text-orange-600!">ugui</NavLi>
 			<MegaMenu
 				items={uguiItems}
-				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border border-dashed border-gray-500 bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
-				ulClass="flex w-fit min-w-max flex-col gap-1"
+				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border-b! border-dotted border-base-content bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
+				ulClass="flex w-full min-w-0 flex-col gap-0"
 			>
 				{#snippet children({ item })}
 					<a
 						href={item.href}
-						class="block w-fit whitespace-nowrap rounded-lg px-3 py-2 text-sm text-base-content transition-colors hover:text-orange-600"
+						class="block -mx-2 w-[calc(100%+1rem)] border-b! border-dotted border-base-content px-4 py-2 text-sm text-base-content transition-colors hover:bg-base-300/60 hover:text-orange-600 first:rounded-t-lg last:border-b-0 last:rounded-b-lg"
 					>
 						{item.name}
 					</a>
@@ -90,13 +90,13 @@
 			<NavLi class="text-base-content! hover:bg-base-300/60! hover:text-orange-600!">STROOP</NavLi>
 			<MegaMenu
 				items={stroopItems}
-				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border border-dashed border-gray-500 bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
-				ulClass="flex w-fit min-w-max flex-col gap-1"
+				class="grid-300-45 z-50 mt-2 w-fit rounded-xl border-b! border-dotted border-base-content bg-base-200/90 p-2 text-base-content shadow-lg backdrop-blur-md"
+				ulClass="flex w-full min-w-0 flex-col gap-0"
 			>
 				{#snippet children({ item })}
 					<a
 						href={item.href}
-						class="block w-fit whitespace-nowrap rounded-lg px-3 py-2 text-sm text-base-content transition-colors hover:text-orange-600"
+						class="block -mx-2 w-[calc(100%+1rem)] border-b! border-dotted border-base-content px-4 py-2 text-sm text-base-content transition-colors hover:bg-base-300/60 hover:text-orange-600 first:rounded-t-lg last:border-b-0 last:rounded-b-lg"
 					>
 						{item.name}
 					</a>
