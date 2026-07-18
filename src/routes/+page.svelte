@@ -7,26 +7,19 @@
 	import Title from '$lib/components/Title.svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { downloadUrls, startDownloadFromChannel } from '$lib/helpers/RepackDownloadHelper';
 
-	const stable_download_url = 'https://github.com/mupen64/repack-stable/archive/refs/heads/main.zip';
-	const nightly_download_url = 'https://github.com/mupen64/repack-nightly/archive/refs/heads/main.zip';
-	const experiments_download_url = 'https://github.com/mupen64/repack-experiments/archive/refs/heads/main.zip';
-
-
-	function handle_download(event: MouseEvent, url: string, channel: 'stable' | 'nightly' | 'experiments') {
+	function handle_download(event: MouseEvent, channel: 'stable' | 'nightly' | 'experiments') {
 		event.preventDefault();
 
-		const iframe = document.createElement('iframe');
-		iframe.style.display = 'none';
-		iframe.src = url;
-		document.body.appendChild(iframe);
+	    const cleanup =	startDownloadFromChannel(channel);
 
 		if(channel === 'experiments')
 			return;
 
 		setTimeout(() => {
-			goto(resolve(`/docs/mupen64/${channel}`));
-			setTimeout(() => iframe.remove(), 1000);
+			goto(resolve(`/downloaded/${channel}`));
+			setTimeout(() => cleanup(), 1000);
 		}, 300);
 	}
 </script>
@@ -44,10 +37,10 @@
 		{#snippet button(dark: boolean)}
 			<div class="inline-flex flex-wrap items-center gap-2">
 				<Button
-					href={stable_download_url}
+					href={downloadUrls.stable}
 					color={dark ? 'light' : 'dark'}
 					class="inline-flex items-center gap-2"
-					onclick={(event) => handle_download(event, stable_download_url, 'stable')}
+					onclick={(event) => handle_download(event, 'stable')}
 				>
 					<span class="material-symbols-sharp">window</span>
 					<span>Download for Windows</span>
@@ -67,8 +60,8 @@
 					class="list-none"
 				>
 					<DropdownItem
-						href={nightly_download_url}
-						onclick={(event) => handle_download(event, nightly_download_url, 'nightly')}
+						href={downloadUrls.nightly}
+						onclick={(event) => handle_download(event, 'nightly')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<p class="text-base">Download nightly</p>
@@ -76,8 +69,8 @@
 						</div>
 					</DropdownItem>
 					<DropdownItem
-						href={experiments_download_url}
-						onclick={(event) => handle_download(event, experiments_download_url, 'experiments')}
+						href={downloadUrls.experiments}
+						onclick={(event) => handle_download(event, 'experiments')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<p class="text-base">Download experiments</p>
