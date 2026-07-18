@@ -84,6 +84,13 @@
 							<p class="text-xs font-light opacity-70">Experimental variations with cutting-edge features</p>
 						</div>
 					</DropdownItem>
+					<DropdownItem>
+					<div class="flex w-full flex-col items-start text-left leading-tight">
+						<p class="text-base">Download for Linux</p>
+						<p class="text-xs font-light opacity-70">There are currently no Linux builds available,<br> but we're gradually working towards cross-platform support</p>
+					</div>
+
+					</DropdownItem>
 				</Dropdown>
 			</div>
 		{/snippet}
