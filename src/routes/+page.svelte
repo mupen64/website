@@ -14,9 +14,6 @@
 
 	    const cleanup =	startDownloadFromChannel(channel);
 
-		if(channel === 'experiments')
-			return;
-
 		setTimeout(() => {
 			goto(resolve(`/downloaded/${channel}`));
 			setTimeout(() => cleanup(), 1000);

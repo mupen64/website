@@ -18,11 +18,15 @@
 			<br>
 
 		<p class="text-xl text-center">Thank you for downloading Mupen64 {channel}!</p>
-		<p>Visit the <a class="app-link" href={resolve(`/docs/mupen64/${channel}`)}>Quickstart guide</a> for instructions on how to use Mupen64.</p>
 
+		{#if channel == 'experiments'}
+		    <p class="text-center">There is no documentation for the <b>{channel}</b> channel.<br>Refer to the corresponding pull request's description for more context.</p>
+		{:else}
+		    <p class="text-center">Visit the <a class="app-link" href={resolve(`/docs/mupen64/${channel}`)}>Quickstart guide</a> for instructions on how to use Mupen64.</p>
+		{/if}
 		<br>
 
-		<p>Download didn't start? Try the <a class="app-link" href={downloadUrls[channel]}>direct download</a>.</p>
+		<p class="text-center">Download didn't start? Try the <a class="app-link" href={downloadUrls[channel]}>direct download</a>.</p>
 
 		</div>
 
