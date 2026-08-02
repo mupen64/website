@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import mupen64 from '$lib/assets/mupen64.svg';
-	import org from '$lib/assets/mupen64solid.svg';
+	import org from '$lib/assets/org.svg';
 	import { resolve } from '$app/paths';
 	import { MegaMenu, NavBrand, NavHamburger, NavLi, Navbar, NavUl } from 'flowbite-svelte';
 
