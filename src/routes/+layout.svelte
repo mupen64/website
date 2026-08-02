@@ -3,7 +3,8 @@
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import org from '$lib/assets/org.svg';
 	import { resolve } from '$app/paths';
-	import { MegaMenu, NavBrand, NavHamburger, NavLi, Navbar, NavUl } from 'flowbite-svelte';
+	import { MegaMenu, NavBrand, NavHamburger, NavLi, Navbar, NavUl, Button } from 'flowbite-svelte';
+	import { DiscordSolid } from 'flowbite-svelte-icons';
 
 	let { children, data } = $props();
 
@@ -15,6 +16,7 @@
 		'grid-300-45 z-50 mt-2 w-fit rounded-xl !border-b border-dotted border-slate-400 bg-slate-100/90 p-2 text-slate-900 shadow-lg backdrop-blur-md dark:border-slate-600 dark:bg-slate-900/90 dark:text-slate-100';
 	const megaMenuItemClass =
 		'block -mx-2 w-[calc(100%+1rem)] !border-b border-dotted border-slate-400/70 px-4 py-2 text-sm text-slate-900 transition-colors hover:bg-slate-200/70 hover:text-primary-600 first:rounded-t-lg last:!border-b-0 last:rounded-b-lg dark:border-slate-600/70 dark:text-slate-100 dark:hover:bg-slate-800/70 dark:hover:text-primary-400';
+	const discordUrl = 'https://discord.gg/hFANcme32k';
 
 	const mupen64Items = $derived([
 		{ name: 'Home', href: resolve('/') },
@@ -37,7 +39,7 @@
 <div
 	class="grid-300-45 sticky top-0 z-50 w-full border-b border-dashed border-slate-400/70 bg-slate-100/80 shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/80"
 >
-	<Navbar class="bg-transparent max-w-3xl ml-auto mr-auto">
+	<Navbar class="bg-transparent max-w-4xl ml-auto mr-auto">
 		<NavBrand href={resolve('/')} class="text-xl font-semibold text-slate-900 dark:text-slate-100">
 			<img src={org} alt="Mupen64 Logo" class="object-fit w-8 pr-1" />
 			<span>Mupen64 Organization</span>
@@ -45,6 +47,10 @@
 
 		<NavHamburger class="text-slate-900 dark:text-slate-100" menuClass="text-slate-900 dark:text-slate-100" />
 
+		<Button href={discordUrl} class="ml-auto mr-auto sm:mr-4" size="sm" pill>
+			<DiscordSolid />
+			<span class="ml-2">Discord server</span>
+		</Button>
 		<NavUl class="items-center gap-1" ulClass={navListClass}>
 			<NavLi class={navItemClass}>Mupen64</NavLi>
 			<MegaMenu items={mupen64Items} class={megaMenuClass} trigger="hover" ulClass="flex w-full min-w-0 flex-col gap-0">
@@ -121,6 +127,15 @@
 				<br />
 				Feel free to contribute!
 			</p>
+
+			<p class="mb-5 max-w-2xl text-center">
+			    Need support? Join our Discord server for live support and community discussions.
+			</p>
+
+			<Button href={discordUrl} class="mb-5" size="sm" pill>
+				<DiscordSolid />
+				<span class="ml-2">Discord server</span>
+			</Button>
 
 			<a class="app-link" href="https://github.com/mupen64">© 2026 Mupen64 Organization</a>
 			<p>Licensed under GNU GPL v2 License</p>
