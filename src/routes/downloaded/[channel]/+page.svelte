@@ -5,6 +5,13 @@
 	import { downloadUrls } from "$lib/helpers/RepackDownloadHelper";
 	import mupen64 from '$lib/assets/mupen64.svg';
 	const channel = page.params.channel as Channel;
+
+	const channelToDocs: Partial<Record<Channel, string>> = {
+		'stable-w32': '/docs/mupen64/stable',
+		'stable-w64': '/docs/mupen64/stable',
+		'nightly-w32': '/docs/mupen64/nightly',
+		'nightly-w64': '/docs/mupen64/nightly',
+	};
 </script>
 
 <main>
@@ -19,10 +26,10 @@
 
 		<p class="text-xl text-center">Thank you for downloading Mupen64 {channel}!</p>
 
-		{#if channel == 'experiments'}
-		    <p class="text-center">There is no documentation for the <b>{channel}</b> channel.<br>Refer to the corresponding pull request's description for more context.</p>
+		{#if channelToDocs[channel]}
+		    <p class="text-center">Visit the <a class="app-link" href={resolve(channelToDocs[channel])}>Quickstart guide</a> for instructions on how to use Mupen64.</p>
 		{:else}
-		    <p class="text-center">Visit the <a class="app-link" href={resolve(`/docs/mupen64/${channel}`)}>Quickstart guide</a> for instructions on how to use Mupen64.</p>
+		    <p class="text-center">There is no documentation for the <b>{channel}</b> channel.<br>Refer to the corresponding pull request's description for more context.</p>
 		{/if}
 		<br>
 

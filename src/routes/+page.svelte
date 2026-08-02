@@ -7,9 +7,9 @@
 	import Title from '$lib/components/Title.svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { downloadUrls, startDownloadFromChannel } from '$lib/helpers/RepackDownloadHelper';
+	import { downloadUrls, startDownloadFromChannel, type Channel } from '$lib/helpers/RepackDownloadHelper';
 
-	function handle_download(event: MouseEvent, channel: 'stable' | 'nightly' | 'experiments') {
+	function handle_download(event: MouseEvent, channel: Channel) {
 		event.preventDefault();
 
 	    const cleanup =	startDownloadFromChannel(channel);
@@ -34,13 +34,13 @@
 		{#snippet button(dark: boolean)}
 			<div class="inline-flex flex-wrap items-center gap-2">
 				<Button
-					href={downloadUrls.stable}
+					href={downloadUrls['stable-w32']}
 					color={dark ? 'light' : 'dark'}
 					class="inline-flex items-center gap-2"
-					onclick={(event) => handle_download(event, 'stable')}
+					onclick={(event: MouseEvent) => handle_download(event, 'stable-w32')}
 				>
 					<span class="material-symbols-sharp">window</span>
-					<span>Download for Windows</span>
+					<span>Download 32-bit for Windows</span>
 				</Button>
 
 				<Button
@@ -56,22 +56,43 @@
 					placement="bottom-end"
 					class="list-none"
 				>
+				<DropdownItem
+					href={downloadUrls['stable-w64']}
+					onclick={(event) => handle_download(event, 'stable-w64')}
+				>
+					<div class="flex w-full flex-col items-start text-left leading-tight">
+						<p class="text-base">Download stable (64-bit)</p>
+						<p class="text-xs font-light opacity-70">
+						Stable release for 64-bit devices.<br>
+						Doesn't work with Jabo's plugins.
+						</p>
+					</div>
+				</DropdownItem>
+				<DropdownItem
+					href={downloadUrls['nightly-w32']}
+					onclick={(event) => handle_download(event, 'nightly-w32')}
+				>
+					<div class="flex w-full flex-col items-start text-left leading-tight">
+						<p class="text-base">Download nightly (32-bit)</p>
+						<p class="text-xs font-light opacity-70">Bleeding-edge features with potential instability</p>
+					</div>
+				</DropdownItem>
 					<DropdownItem
-						href={downloadUrls.nightly}
-						onclick={(event) => handle_download(event, 'nightly')}
+						href={downloadUrls['nightly-w64']}
+						onclick={(event) => handle_download(event, 'nightly-w64')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
-							<p class="text-base">Download nightly</p>
-							<p class="text-xs font-light opacity-70">Beta - updated nightly and may be unstable</p>
+							<p class="text-base">Download nightly (64-bit)</p>
+							<p class="text-xs font-light opacity-70">Bleeding-edge features with potential instability</p>
 						</div>
 					</DropdownItem>
 					<DropdownItem
-						href={downloadUrls.experiments}
-						onclick={(event) => handle_download(event, 'experiments')}
+						href={downloadUrls['experiments-w64']}
+						onclick={(event) => handle_download(event, 'experiments-w64')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<p class="text-base">Download experiments</p>
-							<p class="text-xs font-light opacity-70">Experimental variations with cutting-edge features</p>
+							<p class="text-xs font-light opacity-70">Experimental variations with bleeding-edge features</p>
 						</div>
 					</DropdownItem>
 					<DropdownItem>
