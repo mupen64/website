@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import mupen64 from '$lib/assets/mupen64.svg';
+	import org from '$lib/assets/mupen64solid.svg';
 	import { resolve } from '$app/paths';
 	import { MegaMenu, NavBrand, NavHamburger, NavLi, Navbar, NavUl } from 'flowbite-svelte';
 
@@ -38,7 +39,7 @@
 >
 	<Navbar class="bg-transparent">
 		<NavBrand href={resolve('/')} class="text-xl font-semibold text-slate-900 dark:text-slate-100">
-			<img src={mupen64} alt="Mupen64 Logo" class="object-fit w-8 pr-1" />
+			<img src={org} alt="Mupen64 Logo" class="object-fit w-8 pr-1" />
 			<span>Mupen64 Organization</span>
 		</NavBrand>
 
@@ -111,7 +112,7 @@
 		<hr class="border-dashed border-slate-400/70 dark:border-slate-600/70" />
 		<div class="flex flex-col items-center justify-center p-10 text-center">
 			<div class="mb-5 flex flex-row items-center gap-2">
-				<img src={mupen64} alt="Mupen64 Logo" class="object-fit w-10" />
+				<img src={org} alt="Mupen64 Logo" class="object-fit w-10" />
 				<p class="text-2xl font-bold">Mupen64 Organization</p>
 			</div>
 			<p class="mb-5 max-w-2xl text-center">
