@@ -86,7 +86,25 @@
 
 <div class="flex min-h-screen flex-col">
 	<div class="flex-1">
-		{@render children?.()}
+		{#if data.maintenance}
+			<div class="flex min-h-[60vh] items-center justify-center p-8">
+				<div
+					class="w-full max-w-xl rounded-2xl border border-dashed border-slate-400/70 bg-slate-100/90 p-10 text-center shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/90"
+				>
+					<img src={mupen64} alt="Mupen64 Logo" class="mx-auto mb-6 w-24 animate-pulse object-fit" />
+					<h1 class="mb-3 text-3xl font-bold text-slate-900 dark:text-slate-100">We'll be right back!</h1>
+					<p class="mb-2 text-lg text-slate-700 dark:text-slate-300">
+						The site is currently undergoing scheduled maintenance.
+					</p>
+					<p class="text-sm text-slate-500 dark:text-slate-400">
+					    Avoid downloading the repacks directly during maintenance, as they might be broken. <br>
+						We're working hard to get everything back up and running. Please check back soon.
+					</p>
+				</div>
+			</div>
+		{:else}
+			{@render children?.()}
+		{/if}
 	</div>
 
 	<footer class="grid-300-45 w-full bg-slate-100/70 dark:bg-slate-900/70">
