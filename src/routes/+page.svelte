@@ -56,7 +56,8 @@
 					placement="bottom-end"
 					class="list-none"
 				>
-				<DropdownItem
+				<!-- Unavailable until 1.5.0 -->
+				<!-- <DropdownItem
 					href={downloadUrls['stable-w64']}
 					onclick={(event) => handle_download(event, 'stable-w64')}
 				>
@@ -67,7 +68,7 @@
 						Doesn't work with Jabo's plugins.
 						</p>
 					</div>
-				</DropdownItem>
+				</DropdownItem> -->
 				<DropdownItem
 					href={downloadUrls['nightly-w32']}
 					onclick={(event) => handle_download(event, 'nightly-w32')}
