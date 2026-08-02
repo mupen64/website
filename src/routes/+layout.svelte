@@ -47,7 +47,7 @@
 
 		<NavUl class="items-center gap-1" ulClass={navListClass}>
 			<NavLi class={navItemClass}>Mupen64</NavLi>
-			<MegaMenu items={mupen64Items} class={megaMenuClass} ulClass="flex w-full min-w-0 flex-col gap-0">
+			<MegaMenu items={mupen64Items} class={megaMenuClass} trigger="hover" ulClass="flex w-full min-w-0 flex-col gap-0">
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
 						{item.name}
@@ -56,7 +56,7 @@
 			</MegaMenu>
 
 			<NavLi class={navItemClass}>SM64 Lua Redux</NavLi>
-			<MegaMenu items={reduxItems} class={megaMenuClass} ulClass="flex w-full min-w-0 flex-col gap-0">
+			<MegaMenu items={reduxItems} class={megaMenuClass} trigger="hover" ulClass="flex w-full min-w-0 flex-col gap-0">
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
 						{item.name}
@@ -65,7 +65,7 @@
 			</MegaMenu>
 
 			<NavLi class={navItemClass}>ugui</NavLi>
-			<MegaMenu items={uguiItems} class={megaMenuClass} ulClass="flex w-full min-w-0 flex-col gap-0">
+			<MegaMenu items={uguiItems} class={megaMenuClass} trigger="hover" ulClass="flex w-full min-w-0 flex-col gap-0">
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
 						{item.name}
@@ -74,7 +74,7 @@
 			</MegaMenu>
 
 			<NavLi class={navItemClass}>STROOP</NavLi>
-			<MegaMenu items={stroopItems} class={megaMenuClass} ulClass="flex w-full min-w-0 flex-col gap-0">
+			<MegaMenu items={stroopItems} class={megaMenuClass} trigger="hover" ulClass="flex w-full min-w-0 flex-col gap-0">
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
 						{item.name}
