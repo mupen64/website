@@ -37,7 +37,7 @@
 <div
 	class="grid-300-45 sticky top-0 z-50 w-full border-b border-dashed border-slate-400/70 bg-slate-100/80 shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/80"
 >
-	<Navbar class="bg-transparent">
+	<Navbar class="bg-transparent max-w-3xl ml-auto mr-auto">
 		<NavBrand href={resolve('/')} class="text-xl font-semibold text-slate-900 dark:text-slate-100">
 			<img src={org} alt="Mupen64 Logo" class="object-fit w-8 pr-1" />
 			<span>Mupen64 Organization</span>
