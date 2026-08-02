@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button, Card, Dropdown, DropdownItem } from 'flowbite-svelte';
+	import { ChevronDownOutline, WindowsSolid } from 'flowbite-svelte-icons';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import lua from '$lib/assets/lua.svg';
 	import demo from '$lib/assets/demo.png';
@@ -39,7 +40,7 @@
 					class="inline-flex items-center gap-2"
 					onclick={(event: MouseEvent) => handle_download(event, 'stable-w32')}
 				>
-					<span class="material-symbols-sharp">window</span>
+					<WindowsSolid class="w-5 h-5" />
 					<span>Download 32-bit for Windows</span>
 				</Button>
 
@@ -49,7 +50,7 @@
 					aria-label="More download options"
 					class="inline-flex items-center justify-center"
 				>
-					<span class="material-symbols-sharp">arrow_drop_down</span>
+					<ChevronDownOutline class="w-5 h-5" />
 				</Button>
 
 				<Dropdown
