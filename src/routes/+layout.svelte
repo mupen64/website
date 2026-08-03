@@ -4,7 +4,7 @@
 	import org from '$lib/assets/org.svg';
 	import { resolve } from '$app/paths';
 	import { MegaMenu, NavBrand, NavHamburger, NavLi, Navbar, NavUl, Button } from 'flowbite-svelte';
-	import { DiscordSolid } from 'flowbite-svelte-icons';
+	import { DiscordSolid, HammerSolid, ToolsOutline } from 'flowbite-svelte-icons';
 
 	let { children, data } = $props();
 
@@ -122,15 +122,15 @@
 					class="w-full max-w-xl rounded-2xl border border-dashed border-slate-400/70 bg-slate-100/90 p-10 text-center shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/90"
 				>
 					<img
-						src={mupen64}
-						alt="Mupen64 Logo"
+						src={org}
+						alt="Organization Logo"
 						class="object-fit mx-auto mb-6 w-24 animate-pulse"
 					/>
 					<h1 class="mb-3 text-3xl font-bold text-slate-900 dark:text-slate-100">
-						We'll be right back!
+					    We'll be right back! 🛠️
 					</h1>
 					<p class="mb-2 text-lg text-slate-700 dark:text-slate-300">
-						The site is currently undergoing scheduled maintenance.
+						The site is currently undergoing maintenance.
 					</p>
 					<p class="text-sm text-slate-500 dark:text-slate-400">
 						Avoid downloading the repacks directly during maintenance, as they might be broken. <br
