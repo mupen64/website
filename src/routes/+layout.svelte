@@ -47,20 +47,20 @@
 
 		<NavHamburger
 			class="text-slate-900 dark:text-slate-100"
-			menuClass="text-slate-900 dark:text-slate-100"
+			classes={{ menu: 'text-slate-900 dark:text-slate-100' }}
 		/>
 
 		<Button href={discordUrl} class="mr-auto ml-auto sm:mr-4" size="sm" pill>
 			<DiscordSolid />
 			<span class="ml-2">Discord server</span>
 		</Button>
-		<NavUl class="items-center gap-1" ulClass={navListClass}>
+		<NavUl class="items-center gap-1" classes={{ ul: navListClass }}>
 			<NavLi class={navItemClass}>Mupen64</NavLi>
 			<MegaMenu
 				items={mupen64Items}
 				class={megaMenuClass}
 				trigger="hover"
-				ulClass="flex w-full min-w-0 flex-col gap-0"
+				classes={{ ul: 'flex w-full min-w-0 flex-col gap-0' }}
 			>
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
@@ -74,7 +74,7 @@
 				items={reduxItems}
 				class={megaMenuClass}
 				trigger="hover"
-				ulClass="flex w-full min-w-0 flex-col gap-0"
+				classes={{ ul: 'flex w-full min-w-0 flex-col gap-0' }}
 			>
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
@@ -88,7 +88,7 @@
 				items={uguiItems}
 				class={megaMenuClass}
 				trigger="hover"
-				ulClass="flex w-full min-w-0 flex-col gap-0"
+				classes={{ ul: 'flex w-full min-w-0 flex-col gap-0' }}
 			>
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
@@ -102,7 +102,7 @@
 				items={stroopItems}
 				class={megaMenuClass}
 				trigger="hover"
-				ulClass="flex w-full min-w-0 flex-col gap-0"
+				classes={{ ul: 'flex w-full min-w-0 flex-col gap-0' }}
 			>
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
