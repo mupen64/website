@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import { resolve } from '$app/paths';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import sm64luaredux from '$lib/assets/sm64luaredux.png';
@@ -39,7 +38,7 @@
 			class="mx-auto mb-8 flex max-w-4xl flex-col items-start gap-4 rounded-xl border border-slate-300 bg-slate-200/80 p-6 shadow-sm sm:flex-row sm:items-end sm:justify-between dark:border-slate-700 dark:bg-slate-800/70"
 		>
 			<div>
-				<p class="flex items-center gap-2 text-sm uppercase tracking-wide opacity-70">
+				<p class="flex items-center gap-2 text-sm tracking-wide uppercase opacity-70">
 					<img
 						src={data.product === 'mupen64' ? mupen64 : sm64luaredux}
 						alt=""
@@ -54,7 +53,7 @@
 				></span>
 				<h1 class="mt-4 text-3xl font-bold">{data.title}</h1>
 				<select
-					class="mt-4 w-full max-w-md rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-primary-400 dark:focus:ring-primary-400/30"
+					class="mt-4 w-full max-w-md rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm transition-colors outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-primary-400 dark:focus:ring-primary-400/30"
 					aria-label="Choose a document"
 					value={data.current_doc_href}
 					onchange={handle_doc_change}
@@ -65,9 +64,14 @@
 				</select>
 			</div>
 
-			<div class="inline-flex self-start overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700">
+			<div
+				class="inline-flex self-start overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
+			>
 				{#each data.channel_links as link, i (i)}
-					<a href={resolve(link.href as `/docs/${string}`)} class={channelLinkClass(link.channel === data.channel, i)}>
+					<a
+						href={resolve(link.href as `/docs/${string}`)}
+						class={channelLinkClass(link.channel === data.channel, i)}
+					>
 						{link.channel}
 					</a>
 				{/each}

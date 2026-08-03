@@ -8,12 +8,16 @@
 	import Title from '$lib/components/Title.svelte';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { downloadUrls, startDownloadFromChannel, type Channel } from '$lib/helpers/RepackDownloadHelper';
+	import {
+		downloadUrls,
+		startDownloadFromChannel,
+		type Channel
+	} from '$lib/helpers/RepackDownloadHelper';
 
 	function handle_download(event: MouseEvent, channel: Channel) {
 		event.preventDefault();
 
-	    const cleanup =	startDownloadFromChannel(channel);
+		const cleanup = startDownloadFromChannel(channel);
 
 		setTimeout(() => {
 			goto(resolve(`/downloaded/${channel}`));
@@ -40,7 +44,7 @@
 					class="inline-flex items-center gap-2"
 					onclick={(event: MouseEvent) => handle_download(event, 'stable-w32')}
 				>
-					<WindowsSolid class="w-5 h-5" />
+					<WindowsSolid class="h-5 w-5" />
 					<span>Download 32-bit for Windows</span>
 				</Button>
 
@@ -50,15 +54,12 @@
 					aria-label="More download options"
 					class="inline-flex items-center justify-center"
 				>
-					<ChevronDownOutline class="w-5 h-5" />
+					<ChevronDownOutline class="h-5 w-5" />
 				</Button>
 
-				<Dropdown
-					placement="bottom-end"
-					class="list-none"
-				>
-				<!-- Unavailable until 1.5.0 -->
-				<!-- <DropdownItem
+				<Dropdown placement="bottom-end" class="list-none">
+					<!-- Unavailable until 1.5.0 -->
+					<!-- <DropdownItem
 					href={downloadUrls['stable-w64']}
 					onclick={(event) => handle_download(event, 'stable-w64')}
 				>
@@ -70,22 +71,26 @@
 						</p>
 					</div>
 				</DropdownItem> -->
-				<DropdownItem
-					href={downloadUrls['nightly-w32']}
-					onclick={(event) => handle_download(event, 'nightly-w32')}
-				>
-					<div class="flex w-full flex-col items-start text-left leading-tight">
-						<p class="text-base">Download nightly (32-bit)</p>
-						<p class="text-xs font-light opacity-70">Bleeding-edge features with potential instability</p>
-					</div>
-				</DropdownItem>
+					<DropdownItem
+						href={downloadUrls['nightly-w32']}
+						onclick={(event) => handle_download(event, 'nightly-w32')}
+					>
+						<div class="flex w-full flex-col items-start text-left leading-tight">
+							<p class="text-base">Download nightly (32-bit)</p>
+							<p class="text-xs font-light opacity-70">
+								Bleeding-edge features with potential instability
+							</p>
+						</div>
+					</DropdownItem>
 					<DropdownItem
 						href={downloadUrls['nightly-w64']}
 						onclick={(event) => handle_download(event, 'nightly-w64')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<p class="text-base">Download nightly (64-bit)</p>
-							<p class="text-xs font-light opacity-70">Bleeding-edge features with potential instability</p>
+							<p class="text-xs font-light opacity-70">
+								Bleeding-edge features with potential instability
+							</p>
 						</div>
 					</DropdownItem>
 					<DropdownItem
@@ -94,15 +99,19 @@
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<p class="text-base">Download experiments</p>
-							<p class="text-xs font-light opacity-70">Experimental variations with bleeding-edge features</p>
+							<p class="text-xs font-light opacity-70">
+								Experimental variations with bleeding-edge features
+							</p>
 						</div>
 					</DropdownItem>
 					<DropdownItem>
-					<div class="flex w-full flex-col items-start text-left leading-tight">
-						<p class="text-base">Download for Linux</p>
-						<p class="text-xs font-light opacity-70">There are currently no Linux builds available,<br> but we're gradually working towards cross-platform support</p>
-					</div>
-
+						<div class="flex w-full flex-col items-start text-left leading-tight">
+							<p class="text-base">Download for Linux</p>
+							<p class="text-xs font-light opacity-70">
+								There are currently no Linux builds available,<br /> but we're gradually working towards
+								cross-platform support
+							</p>
+						</div>
 					</DropdownItem>
 				</Dropdown>
 			</div>
@@ -122,21 +131,21 @@
 		<div class="mx-auto max-w-6xl">
 			<Title>Features</Title>
 			<div class="flex flex-row flex-wrap justify-center gap-8">
-				<Card class="p-4 w-80 max-w-72">
+				<Card class="w-80 max-w-72 p-4">
 					<p class="text-xl font-semibold">🔋 Batteries Included</p>
 					<p class="text-sm">
 						The Mupen64 Repack comes with plugins, Lua scripts, and more to get you TASing right
 						away.
 					</p>
 				</Card>
-				<Card class="p-4 w-80 max-w-72">
+				<Card class="w-80 max-w-72 p-4">
 					<p class="text-xl font-semibold">⌛ Rerecording</p>
 					<p class="text-sm">
 						Features the basics like movies and savestates, but also advanced tools like Piano Roll
 						and Seeking.
 					</p>
 				</Card>
-				<Card class="p-4 w-80 max-w-72">
+				<Card class="w-80 max-w-72 p-4">
 					<p class="text-xl font-semibold">⚡ High Performance</p>
 
 					<p class="text-sm">
@@ -144,7 +153,7 @@
 						consistently high performance.
 					</p>
 				</Card>
-				<Card class="p-4 w-80 max-w-72">
+				<Card class="w-80 max-w-72 p-4">
 					<p class="flex flex-row items-center gap-2 text-xl font-semibold">
 						<img src={lua} alt="Lua Logo" class="w-8" />
 						Lua Integration
@@ -155,32 +164,32 @@
 						workflow.
 					</p>
 				</Card>
-				<Card class="p-4 w-80 max-w-72">
+				<Card class="w-80 max-w-72 p-4">
 					<p class="text-xl font-semibold">🌳 Rich Ecosystem</p>
 					<p class="text-sm">
 						Rich ecosystem of advanced TASing tools and plugins geared towards increasing TASer
 						productivity.
 					</p>
 				</Card>
-				<Card class="p-4 w-80 max-w-72">
+				<Card class="w-80 max-w-72 p-4">
 					<p class="text-xl font-semibold">🔌 Extendable</p>
 					<p class="text-sm">The GUI can be extended seamlessly using Lua APIs.</p>
 				</Card>
-				<Card class="p-4 w-80 max-w-72">
+				<Card class="w-80 max-w-72 p-4">
 					<p class="text-xl font-semibold">💪 Poweruser-Friendly</p>
 					<p class="text-sm">
 						Features a Command Palette and a hotkey for each action to give powerusers the freedom
 						they need.
 					</p>
 				</Card>
-				<Card class="p-4 w-80 max-w-72">
+				<Card class="w-80 max-w-72 p-4">
 					<p class="text-xl font-semibold">🎥 Video Capture</p>
 					<p class="text-sm">
 						Capture stable and perfectly synchronized video directly from the emulator faster than
 						realtime using VFW or FFmpeg.
 					</p>
 				</Card>
-				<Card class="p-4 w-80 max-w-72">
+				<Card class="w-80 max-w-72 p-4">
 					<p class="text-xl font-semibold">🎮 Cheats</p>
 					<p class="text-sm">Support for GameShark cheats and GS button emulation.</p>
 				</Card>

@@ -39,21 +39,29 @@
 <div
 	class="grid-300-45 sticky top-0 z-50 w-full border-b border-dashed border-slate-400/70 bg-slate-100/80 shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/80"
 >
-	<Navbar class="bg-transparent max-w-4xl ml-auto mr-auto">
+	<Navbar class="mr-auto ml-auto max-w-4xl bg-transparent">
 		<NavBrand href={resolve('/')} class="text-xl font-semibold text-slate-900 dark:text-slate-100">
 			<img src={org} alt="Mupen64 Logo" class="object-fit w-8 pr-1" />
 			<span>Mupen64 Organization</span>
 		</NavBrand>
 
-		<NavHamburger class="text-slate-900 dark:text-slate-100" menuClass="text-slate-900 dark:text-slate-100" />
+		<NavHamburger
+			class="text-slate-900 dark:text-slate-100"
+			menuClass="text-slate-900 dark:text-slate-100"
+		/>
 
-		<Button href={discordUrl} class="ml-auto mr-auto sm:mr-4" size="sm" pill>
+		<Button href={discordUrl} class="mr-auto ml-auto sm:mr-4" size="sm" pill>
 			<DiscordSolid />
 			<span class="ml-2">Discord server</span>
 		</Button>
 		<NavUl class="items-center gap-1" ulClass={navListClass}>
 			<NavLi class={navItemClass}>Mupen64</NavLi>
-			<MegaMenu items={mupen64Items} class={megaMenuClass} trigger="hover" ulClass="flex w-full min-w-0 flex-col gap-0">
+			<MegaMenu
+				items={mupen64Items}
+				class={megaMenuClass}
+				trigger="hover"
+				ulClass="flex w-full min-w-0 flex-col gap-0"
+			>
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
 						{item.name}
@@ -62,7 +70,12 @@
 			</MegaMenu>
 
 			<NavLi class={navItemClass}>SM64 Lua Redux</NavLi>
-			<MegaMenu items={reduxItems} class={megaMenuClass} trigger="hover" ulClass="flex w-full min-w-0 flex-col gap-0">
+			<MegaMenu
+				items={reduxItems}
+				class={megaMenuClass}
+				trigger="hover"
+				ulClass="flex w-full min-w-0 flex-col gap-0"
+			>
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
 						{item.name}
@@ -71,7 +84,12 @@
 			</MegaMenu>
 
 			<NavLi class={navItemClass}>ugui</NavLi>
-			<MegaMenu items={uguiItems} class={megaMenuClass} trigger="hover" ulClass="flex w-full min-w-0 flex-col gap-0">
+			<MegaMenu
+				items={uguiItems}
+				class={megaMenuClass}
+				trigger="hover"
+				ulClass="flex w-full min-w-0 flex-col gap-0"
+			>
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
 						{item.name}
@@ -80,7 +98,12 @@
 			</MegaMenu>
 
 			<NavLi class={navItemClass}>STROOP</NavLi>
-			<MegaMenu items={stroopItems} class={megaMenuClass} trigger="hover" ulClass="flex w-full min-w-0 flex-col gap-0">
+			<MegaMenu
+				items={stroopItems}
+				class={megaMenuClass}
+				trigger="hover"
+				ulClass="flex w-full min-w-0 flex-col gap-0"
+			>
 				{#snippet children({ item })}
 					<a href={item.href} class={megaMenuItemClass}>
 						{item.name}
@@ -98,13 +121,20 @@
 				<div
 					class="w-full max-w-xl rounded-2xl border border-dashed border-slate-400/70 bg-slate-100/90 p-10 text-center shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/90"
 				>
-					<img src={mupen64} alt="Mupen64 Logo" class="mx-auto mb-6 w-24 animate-pulse object-fit" />
-					<h1 class="mb-3 text-3xl font-bold text-slate-900 dark:text-slate-100">We'll be right back!</h1>
+					<img
+						src={mupen64}
+						alt="Mupen64 Logo"
+						class="object-fit mx-auto mb-6 w-24 animate-pulse"
+					/>
+					<h1 class="mb-3 text-3xl font-bold text-slate-900 dark:text-slate-100">
+						We'll be right back!
+					</h1>
 					<p class="mb-2 text-lg text-slate-700 dark:text-slate-300">
 						The site is currently undergoing scheduled maintenance.
 					</p>
 					<p class="text-sm text-slate-500 dark:text-slate-400">
-					    Avoid downloading the repacks directly during maintenance, as they might be broken. <br>
+						Avoid downloading the repacks directly during maintenance, as they might be broken. <br
+						/>
 						We're working hard to get everything back up and running. Please check back soon.
 					</p>
 				</div>
@@ -129,7 +159,7 @@
 			</p>
 
 			<p class="mb-5 max-w-2xl text-center">
-			    Need support? Join our Discord server for live support and community discussions.
+				Need support? Join our Discord server for live support and community discussions.
 			</p>
 
 			<Button href={discordUrl} class="mb-5" size="sm" pill>

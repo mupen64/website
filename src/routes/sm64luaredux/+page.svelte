@@ -16,14 +16,14 @@
 		dark={false}
 	></Hero>
 
-	<div class="pt-16 flex items-center justify-center">
-    	<div class="tip">
-            <p>
-                SM64 Lua Redux shouldn't be downloaded directly.
-                <br>
-                Get it from the <a class="underline" href={resolve('/')}>repack</a> instead.
-            </p>
-	    </div>
+	<div class="flex items-center justify-center pt-16">
+		<div class="tip">
+			<p>
+				SM64 Lua Redux shouldn't be downloaded directly.
+				<br />
+				Get it from the <a class="underline" href={resolve('/')}>repack</a> instead.
+			</p>
+		</div>
 	</div>
 
 	<section id="about" class="mb-12 p-16 pb-0">

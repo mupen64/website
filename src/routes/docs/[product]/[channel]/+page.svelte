@@ -17,9 +17,11 @@
 
 <main>
 	<section id="wiki" class="mx-auto max-w-6xl p-4 py-16">
-		<div class="mx-auto mb-8 flex max-w-4xl flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
+		<div
+			class="mx-auto mb-8 flex max-w-4xl flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between"
+		>
 			<div>
-				<p class="flex items-center gap-2 text-sm uppercase tracking-wide opacity-70">
+				<p class="flex items-center gap-2 text-sm tracking-wide uppercase opacity-70">
 					<img
 						src={data.product === 'mupen64' ? mupen64 : sm64luaredux}
 						alt=""
@@ -33,10 +35,14 @@
 					style:background-color={data.product === 'mupen64' ? '#dc2626' : '#64748b'}
 				></span>
 				<h1 class="mt-4 text-3xl font-bold">Documentation</h1>
-				<p class="mt-2 text-slate-600 dark:text-slate-400">Choose a channel to browse the synced docs.</p>
+				<p class="mt-2 text-slate-600 dark:text-slate-400">
+					Choose a channel to browse the synced docs.
+				</p>
 			</div>
 
-			<div class="inline-flex self-start overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700">
+			<div
+				class="inline-flex self-start overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
+			>
 				{#each data.channel_links as link, i (i)}
 					<a href={link.href} class={channelLinkClass(link.channel === data.channel, i)}>
 						{link.channel}

@@ -3,7 +3,9 @@
 </script>
 
 <main>
-	<section class="bg-gradient-to-br from-red-700 to-red-900 p-16 shadow-md dark:from-red-900 dark:to-red-950">
+	<section
+		class="bg-gradient-to-br from-red-700 to-red-900 p-16 shadow-md dark:from-red-900 dark:to-red-950"
+	>
 		<div class="mx-auto max-w-6xl">
 			<div class="flex flex-col items-center justify-center gap-12 text-white">
 				<p class="text-4xl">{page.error?.message}</p>
