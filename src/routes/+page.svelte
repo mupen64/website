@@ -76,7 +76,10 @@
 						onclick={(event) => handle_download(event, 'nightly-w32')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
-							<p class="text-base">Download nightly (32-bit)</p>
+							<div class="flex flex-row items-center gap-1">
+								<WindowsSolid class="mb-px h-4 w-4" />
+								<p class="text-base">Download nightly (32-bit)</p>
+							</div>
 							<p class="text-xs font-light opacity-70">
 								Bleeding-edge features with potential instability
 							</p>
@@ -87,7 +90,10 @@
 						onclick={(event) => handle_download(event, 'nightly-w64')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
-							<p class="text-base">Download nightly (64-bit)</p>
+							<div class="flex flex-row items-center gap-1">
+								<WindowsSolid class="mb-px h-4 w-4" />
+								<p class="text-base">Download nightly (64-bit)</p>
+							</div>
 							<p class="text-xs font-light opacity-70">
 								Bleeding-edge features with potential instability
 							</p>
@@ -98,7 +104,10 @@
 						onclick={(event) => handle_download(event, 'experiments-w64')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
-							<p class="text-base">Download experiments</p>
+							<div class="flex flex-row items-center gap-1">
+								<WindowsSolid class="mb-px h-4 w-4" />
+								<p class="text-base">Download experiments</p>
+							</div>
 							<p class="text-xs font-light opacity-70">
 								Experimental variations with bleeding-edge features
 							</p>
@@ -108,8 +117,10 @@
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<p class="text-base">Download for Linux</p>
 							<p class="text-xs font-light opacity-70">
-								There are currently no Linux builds available,<br /> but we're gradually working towards
-								cross-platform support
+								To run Mupen64 on Linux, use <a class="app-link" href="https://usebottles.com/"
+									>Bottles</a
+								>.<br />
+								Linux builds coming soon.
 							</p>
 						</div>
 					</DropdownItem>
