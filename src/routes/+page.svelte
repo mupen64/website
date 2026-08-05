@@ -3,7 +3,7 @@
 	import { ChevronDownOutline, WindowsSolid } from 'flowbite-svelte-icons';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import lua from '$lib/assets/lua.svg';
-	import demo from '$lib/assets/demo.png';
+	import demo from '$lib/assets/demo.webp';
 	import Hero from '$lib/components/Hero.svelte';
 	import Title from '$lib/components/Title.svelte';
 	import { goto } from '$app/navigation';

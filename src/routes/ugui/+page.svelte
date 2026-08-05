@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ugui from '$lib/assets/ugui.png';
+	import ugui from '$lib/assets/ugui.webp';
 	import Hero from '$lib/components/Hero.svelte';
 	import Title from '$lib/components/Title.svelte';
 </script>

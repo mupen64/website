@@ -25,7 +25,7 @@
 				? 'text-white'
 				: 'text-slate-950'}"
 		>
-			<img src={logo} alt="{name} Logo" fetchpriority="high" class="object-fit w-48" />
+			<img src={logo} alt="{name} Logo" fetchpriority="high" class="object-fit w-48 h-48" />
 			<div class="flex flex-col gap-4">
 				<div
 					class="flex flex-col items-center gap-2 text-center text-5xl leading-tight font-bold md:flex-row"
