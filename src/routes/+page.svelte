@@ -40,8 +40,8 @@
 			<div class="inline-flex flex-wrap items-center gap-2">
 				<Button
 					href={downloadUrls['stable-w32']}
-					color={dark ? 'light' : 'dark'}
-					class="inline-flex items-center gap-2"
+					color="blue"
+					class="inline-flex items-center gap-2 border-b-blue-900 border-b-4 active:border-b-0 active:mt-1"
 					onclick={(event: MouseEvent) => handle_download(event, 'stable-w32')}
 				>
 					<WindowsSolid class="h-5 w-5" />
