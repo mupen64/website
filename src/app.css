@@ -148,6 +148,32 @@ body {
 	@apply border-b-0;
 }
 
+.doc-heading {
+	position: relative;
+}
+
+.doc-heading-link {
+	@apply absolute -left-6 top-1/2 inline-flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-md text-slate-500 opacity-0 transition-opacity duration-150 dark:text-slate-400;
+}
+
+.doc-heading:hover .doc-heading-link,
+.doc-heading:focus-within .doc-heading-link,
+.doc-heading-link:focus-visible {
+	opacity: 1;
+}
+
+.doc-heading-link:hover {
+	@apply text-primary-600 dark:text-primary-300;
+}
+
+.doc-heading-link svg {
+	@apply h-4 w-4;
+}
+
+.doc-heading-link.copied {
+	@apply text-emerald-500 opacity-100 dark:text-emerald-400;
+}
+
 @source '../node_modules/flowbite-svelte/dist';
 @source '../node_modules/flowbite-svelte-icons/dist';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import mupen64 from '$lib/assets/mupen64.svg';
-	import sm64luaredux from '$lib/assets/sm64luaredux.png';
+	import sm64luaredux from '$lib/assets/sm64luaredux.webp';
 
 	type DocsPageData = {
 		product: 'mupen64' | 'redux';
@@ -16,10 +16,83 @@
 
 	let { data }: { data: DocsPageData } = $props();
 
+	let content_ref: HTMLDivElement | undefined = $state();
+
+	const check_icon_svg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>`;
+
 	function handle_doc_change(event: Event) {
 		const target = event.currentTarget as HTMLSelectElement;
 		window.location.assign(target.value);
 	}
+
+	async function write_clipboard(text: string) {
+		try {
+			await navigator.clipboard.writeText(text);
+			return true;
+		} catch {
+			try {
+				const textarea = document.createElement('textarea');
+				textarea.value = text;
+				textarea.style.position = 'fixed';
+				textarea.style.opacity = '0';
+				document.body.append(textarea);
+				textarea.select();
+				const ok = document.execCommand('copy');
+				textarea.remove();
+				return ok;
+			} catch {
+				return false;
+			}
+		}
+	}
+
+	function copy_heading_link(link: HTMLAnchorElement) {
+		const id = link.getAttribute('href')?.replace(/^#/, '');
+		if (!id) {
+			return;
+		}
+
+		const url = `${location.origin}${location.pathname}${location.search}#${id}`;
+		history.replaceState(history.state, '', `${location.pathname}${location.search}#${id}`);
+
+		write_clipboard(url).then((ok) => {
+			if (!ok) {
+				return;
+			}
+
+			const original_html = link.innerHTML;
+			const original_label = link.getAttribute('aria-label') ?? '';
+			link.classList.add('copied');
+			link.innerHTML = check_icon_svg;
+			link.setAttribute('aria-label', 'Link copied to clipboard');
+
+			window.setTimeout(() => {
+				link.innerHTML = original_html;
+				link.classList.remove('copied');
+				link.setAttribute('aria-label', original_label);
+			}, 1500);
+		});
+	}
+
+	$effect(() => {
+		const container = content_ref;
+		void data.content; // re-run when a different doc is rendered
+		if (!container) {
+			return;
+		}
+
+		const onClick = (event: MouseEvent) => {
+			const target = (event.target as Element | null)?.closest?.('.doc-heading-link');
+			if (!(target instanceof HTMLAnchorElement)) {
+				return;
+			}
+			event.preventDefault();
+			copy_heading_link(target);
+		};
+
+		container.addEventListener('click', onClick);
+		return () => container.removeEventListener('click', onClick);
+	});
 
 	function channelLinkClass(active: boolean, index: number) {
 		return [
@@ -79,6 +152,7 @@
 		</div>
 
 		<div
+			bind:this={content_ref}
 			class="mx-auto flex max-w-4xl flex-col items-start rounded-xl border border-slate-300 bg-slate-100/90 p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900/70"
 		>
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -->

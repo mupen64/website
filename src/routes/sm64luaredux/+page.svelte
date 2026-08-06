@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import sm64luaredux from '$lib/assets/sm64luaredux.png';
+	import sm64luaredux from '$lib/assets/sm64luaredux.webp';
 	import Hero from '$lib/components/Hero.svelte';
 	import Title from '$lib/components/Title.svelte';
 </script>

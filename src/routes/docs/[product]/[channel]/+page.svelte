@@ -1,6 +1,6 @@
 <script lang="ts">
 	import mupen64 from '$lib/assets/mupen64.svg';
-	import sm64luaredux from '$lib/assets/sm64luaredux.png';
+	import sm64luaredux from '$lib/assets/sm64luaredux.webp';
 
 	let { data } = $props();
 
