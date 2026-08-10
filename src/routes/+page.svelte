@@ -99,20 +99,6 @@
 							</p>
 						</div>
 					</DropdownItem>
-					<DropdownItem
-						href={downloadUrls['experiments-w64']}
-						onclick={(event) => handle_download(event, 'experiments-w64')}
-					>
-						<div class="flex w-full flex-col items-start text-left leading-tight">
-							<div class="flex flex-row items-center gap-1">
-								<WindowsSolid class="mb-px h-4 w-4" />
-								<p class="text-base">Download experiments</p>
-							</div>
-							<p class="text-xs font-light opacity-70">
-								Experimental variations with bleeding-edge features
-							</p>
-						</div>
-					</DropdownItem>
 					<DropdownItem>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<p class="text-base">Download for Linux</p>
