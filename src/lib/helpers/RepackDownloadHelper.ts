@@ -1,8 +1,8 @@
 export type Channel =
 	'stable-w32' | 'stable-w64' | 'nightly-w32' | 'nightly-w64';
 export const downloadUrls: Record<Channel, string> = {
-	'stable-w32': 'https://github.com/mupen64/repack-stable-w32/archive/refs/heads/main.zip',
-	'stable-w64': 'https://github.com/mupen64/repack-stable-w64/archive/refs/heads/main.zip',
+	'stable-w32': 'https://github.com/mupen64/repack/archive/refs/heads/stable-w32.zip',
+	'stable-w64': 'https://github.com/mupen64/repack/archive/refs/heads/stable-w64.zip',
 	'nightly-w32': 'https://github.com/mupen64/repack/archive/refs/heads/nightly-w32.zip',
 	'nightly-w64': 'https://github.com/mupen64/repack/archive/refs/heads/nightly-w64.zip',
 };
