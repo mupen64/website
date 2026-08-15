@@ -1,6 +1,9 @@
 <script lang="ts">
 	import '../app.css';
 	import mupen64 from '$lib/assets/mupen64.svg';
+	import sm64luaredux from '$lib/assets/sm64luaredux.webp';
+	import ugui from '$lib/assets/ugui.webp';
+	import stroop from '$lib/assets/stroop.svg';
 	import org from '$lib/assets/org.svg';
 	import { resolve } from '$app/paths';
 	import { NavBrand, Navbar, Button } from 'flowbite-svelte';
@@ -11,20 +14,20 @@
 	const navItemClass =
 		'!text-slate-900 hover:!bg-slate-200/70 hover:!text-primary-600 dark:!text-slate-100 dark:hover:!bg-slate-800/70 dark:hover:!text-primary-400';
 	const navListClass =
-		'flex w-full flex-col gap-1 rounded-lg !border-b border-dotted border-slate-400 bg-slate-100/90 p-2 dark:border-slate-600 dark:bg-slate-900/90 md:w-auto md:flex-row md:overflow-hidden md:border-0 md:bg-transparent md:p-0';
+		'flex w-full flex-col gap-1 rounded-lg !border-b border-dotted border-slate-400 bg-slate-100/90 p-2 dark:border-slate-600 dark:bg-slate-900/90 md:w-auto md:flex-row md:overflow-visible md:border-0 md:bg-transparent md:p-0';
 	const megaMenuClass =
-		'z-50 mt-2 w-fit rounded-xl !border-b border-dotted border-slate-400 bg-slate-100/90 p-2 text-slate-900 shadow-lg backdrop-blur-md dark:border-slate-600 dark:bg-slate-900/90 dark:text-slate-100';
+		'z-50 mt-2 w-fit rounded-xl !border-b border-dotted border-slate-400 bg-slate-100/95 p-2 text-slate-900 shadow-lg backdrop-blur-md dark:border-slate-500 dark:bg-slate-800/95 dark:text-slate-100';
 	const megaMenuItemClass =
-		'block -mx-2 w-[calc(100%+1rem)] !border-b border-dotted border-slate-400/70 px-4 py-2 text-sm text-slate-900 transition-colors hover:bg-slate-200/70 hover:text-primary-600 first:rounded-t-lg last:!border-b-0 last:rounded-b-lg dark:border-slate-600/70 dark:text-slate-100 dark:hover:bg-slate-800/70 dark:hover:text-primary-400';
+		'block -mx-2 w-[calc(100%+1rem)] !border-b border-dotted border-slate-400/70 px-4 py-2 text-sm text-slate-900 transition-colors hover:bg-slate-200/70 hover:text-primary-600 first:rounded-t-lg last:!border-b-0 last:rounded-b-lg dark:border-slate-500/70 dark:bg-slate-800/95 dark:text-slate-100 dark:hover:bg-slate-700/95 dark:hover:text-primary-300';
 	const discordUrl = 'https://discord.gg/hFANcme32k';
 	let projectsOpen = $state(false);
 	let navOpen = $state(false);
 
 	const projectItems = [
-		{ name: 'Mupen64', href: resolve('/') },
-		{ name: 'SM64 Lua Redux', href: resolve('/sm64luaredux') },
-		{ name: 'ugui', href: resolve('/ugui') },
-		{ name: 'STROOP', href: resolve('/stroop') }
+		{ name: 'Mupen64', href: resolve('/'), icon: mupen64 },
+		{ name: 'SM64 Lua Redux', href: resolve('/sm64luaredux'), icon: sm64luaredux },
+		{ name: 'ugui', href: resolve('/ugui'), icon: ugui },
+		{ name: 'STROOP', href: resolve('/stroop'), icon: stroop }
 	];
 </script>
 
@@ -69,7 +72,10 @@
 					class={`${megaMenuClass} ${projectsOpen ? 'visible opacity-100' : 'invisible opacity-0'} absolute top-full left-0 !mt-0 min-w-48 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100`}
 				>
 					{#each projectItems as item (item.name)}
-						<a href={item.href} class={megaMenuItemClass}>{item.name}</a>
+						<a href={item.href} class={`${megaMenuItemClass} flex items-center gap-2`}>
+													<img src={item.icon} alt="" class="h-5 w-5 shrink-0 rounded-sm object-contain" />
+													<span>{item.name}</span>
+												</a>
 					{/each}
 				</div>
 			</div>
