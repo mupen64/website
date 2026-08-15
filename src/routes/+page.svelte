@@ -50,9 +50,9 @@
 
 				<Button
 					type="button"
-					color={dark ? 'light' : 'dark'}
 					aria-label="More download options"
-					class="inline-flex items-center justify-center"
+					color="blue"
+					class="inline-flex items-center gap-2 border-b-blue-900 border-b-4 active:border-b-0 active:mt-1"
 				>
 					<ChevronDownOutline class="h-5 w-5" />
 				</Button>
