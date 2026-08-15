@@ -18,14 +18,17 @@
 	`);
 </script>
 
-<section class="border-b border-slate-200 p-16 shadow-lg dark:border-slate-700" style={bg_style}>
+<section
+	class="-mt-16 border-b border-slate-200 p-16 pt-32 pb-24 shadow-lg dark:border-slate-700"
+	style={bg_style}
+>
 	<div class="mx-auto max-w-6xl">
 		<div
 			class="flex flex-row flex-wrap items-center justify-center gap-12 {dark
 				? 'text-white'
 				: 'text-slate-950'}"
 		>
-			<img src={logo} alt="{name} Logo" fetchpriority="high" class="object-fit w-48 h-48" />
+			<img src={logo} alt="{name} Logo" fetchpriority="high" class="object-fit h-48 w-48" />
 			<div class="flex flex-col gap-4">
 				<div
 					class="flex flex-col items-center gap-2 text-center text-5xl leading-tight font-bold md:flex-row"

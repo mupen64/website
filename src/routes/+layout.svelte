@@ -36,9 +36,9 @@
 </svelte:head>
 
 <div
-	class="grid-300-45 sticky top-0 z-50 w-full border-b border-dashed border-slate-400/70 bg-slate-100/80 shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/80"
+	class="sticky top-0 z-50 mx-auto w-full border-b border-dashed border-slate-400/70 bg-slate-200/90 md:border-x shadow-sm backdrop-blur-md md:max-w-6xl md:rounded-b-xl dark:border-slate-600/70 dark:bg-slate-900/80"
 >
-	<Navbar class="mr-auto ml-auto max-w-4xl bg-transparent">
+	<Navbar class="mr-auto ml-auto max-w-6xl bg-transparent">
 		<NavBrand href={resolve('/')} class="text-xl font-semibold text-slate-900 dark:text-slate-100">
 			<img src={org} alt="Mupen64 Logo" class="object-fit w-8 pr-1" />
 			<span>Mupen64 Organization</span>
