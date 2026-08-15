@@ -25,6 +25,15 @@ export type DocsProductLink = {
 	href: string;
 };
 
+export type DocsTreeNode = {
+	id: string;
+	label: string;
+	href?: string;
+	icon?: DocsProduct;
+	channel?: DocsChannel;
+	children?: DocsTreeNode[];
+};
+
 const DOCS_PRODUCT_LABELS: Record<DocsProduct, string> = {
 	mupen64: 'Mupen64',
 	redux: 'SM64 Lua Redux'
@@ -137,6 +146,52 @@ export async function getDocsNavItems(
 		href: buildDocHref(product, channel, slug),
 		channel
 	}));
+}
+
+export async function getDocsTree(): Promise<DocsTreeNode[]> {
+	const roots: DocsTreeNode[] = [];
+
+	for (const product of DOCS_PRODUCTS) {
+		for (const channel of DOCS_CHANNELS) {
+			const slugs = await listDocSlugs(product, channel);
+			if (slugs.length === 0) continue;
+
+			const root: DocsTreeNode = {
+				id: `${product}-${channel}`,
+				label: getDocsProductLabel(product),
+				icon: product,
+				channel,
+				href: buildDocsChannelHref(product, channel),
+				children: []
+			};
+
+			for (const slug of slugs) {
+				let current = root.children!;
+				const segments = slug.split('/');
+				for (let index = 0; index < segments.length; index += 1) {
+					const segment = segments[index];
+					const isDocument = index === segments.length - 1;
+					const id = `${product}-${channel}-${segments.slice(0, index + 1).join('/')}`;
+					let node = current.find((item) => item.id === id);
+
+					if (!node) {
+						node = {
+							id,
+							label: doc_name_to_friendly_name(segment),
+							...(isDocument ? { href: buildDocHref(product, channel, slug) } : { children: [] })
+						};
+						current.push(node);
+					}
+
+					current = node.children ?? [];
+				}
+			}
+
+			roots.push(root);
+		}
+	}
+
+	return roots;
 }
 
 export async function getDocsProductLinks(): Promise<DocsProductLink[]> {

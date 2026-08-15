@@ -6,9 +6,7 @@ import {
 	buildDocHref,
 	getDocContent,
 	getDocsChannelLinks,
-	getDocsNavItems,
 	getDocsProductLabel,
-	getDocsProductLinks,
 	isDocsChannel,
 	isDocsProduct,
 	listDocSlugs
@@ -132,9 +130,6 @@ export const load: PageServerLoad = async ({ params }) => {
 		product_label: getDocsProductLabel(params.product),
 		channel: params.channel,
 		channel_links: await getDocsChannelLinks(params.product, slug),
-		product_links: await getDocsProductLinks(),
-		docs: await getDocsNavItems(params.product, params.channel),
-		current_doc_href: buildDocHref(params.product, params.channel, slug),
 		content: await renderDoc(content),
 		title: doc_name_to_friendly_name(slug)
 	};

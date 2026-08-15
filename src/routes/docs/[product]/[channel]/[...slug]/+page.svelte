@@ -8,9 +8,8 @@
 		product_label: string;
 		channel: 'stable' | 'nightly';
 		channel_links: Array<{ channel: 'stable' | 'nightly'; href: string; available: boolean }>;
-		product_links: Array<{ product: 'mupen64' | 'redux'; label: string; href: string }>;
-		docs: Array<{ slug: string; title: string; href: string; channel: 'stable' | 'nightly' }>;
-		current_doc_href: string;
+
+
 		content: string;
 		title: string;
 	};
@@ -21,18 +20,7 @@
 
 	const check_icon_svg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>`;
 
-	function handle_doc_change(event: Event) {
-		const target = event.currentTarget as HTMLSelectElement;
-		window.location.assign(target.value);
-	}
 
-	function handle_product_change(event: Event) {
-		const target = event.currentTarget as HTMLSelectElement;
-		const product = data.product_links.find((link) => link.product === target.value);
-		if (product) {
-			window.location.assign(product.href);
-		}
-	}
 
 	async function write_clipboard(text: string) {
 		try {
@@ -134,29 +122,9 @@
 					style:background-color={data.product === 'mupen64' ? '#dc2626' : '#64748b'}
 				></span>
 				<h1 class="mt-4 text-3xl font-bold">{data.title}</h1>
-				<select
-					class="mt-4 w-full max-w-md rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm transition-colors outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:focus:border-primary-400 dark:focus:ring-primary-400/30"
-					aria-label="Choose a document"
-					value={data.current_doc_href}
-					onchange={handle_doc_change}
-				>
-					{#each data.docs as doc (doc.href)}
-						<option value={doc.href}>{doc.title}</option>
-					{/each}
-				</select>
+
 			</div>
 
-			<div class="flex flex-wrap items-center gap-2 self-start">
-				<select
-					class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm shadow-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
-					aria-label="Choose a documentation project"
-					value={data.product}
-					onchange={handle_product_change}
-				>
-					{#each data.product_links as link (link.product)}
-						<option value={link.product}>{link.label}</option>
-					{/each}
-				</select>
 				<div
 					class="inline-flex overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
 				>
@@ -170,7 +138,6 @@
 					{/each}
 				</div>
 			</div>
-		</div>
 
 		<div
 			bind:this={content_ref}
