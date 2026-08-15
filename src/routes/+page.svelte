@@ -37,14 +37,14 @@
 		dark={true}
 	>
 		{#snippet button(dark: boolean)}
-			<div class="inline-flex flex-wrap items-center gap-2">
+			<div class="flex w-full flex-nowrap items-stretch justify-center gap-2 md:w-auto">
 				<Button
 					href={downloadUrls['stable-w32']}
 					color="blue"
-					class="inline-flex items-center gap-2 border-b-blue-900 border-b-4 active:border-b-0 active:mt-1"
+					class="inline-flex w-fit max-w-full items-center justify-start gap-2 text-left border-b-blue-900 border-b-4 active:border-b-0 active:mt-1"
 					onclick={(event: MouseEvent) => handle_download(event, 'stable-w32')}
 				>
-					<WindowsSolid class="h-5 w-5" />
+					<WindowsSolid class="h-5 w-5 shrink-0" />
 					<span>Download 32-bit for Windows</span>
 				</Button>
 
@@ -52,7 +52,7 @@
 					type="button"
 					aria-label="More download options"
 					color="blue"
-					class="inline-flex items-center gap-2 border-b-blue-900 border-b-4 active:border-b-0 active:mt-1"
+					class="inline-flex self-stretch items-center gap-2 border-b-blue-900 border-b-4 active:border-b-0 active:mt-1"
 				>
 					<ChevronDownOutline class="h-5 w-5" />
 				</Button>
