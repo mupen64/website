@@ -33,7 +33,7 @@
 		logo={mupen64}
 		repository="https://github.com/mupen64/mupen64-rr-lua"
 		bg_color_from="#ff0000"
-		bg_color_to="#dd0000"
+		bg_color_to="#ee0000"
 		dark={true}
 	>
 		{#snippet button(dark: boolean)}

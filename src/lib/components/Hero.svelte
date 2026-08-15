@@ -14,7 +14,7 @@
 	} = $props();
 
 	const bg_style = $derived(`
-	background: repeating-linear-gradient(45deg, ${bg_color_from} 0 1px, transparent 1px 20px), repeating-linear-gradient(-45deg, ${bg_color_from} 0 1px, transparent 1px 20px), linear-gradient(45deg, ${bg_color_from}, ${bg_color_to});
+	background: repeating-linear-gradient(45deg, ${bg_color_from} 0 1px, transparent 1px 10px), repeating-linear-gradient(-45deg, ${bg_color_from} 0 1px, transparent 1px 10px), radial-gradient(circle at center, ${bg_color_from}, ${bg_color_to});
 	`);
 </script>
 
