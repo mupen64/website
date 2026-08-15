@@ -57,9 +57,8 @@
 
 html {
 	background-color: var(--surface-100);
-	background-image:
-		repeating-linear-gradient(0deg, var(--surface-200) 0 1px, transparent 1px 20px),
-		repeating-linear-gradient(90deg, var(--surface-200) 0 1px, transparent 1px 20px);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+	background-size: 180px 180px;
 }
 
 body {
