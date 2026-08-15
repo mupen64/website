@@ -8,6 +8,7 @@
 		product_label: string;
 		channel: 'stable' | 'nightly';
 		channel_links: Array<{ channel: 'stable' | 'nightly'; href: string; available: boolean }>;
+		product_links: Array<{ product: 'mupen64' | 'redux'; label: string; href: string }>;
 		docs: Array<{ slug: string; title: string; href: string; channel: 'stable' | 'nightly' }>;
 		current_doc_href: string;
 		content: string;
@@ -23,6 +24,14 @@
 	function handle_doc_change(event: Event) {
 		const target = event.currentTarget as HTMLSelectElement;
 		window.location.assign(target.value);
+	}
+
+	function handle_product_change(event: Event) {
+		const target = event.currentTarget as HTMLSelectElement;
+		const product = data.product_links.find((link) => link.product === target.value);
+		if (product) {
+			window.location.assign(product.href);
+		}
 	}
 
 	async function write_clipboard(text: string) {
@@ -137,17 +146,29 @@
 				</select>
 			</div>
 
-			<div
-				class="inline-flex self-start overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
-			>
-				{#each data.channel_links as link, i (i)}
-					<a
-						href={resolve(link.href as `/docs/${string}`)}
-						class={channelLinkClass(link.channel === data.channel, i)}
-					>
-						{link.channel}
-					</a>
-				{/each}
+			<div class="flex flex-wrap items-center gap-2 self-start">
+				<select
+					class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm shadow-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+					aria-label="Choose a documentation project"
+					value={data.product}
+					onchange={handle_product_change}
+				>
+					{#each data.product_links as link (link.product)}
+						<option value={link.product}>{link.label}</option>
+					{/each}
+				</select>
+				<div
+					class="inline-flex overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
+				>
+					{#each data.channel_links as link, i (i)}
+						<a
+							href={resolve(link.href as `/docs/${string}`)}
+							class={channelLinkClass(link.channel === data.channel, i)}
+						>
+							{link.channel}
+						</a>
+					{/each}
+				</div>
 			</div>
 		</div>
 

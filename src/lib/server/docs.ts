@@ -19,6 +19,12 @@ export type DocsChannelLink = {
 	available: boolean;
 };
 
+export type DocsProductLink = {
+	product: DocsProduct;
+	label: string;
+	href: string;
+};
+
 const DOCS_PRODUCT_LABELS: Record<DocsProduct, string> = {
 	mupen64: 'Mupen64',
 	redux: 'SM64 Lua Redux'
@@ -131,6 +137,16 @@ export async function getDocsNavItems(
 		href: buildDocHref(product, channel, slug),
 		channel
 	}));
+}
+
+export async function getDocsProductLinks(): Promise<DocsProductLink[]> {
+	return Promise.all(
+		DOCS_PRODUCTS.map(async (product) => ({
+			product,
+			label: getDocsProductLabel(product),
+			href: await getDefaultDocHref(product)
+		}))
+	);
 }
 
 export async function getDocsChannelLinks(

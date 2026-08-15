@@ -4,6 +4,11 @@
 
 	let { data } = $props();
 
+	function handle_product_change(event: Event) {
+		const target = event.currentTarget as HTMLSelectElement;
+		window.location.assign(target.value);
+	}
+
 	function channelLinkClass(active: boolean, index: number) {
 		return [
 			'px-3 py-1.5 text-sm font-medium capitalize transition-colors',
@@ -40,14 +45,26 @@
 				</p>
 			</div>
 
-			<div
-				class="inline-flex self-start overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
-			>
-				{#each data.channel_links as link, i (i)}
-					<a href={link.href} class={channelLinkClass(link.channel === data.channel, i)}>
-						{link.channel}
-					</a>
-				{/each}
+			<div class="flex flex-wrap items-center gap-2 self-start">
+				<select
+					class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm shadow-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+					aria-label="Choose a documentation project"
+					value={data.product_links.find((link) => link.product === data.product)?.href}
+					onchange={handle_product_change}
+				>
+					{#each data.product_links as link (link.product)}
+						<option value={link.href}>{link.label}</option>
+					{/each}
+				</select>
+				<div
+					class="inline-flex overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
+				>
+					{#each data.channel_links as link, i (i)}
+						<a href={link.href} class={channelLinkClass(link.channel === data.channel, i)}>
+							{link.channel}
+						</a>
+					{/each}
+				</div>
 			</div>
 		</div>
 

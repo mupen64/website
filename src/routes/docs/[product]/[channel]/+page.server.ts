@@ -4,6 +4,7 @@ import {
 	buildDocHref,
 	getDocsChannelLinks,
 	getDocsProductLabel,
+	getDocsProductLinks,
 	getFirstDocSlug,
 	isDocsChannel,
 	isDocsProduct
@@ -24,6 +25,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		product: params.product,
 		product_label: getDocsProductLabel(params.product),
 		channel: params.channel,
-		channel_links: await getDocsChannelLinks(params.product)
+		channel_links: await getDocsChannelLinks(params.product),
+		product_links: await getDocsProductLinks()
 	};
 };

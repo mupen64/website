@@ -3,8 +3,8 @@
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import org from '$lib/assets/org.svg';
 	import { resolve } from '$app/paths';
-	import { MegaMenu, NavBrand, NavHamburger, NavLi, Navbar, NavUl, Button } from 'flowbite-svelte';
-	import { DiscordSolid, HammerSolid, ToolsOutline } from 'flowbite-svelte-icons';
+	import { NavBrand, NavHamburger, Navbar, NavUl, Button } from 'flowbite-svelte';
+	import { ChevronDownOutline, DiscordSolid } from 'flowbite-svelte-icons';
 
 	let { children, data } = $props();
 
@@ -18,18 +18,12 @@
 		'block -mx-2 w-[calc(100%+1rem)] !border-b border-dotted border-slate-400/70 px-4 py-2 text-sm text-slate-900 transition-colors hover:bg-slate-200/70 hover:text-primary-600 first:rounded-t-lg last:!border-b-0 last:rounded-b-lg dark:border-slate-600/70 dark:text-slate-100 dark:hover:bg-slate-800/70 dark:hover:text-primary-400';
 	const discordUrl = 'https://discord.gg/hFANcme32k';
 
-	const mupen64Items = $derived([
-		{ name: 'Home', href: resolve('/') },
-		...(data.mupen64_docs ?? []).map((doc) => ({ name: doc.title, href: doc.href }))
-	]);
-
-	const reduxItems = $derived([
-		{ name: 'Home', href: resolve('/sm64luaredux') },
-		...(data.redux_docs ?? []).map((doc) => ({ name: doc.title, href: doc.href }))
-	]);
-
-	const uguiItems = [{ name: 'Home', href: resolve('/ugui') }];
-	const stroopItems = [{ name: 'Home', href: resolve('/stroop') }];
+	const projectItems = [
+		{ name: 'Mupen64', href: resolve('/') },
+		{ name: 'SM64 Lua Redux', href: resolve('/sm64luaredux') },
+		{ name: 'ugui', href: resolve('/ugui') },
+		{ name: 'STROOP', href: resolve('/stroop') }
+	];
 </script>
 
 <svelte:head>
@@ -55,61 +49,29 @@
 			<span class="ml-2">Discord server</span>
 		</Button>
 		<NavUl class="items-center gap-1" classes={{ ul: navListClass }}>
-			<NavLi class={navItemClass}>Mupen64</NavLi>
-			<MegaMenu
-				items={mupen64Items}
-				class={megaMenuClass}
-				trigger="hover"
-				classes={{ ul: 'flex w-full min-w-0 flex-col gap-0' }}
+			<div class="group relative">
+				<button
+					type="button"
+					class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
+					aria-haspopup="true"
+				>
+					Projects
+					<span aria-hidden="true" class="text-xs transition-transform group-hover:rotate-180">
+						<ChevronDownOutline />
+					</span>
+				</button>
+				<div
+					class={`${megaMenuClass} invisible absolute top-full left-0 !mt-0 min-w-48 opacity-0 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100`}
+				>
+					{#each projectItems as item (item.name)}
+						<a href={item.href} class={megaMenuItemClass}>{item.name}</a>
+					{/each}
+				</div>
+			</div>
+			<a
+				href={resolve('/docs/mupen64/stable')}
+				class={`${navItemClass} rounded-lg px-3 py-2 text-sm font-medium`}>Docs</a
 			>
-				{#snippet children({ item })}
-					<a href={item.href} class={megaMenuItemClass}>
-						{item.name}
-					</a>
-				{/snippet}
-			</MegaMenu>
-
-			<NavLi class={navItemClass}>SM64 Lua Redux</NavLi>
-			<MegaMenu
-				items={reduxItems}
-				class={megaMenuClass}
-				trigger="hover"
-				classes={{ ul: 'flex w-full min-w-0 flex-col gap-0' }}
-			>
-				{#snippet children({ item })}
-					<a href={item.href} class={megaMenuItemClass}>
-						{item.name}
-					</a>
-				{/snippet}
-			</MegaMenu>
-
-			<NavLi class={navItemClass}>ugui</NavLi>
-			<MegaMenu
-				items={uguiItems}
-				class={megaMenuClass}
-				trigger="hover"
-				classes={{ ul: 'flex w-full min-w-0 flex-col gap-0' }}
-			>
-				{#snippet children({ item })}
-					<a href={item.href} class={megaMenuItemClass}>
-						{item.name}
-					</a>
-				{/snippet}
-			</MegaMenu>
-
-			<NavLi class={navItemClass}>STROOP</NavLi>
-			<MegaMenu
-				items={stroopItems}
-				class={megaMenuClass}
-				trigger="hover"
-				classes={{ ul: 'flex w-full min-w-0 flex-col gap-0' }}
-			>
-				{#snippet children({ item })}
-					<a href={item.href} class={megaMenuItemClass}>
-						{item.name}
-					</a>
-				{/snippet}
-			</MegaMenu>
 		</NavUl>
 	</Navbar>
 </div>
@@ -127,7 +89,7 @@
 						class="object-fit mx-auto mb-6 w-24 animate-pulse"
 					/>
 					<h1 class="mb-3 text-3xl font-bold text-slate-900 dark:text-slate-100">
-					    We'll be right back! 🛠️
+						We'll be right back! 🛠️
 					</h1>
 					<p class="mb-2 text-lg text-slate-700 dark:text-slate-300">
 						The site is currently undergoing maintenance.
