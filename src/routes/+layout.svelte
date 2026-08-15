@@ -36,7 +36,7 @@
 </svelte:head>
 
 <div
-	class="sticky top-0 z-50 mx-auto w-full border-b border-dashed border-slate-400/70 bg-slate-200/90 md:border-x shadow-sm backdrop-blur-md md:max-w-6xl md:rounded-b-xl dark:border-slate-600/70 dark:bg-slate-900/80"
+	class="sticky top-0 z-50 mx-auto w-full border-b border-dashed border-slate-400/70 bg-white/20 md:border-x shadow-sm backdrop-blur-xs md:max-w-6xl md:rounded-b-xl dark:border-slate-600/70 dark:bg-slate-950/10"
 >
 	<Navbar class="mr-auto ml-auto max-w-6xl bg-transparent">
 		<NavBrand href={resolve('/')} class="text-xl font-semibold text-slate-900 dark:text-slate-100">
