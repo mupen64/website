@@ -9,10 +9,10 @@
 	const channel = page.params.channel as Channel;
 
 	const channelToDocs: Partial<Record<Channel, string>> = {
-		'stable-w32': '/docs/mupen64/stable',
-		'stable-w64': '/docs/mupen64/stable',
-		'nightly-w32': '/docs/mupen64/nightly',
-		'nightly-w64': '/docs/mupen64/nightly'
+		'stable-windows-x86': '/docs/mupen64/stable',
+		'stable-windows-x64': '/docs/mupen64/stable',
+		'nightly-windows-x86': '/docs/mupen64/nightly',
+		'nightly-windows-x64': '/docs/mupen64/nightly'
 	};
 </script>
 

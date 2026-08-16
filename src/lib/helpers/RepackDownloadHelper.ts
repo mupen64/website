@@ -1,10 +1,10 @@
 export type Channel =
-	'stable-w32' | 'stable-w64' | 'nightly-w32' | 'nightly-w64';
+	'stable-windows-x86' | 'stable-windows-x64' | 'nightly-windows-x86' | 'nightly-windows-x64';
 export const downloadUrls: Record<Channel, string> = {
-	'stable-w32': 'https://github.com/mupen64/repack/archive/refs/heads/stable-w32.zip',
-	'stable-w64': 'https://github.com/mupen64/repack/archive/refs/heads/stable-w64.zip',
-	'nightly-w32': 'https://github.com/mupen64/repack/archive/refs/heads/nightly-w32.zip',
-	'nightly-w64': 'https://github.com/mupen64/repack/archive/refs/heads/nightly-w64.zip',
+	'stable-windows-x86': 'https://github.com/mupen64/repack/archive/refs/heads/stable-windows-x86.zip',
+	'stable-windows-x64': 'https://github.com/mupen64/repack/archive/refs/heads/stable-windows-x64.zip',
+	'nightly-windows-x86': 'https://github.com/mupen64/repack/archive/refs/heads/nightly-windows-x86.zip',
+	'nightly-windows-x64': 'https://github.com/mupen64/repack/archive/refs/heads/nightly-windows-x64.zip',
 };
 
 export function startDownloadFromChannel(channel: Channel): () => void {

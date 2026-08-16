@@ -39,10 +39,10 @@
 		{#snippet button(dark: boolean)}
 			<div class="flex w-full flex-nowrap items-stretch justify-center gap-2 md:w-auto">
 				<Button
-					href={downloadUrls['stable-w32']}
+					href={downloadUrls['stable-windows-x86']}
 					color="blue"
 					class="inline-flex w-fit max-w-full items-center justify-start gap-2 text-left border-b-blue-900 border-b-4 active:border-b-0 active:mt-1"
-					onclick={(event: MouseEvent) => handle_download(event, 'stable-w32')}
+					onclick={(event: MouseEvent) => handle_download(event, 'stable-windows-x86')}
 				>
 					<WindowsSolid class="h-5 w-5 shrink-0" />
 					<span>Download 32-bit for Windows</span>
@@ -60,8 +60,8 @@
 				<Dropdown placement="bottom-end" class="list-none">
 					<!-- Unavailable until 1.5.0 -->
 					<!-- <DropdownItem
-					href={downloadUrls['stable-w64']}
-					onclick={(event) => handle_download(event, 'stable-w64')}
+					href={downloadUrls['stable-windows-x64']}
+					onclick={(event) => handle_download(event, 'stable-windows-x64')}
 				>
 					<div class="flex w-full flex-col items-start text-left leading-tight">
 						<p class="text-base">Download stable (64-bit)</p>
@@ -72,8 +72,8 @@
 					</div>
 				</DropdownItem> -->
 					<DropdownItem
-						href={downloadUrls['nightly-w32']}
-						onclick={(event) => handle_download(event, 'nightly-w32')}
+						href={downloadUrls['nightly-windows-x86']}
+						onclick={(event) => handle_download(event, 'nightly-windows-x86')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<div class="flex flex-row items-center gap-1">
@@ -86,8 +86,8 @@
 						</div>
 					</DropdownItem>
 					<DropdownItem
-						href={downloadUrls['nightly-w64']}
-						onclick={(event) => handle_download(event, 'nightly-w64')}
+						href={downloadUrls['nightly-windows-x64']}
+						onclick={(event) => handle_download(event, 'nightly-windows-x64')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<div class="flex flex-row items-center gap-1">
