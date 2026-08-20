@@ -1,3 +1,4 @@
+export const prerender = true;
 
 import type { LayoutServerLoad } from './$types';
 import { MAINTENANCE } from '$env/static/private';

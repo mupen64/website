@@ -1,6 +1,8 @@
 import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { buildDocsChannelHref, isDocsProduct } from '$lib/server/docs';
+import { buildDocsChannelHref, DOCS_PRODUCTS, isDocsProduct } from '$lib/server/docs';
+
+export const entries = () => DOCS_PRODUCTS.map((product) => ({ product }));
 
 export const load: PageServerLoad = async ({ params }) => {
 	if (!isDocsProduct(params.product)) {

@@ -7,8 +7,13 @@ import {
 	getDocsProductLinks,
 	getFirstDocSlug,
 	isDocsChannel,
-	isDocsProduct
+	isDocsProduct,
+	DOCS_CHANNELS,
+	DOCS_PRODUCTS
 } from '$lib/server/docs';
+
+export const entries = () =>
+	DOCS_PRODUCTS.flatMap((product) => DOCS_CHANNELS.map((channel) => ({ product, channel })));
 
 export const load: PageServerLoad = async ({ params }) => {
 	if (!isDocsProduct(params.product) || !isDocsChannel(params.channel)) {

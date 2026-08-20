@@ -1,4 +1,5 @@
 <script lang="ts">
+
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import type { Channel } from '$lib/helpers/RepackDownloadHelper';
