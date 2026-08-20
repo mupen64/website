@@ -9,8 +9,9 @@
 	import { NavBrand, Navbar, Button } from 'flowbite-svelte';
 	import { ChevronDownOutline, DiscordSolid } from 'flowbite-svelte-icons';
 
-	let { children, data } = $props();
+	let { children } = $props();
 
+	const maintenance = false;
 	const navItemClass =
 		'!text-slate-900 hover:!bg-slate-200/70 hover:!text-primary-600 dark:!text-slate-100 dark:hover:!bg-slate-800/70 dark:hover:!text-primary-400';
 	const navListClass =
@@ -95,7 +96,7 @@
 
 <div class="flex min-h-screen flex-col">
 	<div class="flex-1">
-		{#if data.maintenance}
+		{#if maintenance}
 			<div class="flex min-h-[60vh] items-center justify-center p-8">
 				<div
 					class="w-full max-w-xl rounded-2xl border border-dashed border-slate-400/70 bg-slate-100/90 p-10 text-center shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/90"
