@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Advanced N64 TASing Emulator" />
+		<meta
+			name="keywords"
+			content="Mupen64, N64, Emulator, TAS, Tool Assisted Speedrun, Lua, Scripting, Gaming, Retro, Nintendo 64"
+		/>
+		<meta name="author" content="Mupen64 Organization" />
+		<meta content="Mupen64" property="og:title" />
+		<meta content="Advanced N64 TASing Emulator" property="og:description" />
+		<meta content="https://mupen64.com" property="og:url" />
+		<meta content="/img/banner.webp" property="og:image" />
+
+		<title>Mupen64</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<script>
+			(() => {
+				const root = document.documentElement;
+				const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+				let shouldUseDark = darkQuery.matches;
+
+				try {
+					const storedTheme = localStorage.getItem('theme');
+					if (storedTheme === 'light' || storedTheme === 'dark') {
+						shouldUseDark = storedTheme === 'dark';
+					}
+				} catch {}
+
+				root.classList.toggle('dark', shouldUseDark);
+			})();
+		</script>
+
+		<link href="../../../_app/immutable/entry/start.BApnoKoU.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/CpWWgsk3.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DCYArm1n.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/O7ILNLzt.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DguXbYMS.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.7-M0zthI.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/m-YLSzpL.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/D6toM1TJ.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BhrfKKyi.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/96q0E-ao.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Bk9UJqFD.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/0.E0C24iql.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BfHoPi46.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DQVlzZX5.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/5paJzWI8.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/CRMqfMEO.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BXrwnbQ5.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/B9ORIDLx.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Beo4coCJ.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Cz9bPriW.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/O2M0Zibi.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Dk_-qn3s.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/f4Kt09xR.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/2.UQV6LBMF.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BBvCF7aP.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/7.qET4R3Ra.js" rel="modulepreload">
+		<!--12qhfyh--><link rel="icon" href="/_app/immutable/assets/mupen64.5H--mm2K.svg"/><!---->
+		<link href="../../../_app/immutable/assets/Tour.CD54FDqW.css" rel="stylesheet">
+		<link href="../../../_app/immutable/assets/0.bYuuYlJT.css" rel="stylesheet">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[0--><!--[--><div class="sticky top-0 z-50 mx-auto w-full border-b border-dashed border-slate-400/70 bg-white/20 md:border-x shadow-sm backdrop-blur-xs md:max-w-6xl md:rounded-b-xl dark:border-slate-600/70 dark:bg-slate-950/10"><nav><div class="relative w-full px-2 py-2.5 sm:px-4 mr-auto ml-auto max-w-6xl bg-transparent"><div class="mx-auto flex flex-wrap items-center justify-between container"><a href="../../../" class="flex items-center text-xl font-semibold text-slate-900 dark:text-slate-100"><img src="data:image/svg+xml,%3c?xml%20version='1.0'?%3e%3csvg%20width='116'%20height='116'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:svg='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20version='1.0'%3e%3cmetadata%20id='metadata7'%3eimage/svg+xmlMupen64plus%20Program%20IconAugust%2017,%202008Tillin9Copyright%20(C)%20Tillin9GPL%20(v2%20or%20later)This%20icon%20is%20original%20work%20created%20by%20Tillin9%20for%20Mupen64plus.%20This%20icon%20is%20free%20software;%20you%20can%20redistribute%20it%20and/or%20modify%20it%20under%20the%20terms%20of%20the%20GNU%20General%20Public%20License%20as%20published%20by%20the%20Free%20Software%20Foundation;%20either%20version%202%20of%20the%20License,%20or%20(at%20your%20option)%20any%20later%20version.%20You%20may%20also%20copy%20it%20under%20the%20Creative%20Common%20Attribution-ShareAlike%203.0%20license,%20as%20found%20here:%20http://creativecommons.org/licenses/by-sa/3.0/%20It%20is%20the%20author&amp;%23x27;s%20desire%20that%20SVG%20/%20vector%20format%20copies%20be%20GPLed%20and%20rasterizations%20licensed%20under%20Creative%20Commons.%20This%20is%20because%20there%20are%20no%20clear%20guidelines%20to%20applying%20the%20GPL%20to%20artwork,%20whereas%20vector%20data%20consitutes%20source.%3c/metadata%3e%3cg%20class='layer'%20display='inline'%20transform='translate(4,0)'%3e%3ctitle%3eLayer%201%3c/title%3e%3cpath%20d='m54.01,0.73c-0.27,0.01%20-0.54,0.08%20-0.78,0.19l-13.32,6.5c-0.39,0.2%20-0.71,0.51%20-0.9,0.91l-21.97,11.09c-0.55,-0.27%20-1.2,-0.27%20-1.75,0l-13.31,6.5c-0.7,0.34%20-1.13,1.04%20-1.13,1.81l0,61c0,0.77%200.43,1.48%201.13,1.82l13.31,6.5c0.55,0.26%201.2,0.26%201.75,0l13.34,-6.5c0.7,-0.34%201.13,-1.05%201.13,-1.82l0,-9.9c0.43,0.1%200.88,0.05%201.28,-0.13l6,-2.87l0,31.4c-0.01,0.77%200.43,1.48%201.12,1.82l13.32,6.5c0.55,0.26%201.19,0.26%201.75,0l13.34,-6.5c0.69,-0.34%201.13,-1.05%201.13,-1.82l0,-31.4l6,2.87c0.38,0.19%200.82,0.24%201.25,0.16l0,9.87c-0.01,0.77%200.43,1.48%201.12,1.82l13.34,6.5c0.56,0.26%201.2,0.26%201.75,0l13.32,-6.5c0.69,-0.34%201.13,-1.05%201.12,-1.82l0,-61c0.01,-0.77%20-0.43,-1.47%20-1.12,-1.81l-13.32,-6.5c-0.55,-0.27%20-1.19,-0.27%20-1.75,0l-21.93,-11.09c-0.2,-0.4%20-0.52,-0.71%20-0.91,-0.91l-13.34,-6.5c-0.31,-0.14%20-0.64,-0.21%20-0.97,-0.19l0,0z'%20fill='currentColor'%20fill-rule='evenodd'%20id='path4621'%20stroke-linejoin='round'%20stroke-miterlimit='4'/%3e%3cpath%20d='m29.5,75.73l0,13l-13.33,6.5l0,-39'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3742'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m40.78,107.23l13.32,6.5l0,-61l-13.32,-6.5l-12.3,12l-12.31,-24l-13.32,-6.5l0,61l13.32,6.5l0,-39l8.9,17.34l6.83,3.34l8.88,-8.68l0,39z'%20fill='currentColor'%20fill-rule='evenodd'%20id='path2384'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m16.17,34.23l-13.32,-6.5l51.16,-25'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3796'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m76.31,76.9l-8.88,-4.26l0,-4.41l8.88,8.67z'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3895'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m78.71,75.73l0,13l13.32,6.5l0,-39'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3897'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m67.43,107.23l-13.33,6.5l0,-61l13.33,-6.5l12.3,12l12.3,-24l13.33,-6.5l0,61l-13.33,6.5l0,-39l-8.89,17.34l-6.83,3.34l-8.88,-8.68l0,39z'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3899'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m92.03,34.23l13.33,-6.5l-51.35,-25'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3901'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3c/g%3e%3c/svg%3e" alt="Mupen64 Logo" class="object-fit w-8 pr-1"/> <span>Mupen64 Organization</span><!----></a><!----> <button type="button" class="inline-flex items-center rounded-lg p-2 text-xl text-slate-900 hover:bg-slate-200 md:hidden dark:text-slate-100 dark:hover:bg-slate-800" aria-label="Open main menu" aria-expanded="false">☰</button> <div class="hidden w-full md:block md:w-auto"><div class="flex items-center gap-1 md:flex"><div class="flex w-full flex-col gap-1 rounded-lg !border-b border-dotted border-slate-400 bg-slate-100/90 p-2 dark:border-slate-600 dark:bg-slate-900/90 md:w-auto md:flex-row md:overflow-visible md:border-0 md:bg-transparent md:p-0"><div class="group relative w-full md:w-auto"><button type="button" class="!text-slate-900 hover:!bg-slate-200/70 hover:!text-primary-600 dark:!text-slate-100 dark:hover:!bg-slate-800/70 dark:hover:!text-primary-400 inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium" aria-haspopup="true" aria-expanded="false">Projects <span aria-hidden="true" class="text-xs transition-transform group-hover:rotate-180"><svg xmlns="http://www.w3.org/2000/svg" fill="none" color="currentColor" class="shrink-0 w-5 h-5" viewBox="0 0 24 24" aria-hidden="true"><!--[-1--><!--]--><!--[-1--><!--]--><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 10 4 4 4-4"></path></svg><!----></span></button> <div class="z-50 mt-2 w-fit rounded-xl !border-b border-dotted border-slate-400 bg-slate-100/95 p-2 text-slate-900 shadow-lg backdrop-blur-md dark:border-slate-500 dark:bg-slate-800/95 dark:text-slate-100 invisible opacity-0 absolute top-full left-0 !mt-0 min-w-48 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"><!--[--><a href="../../../" class="block -mx-2 w-[calc(100%+1rem)] !border-b border-dotted border-slate-400/70 px-4 py-2 text-sm text-slate-900 transition-colors hover:bg-slate-200/70 hover:text-primary-600 first:rounded-t-lg last:!border-b-0 last:rounded-b-lg dark:border-slate-500/70 dark:bg-slate-800/95 dark:text-slate-100 dark:hover:bg-slate-700/95 dark:hover:text-primary-300 flex items-center gap-2"><img src="/_app/immutable/assets/mupen64.5H--mm2K.svg" alt="" class="h-5 w-5 shrink-0 rounded-sm object-contain"/> <span>Mupen64</span></a><a href="../../../sm64luaredux" class="block -mx-2 w-[calc(100%+1rem)] !border-b border-dotted border-slate-400/70 px-4 py-2 text-sm text-slate-900 transition-colors hover:bg-slate-200/70 hover:text-primary-600 first:rounded-t-lg last:!border-b-0 last:rounded-b-lg dark:border-slate-500/70 dark:bg-slate-800/95 dark:text-slate-100 dark:hover:bg-slate-700/95 dark:hover:text-primary-300 flex items-center gap-2"><img src="/_app/immutable/assets/sm64luaredux.C_apz1qv.webp" alt="" class="h-5 w-5 shrink-0 rounded-sm object-contain"/> <span>SM64 Lua Redux</span></a><a href="../../../ugui" class="block -mx-2 w-[calc(100%+1rem)] !border-b border-dotted border-slate-400/70 px-4 py-2 text-sm text-slate-900 transition-colors hover:bg-slate-200/70 hover:text-primary-600 first:rounded-t-lg last:!border-b-0 last:rounded-b-lg dark:border-slate-500/70 dark:bg-slate-800/95 dark:text-slate-100 dark:hover:bg-slate-700/95 dark:hover:text-primary-300 flex items-center gap-2"><img src="/_app/immutable/assets/ugui.fSEq-Eu6.webp" alt="" class="h-5 w-5 shrink-0 rounded-sm object-contain"/> <span>ugui</span></a><a href="../../../stroop" class="block -mx-2 w-[calc(100%+1rem)] !border-b border-dotted border-slate-400/70 px-4 py-2 text-sm text-slate-900 transition-colors hover:bg-slate-200/70 hover:text-primary-600 first:rounded-t-lg last:!border-b-0 last:rounded-b-lg dark:border-slate-500/70 dark:bg-slate-800/95 dark:text-slate-100 dark:hover:bg-slate-700/95 dark:hover:text-primary-300 flex items-center gap-2"><img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='utf-8'?%3e%3csvg%20version='1.0'%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20110%20110'%20preserveAspectRatio='xMidYMid%20meet'%3e%3cg%20transform='matrix(0.1,%200,%200,%20-0.1,%20-8.65,%20119.55)'%20fill='%23000000'%20stroke='none'%3e%3cpath%20style='fill:%20rgb(255,%20255,%20255);%20stroke:%20none;'%20d='M%20220.257%20931.233%20C%20220.257%20946.452%20460.44%201036.15%20462.717%201036.719%20C%20464.753%201037.228%20761.855%201043.017%20783.897%201043.017%20C%20790.72%201043.017%201044.025%20964.559%201060.995%20939.105%20C%201061.286%20938.668%201071.769%20362.291%201070.442%20361.295%20C%201069.503%20360.591%20869.441%20263.681%20857.895%20263.681%20C%20840.052%20263.681%20453.737%20251.826%20450.121%20252.66%20C%20446.887%20253.407%20232.852%20334.53%20229.703%20334.53'%20id='object-0'/%3e%3cpath%20d='M%20446%201065%20C%20333%201046%20254%201013%20203%20965%20C%20167%20930%20160%20917%20160%20884%20C%20160%20862%20167%20834%20176%20822%20C%20190%20802%20190%20798%20176%20778%20C%20156%20749%20156%20691%20176%20662%20C%20190%20642%20190%20638%20176%20618%20C%20156%20589%20156%20531%20175%20502%20C%20189%20483%20189%20477%20174%20449%20C%20127%20357%20204%20278%20388%20228%20C%20500%20198%20780%20198%20892%20228%20C%201076%20278%201153%20357%201106%20449%20C%201091%20477%201091%20483%201105%20502%20C%201124%20531%201124%20589%201104%20618%20C%201090%20638%201090%20642%201104%20662%20C%201124%20691%201124%20749%201104%20778%20C%201090%20798%201090%20802%201104%20822%20C%201113%20834%201120%20862%201120%20884%20C%201120%20917%201113%20930%201077%20965%20C%201053%20988%201009%201015%20976%201028%20C%20848%201077%20615%201093%20446%201065%20Z%20M%20875%20976%20C%20948%20956%201019%20921%201034%20897%20C%201058%20859%20985.818%20820.277%20865%20784%20C%20775.723%20757.194%20769.591%20759%20765.591%20721%20C%20762.591%20693%20770.577%20687.606%20789.394%20688.606%20C%20804.394%20688.606%20856%20702%20905%20716%20C%201025%20749%201031.606%20763.168%201035.606%20737.168%20C%201037.734%20722.626%201042.898%20702.144%201026.31%20690.219%20C%20983.742%20659.617%20891.382%20631.284%20815.165%20614.082%20C%20794.46%20609.409%20782.076%20609.116%20772.497%20602.058%20C%20762.455%20594.658%20758.598%20585.183%20760%20569%20C%20760%20533%20762%20530%20788%20531%20C%20803%20531%20856%20542%20905%20556%20C%201025%20589%201036.394%20597.183%201040.394%20571.183%20C%201042.434%20557.243%201051.562%20538.12%201028.977%20523.278%20C%20991.867%20498.89%20884.672%20472.293%20810.835%20456.247%20C%20788.878%20452.103%20776.84%20454.158%20765.836%20443.775%20C%20758.238%20436.606%20760.183%20423.463%20760%20409%20C%20760%20373%20762%20370%20788%20371%20C%20803%20371%20856%20382%20905%20396%20C%201022%20428%201042.764%20437.874%201046.764%20415.874%20C%201048.821%20405.429%201050.846%20385.884%201043.034%20376.209%20C%201002.252%20325.702%20826.026%20280%20640%20280%20C%20419%20280%20244.562%20345.788%20240.802%20389.042%20C%20239.734%20401.333%20234.745%20421.467%20259.426%20422.346%20C%20279.475%20423.059%20322.296%20409.861%20375%20397%20C%20421.878%20385.561%20491.738%20371.631%20533%20367%20C%20534.596%20366.76%20562.092%20362.636%20582.044%20360.999%20C%20598.21%20360.335%20607.151%20371.627%20604.789%20397.606%20C%20604.789%20436.606%20597.705%20434.173%20566%20440%20C%20520.005%20448.453%20396%20465%20342%20484%20C%20310.729%20495.065%20267.519%20507.982%20250.177%20521.302%20C%20231.47%20535.67%20241.121%20558.888%20243.197%20572.38%20C%20247.197%20598.38%20256%20589%20375%20556%20C%20425%20542%20453.634%20537.183%20458.634%20537.183%20C%20467.423%20537.183%20480%20548%20480%20570%20C%20480%20607%20477.787%20608.008%20443%20616%20C%20378.553%20630.807%20288.957%20653.733%20249.843%20680.385%20C%20220.982%20700.05%20232.694%20720.261%20234.817%20735.971%20C%20238.817%20760.971%20259%20749%20350%20722%20C%20386%20712%20430%20700%20448%20697%20C%20479%20691%20480%20691%20480%20725%20C%20480%20764%20480.723%20759.555%20400.865%20784.11%20C%20326.42%20807%20240%20854%20240%20879%20C%20240%20917%20323%20958%20450%20985%20C%20538%201004%20793%20998%20875%20976%20Z'/%3e%3cpath%20d='M%20530%20949%20C%20405%20928%20367%20876%20448%20835%20C%20471%20823%20496%20808%20503%20801%20C%20510%20794%20517%20747%20520%20683%20C%20524%20597%20528%20575%20543%20566%20C%20555%20558%20565%20558%20578%20566%20C%20592%20575%20595%20595%20598%20689%20C%20600%20791%20602%20800%20620%20800%20C%20639%20800%20640%20791%20642%20589%20C%20645%20400%20647%20376%20663%20366%20C%20675%20358%20685%20358%20698%20366%20C%20713%20376%20716%20401%20720%20577%20C%20726%20800%20727%20803%20793%20821%20C%20926%20857%20898%20924%20740%20949%20C%20665%20962%20607%20961%20530%20949%20Z'/%3e%3c/g%3e%3c/svg%3e" alt="" class="h-5 w-5 shrink-0 rounded-sm object-contain"/> <span>STROOP</span></a><!--]--></div></div> <a href="../../../docs/mupen64/stable" class="!text-slate-900 hover:!bg-slate-200/70 hover:!text-primary-600 dark:!text-slate-100 dark:hover:!bg-slate-800/70 dark:hover:!text-primary-400 block w-full rounded-lg px-3 py-2 text-sm font-medium md:w-auto">Docs</a> <!--[0--><a href="https://discord.gg/hFANcme32k" class="text-center font-medium inline-flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700 focus-within:ring-primary-300 dark:focus-within:ring-primary-800 px-4 py-2 text-sm focus-within:ring-4 focus-within:outline-hidden rounded-full w-full sm:w-auto md:rounded-r-lg!"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="shrink-0 w-5 h-5" viewBox="0 0 24 24" aria-hidden="true"><!--[-1--><!--]--><!--[-1--><!--]--><path d="M18.942 5.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.586 11.586 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3 17.392 17.392 0 0 0-2.868 11.662 15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.638 10.638 0 0 1-1.706-.83c.143-.106.283-.217.418-.331a11.664 11.664 0 0 0 10.118 0c.137.114.277.225.418.331-.544.328-1.116.606-1.71.832a12.58 12.58 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM8.678 14.813a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.929 1.929 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"></path></svg><!----> <span class="ml-2">Discord server</span><!----></a><!--]--><!----></div></div></div><!----><!----></div><!----></div></nav><!----></div> <div class="flex min-h-screen flex-col"><div class="flex-1"><!--[-1--><!--[0--><!--[--><div class="relative mx-auto flex max-w-7xl items-start"><button type="button" class="fixed top-20 left-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-slate-100/95 text-xl text-slate-900 shadow-lg backdrop-blur-md md:hidden dark:border-slate-700 dark:bg-slate-900/95 dark:text-slate-100" aria-label="Open documentation navigation">☰</button> <!--[-1--><!--]--> <aside class="fixed top-20 bottom-0 left-0 z-40 w-72 -translate-x-full overflow-y-auto border-r border-slate-300 bg-slate-100/95 p-4 shadow-xl backdrop-blur-md transition-transform dark:border-slate-700 dark:bg-slate-900/95 md:sticky md:top-18 md:z-0 md:block md:h-[calc(100vh-5rem)] md:translate-x-0 md:shadow-none md:mt-14 md:mb-14 md:max-h-[calc(100vh-5rem)] md:rounded-xl md:border"><div class="mb-4 flex items-center justify-between"><h2 class="text-sm font-bold tracking-wide text-slate-900 uppercase dark:text-slate-100">Documentation</h2> <button type="button" class="rounded p-1 text-xl text-slate-500 hover:bg-slate-200 md:hidden dark:hover:bg-slate-800" aria-label="Close documentation navigation">×</button></div> <ul class="space-y-0.5" aria-label="Documentation pages"><!--[--><li><div class="flex items-center gap-1"><!--[0--><button type="button" class="flex h-6 w-5 shrink-0 items-center justify-center rounded text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800" aria-label="Expand Mupen64" aria-expanded="false"><span class="transition-transform"><svg xmlns="http://www.w3.org/2000/svg" fill="none" color="currentColor" class="shrink-0 h-4 w-4" viewBox="0 0 24 24" aria-hidden="true"><!--[-1--><!--]--><!--[-1--><!--]--><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 10 4 4 4-4"></path></svg><!----></span></button><!--]--> <!--[0--><a href="/docs/mupen64/stable" class="min-w-0 flex-1 rounded-md px-2 py-1.5 text-sm hover:bg-slate-200/80 dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-300"><span class="flex min-w-0 items-center gap-1.5 truncate"><!--[0--><img src="/_app/immutable/assets/mupen64.5H--mm2K.svg" alt="" class="h-4 w-4 shrink-0 rounded-sm object-contain"/><!--]--> <span class="truncate">Mupen64</span> <!--[1--><span class="shrink-0 rounded-full bg-slate-200 px-1.5 py-0.5 text-[0.65rem] leading-none font-semibold text-slate-600 uppercase dark:bg-slate-700 dark:text-slate-300">stable</span><!--]--></span></a><!--]--></div> <!--[-1--><!--]--></li><li><div class="flex items-center gap-1"><!--[0--><button type="button" class="flex h-6 w-5 shrink-0 items-center justify-center rounded text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800" aria-label="Expand Mupen64" aria-expanded="false"><span class="transition-transform"><svg xmlns="http://www.w3.org/2000/svg" fill="none" color="currentColor" class="shrink-0 h-4 w-4" viewBox="0 0 24 24" aria-hidden="true"><!--[-1--><!--]--><!--[-1--><!--]--><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 10 4 4 4-4"></path></svg><!----></span></button><!--]--> <!--[0--><a href="/docs/mupen64/nightly" class="min-w-0 flex-1 rounded-md px-2 py-1.5 text-sm hover:bg-slate-200/80 dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-300"><span class="flex min-w-0 items-center gap-1.5 truncate"><!--[0--><img src="/_app/immutable/assets/mupen64.5H--mm2K.svg" alt="" class="h-4 w-4 shrink-0 rounded-sm object-contain"/><!--]--> <span class="truncate">Mupen64</span> <!--[0--><span class="shrink-0 rounded-full bg-red-100 px-1.5 py-0.5 text-[0.65rem] leading-none font-semibold text-red-700 uppercase dark:bg-red-900/40 dark:text-red-300">nightly</span><!--]--></span></a><!--]--></div> <!--[-1--><!--]--></li><li><div class="flex items-center gap-1"><!--[0--><button type="button" class="flex h-6 w-5 shrink-0 items-center justify-center rounded text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800" aria-label="Expand SM64 Lua Redux" aria-expanded="false"><span class="transition-transform"><svg xmlns="http://www.w3.org/2000/svg" fill="none" color="currentColor" class="shrink-0 h-4 w-4" viewBox="0 0 24 24" aria-hidden="true"><!--[-1--><!--]--><!--[-1--><!--]--><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 10 4 4 4-4"></path></svg><!----></span></button><!--]--> <!--[0--><a href="/docs/redux/stable" class="min-w-0 flex-1 rounded-md px-2 py-1.5 text-sm hover:bg-slate-200/80 dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-300"><span class="flex min-w-0 items-center gap-1.5 truncate"><!--[0--><img src="/_app/immutable/assets/sm64luaredux.C_apz1qv.webp" alt="" class="h-4 w-4 shrink-0 rounded-sm object-contain"/><!--]--> <span class="truncate">SM64 Lua Redux</span> <!--[1--><span class="shrink-0 rounded-full bg-slate-200 px-1.5 py-0.5 text-[0.65rem] leading-none font-semibold text-slate-600 uppercase dark:bg-slate-700 dark:text-slate-300">stable</span><!--]--></span></a><!--]--></div> <!--[-1--><!--]--></li><li><div class="flex items-center gap-1"><!--[0--><button type="button" class="flex h-6 w-5 shrink-0 items-center justify-center rounded text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800" aria-label="Expand SM64 Lua Redux" aria-expanded="false"><span class="transition-transform"><svg xmlns="http://www.w3.org/2000/svg" fill="none" color="currentColor" class="shrink-0 h-4 w-4" viewBox="0 0 24 24" aria-hidden="true"><!--[-1--><!--]--><!--[-1--><!--]--><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 10 4 4 4-4"></path></svg><!----></span></button><!--]--> <!--[0--><a href="/docs/redux/nightly" class="min-w-0 flex-1 rounded-md px-2 py-1.5 text-sm hover:bg-slate-200/80 dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-300"><span class="flex min-w-0 items-center gap-1.5 truncate"><!--[0--><img src="/_app/immutable/assets/sm64luaredux.C_apz1qv.webp" alt="" class="h-4 w-4 shrink-0 rounded-sm object-contain"/><!--]--> <span class="truncate">SM64 Lua Redux</span> <!--[0--><span class="shrink-0 rounded-full bg-red-100 px-1.5 py-0.5 text-[0.65rem] leading-none font-semibold text-red-700 uppercase dark:bg-red-900/40 dark:text-red-300">nightly</span><!--]--></span></a><!--]--></div> <!--[-1--><!--]--></li><!--]--></ul><!----></aside> <div class="min-w-0 flex-1"><!--[-1--><!--[--><main><section id="wiki" class="mx-auto max-w-6xl p-4 py-16"><div class="mx-auto mb-8 flex max-w-4xl flex-col items-start gap-4 rounded-xl border border-slate-300 bg-slate-200/80 p-6 shadow-sm sm:flex-row sm:items-end sm:justify-between dark:border-slate-700 dark:bg-slate-800/70"><div><p class="flex items-center gap-2 text-sm tracking-wide uppercase opacity-70"><img src="/_app/immutable/assets/mupen64.5H--mm2K.svg" alt="" class="h-5 w-5 object-contain"/> <span>Mupen64</span></p> <span aria-hidden="true" class="mt-3 block h-px w-16 rounded-full" style="background-color: #dc2626;"></span> <h1 class="mt-4 text-3xl font-bold"> Data Formats</h1></div> <div class="inline-flex overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"><!--[--><a href="../../../docs/mupen64/stable/8._Data-Formats" class="px-3 py-1.5 text-sm font-medium capitalize transition-colors  bg-slate-100 text-slate-700 hover:bg-primary-50 hover:text-primary-700 dark:bg-slate-900/60 dark:text-slate-300 dark:hover:bg-primary-900/30 dark:hover:text-primary-300">stable</a><a href="../../../docs/mupen64/nightly/8._Data-Formats" class="px-3 py-1.5 text-sm font-medium capitalize transition-colors border-l border-slate-300 dark:border-slate-700 bg-primary-600 text-white dark:bg-primary-500 dark:text-white">nightly</a><!--]--></div></div> <div class="mx-auto flex max-w-4xl flex-col items-start rounded-xl border border-slate-300 bg-slate-100/90 p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900/70"><!----><h1 id="m64" class="doc-heading scroll-mt-24 my-4 text-3xl font-bold separator-below">M64 <a class="doc-heading-link" href="#m64" title="Copy link to heading" aria-label="Copy link to “M64” heading"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg></a></h1>
+<p class="my-2">Movies (.m64 files, also called &quot;m64s&quot;) are the storage formats for TASes created using Mupen64.</p>
+<p class="my-2">They are made up of a 1024-byte long header, followed by a variable-size sequence of input samples.</p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Additional Info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x000</code></td>
+<td>uint8_t[4]</td>
+<td>Magic</td>
+<td>Must be <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x4D36341A</code></td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x004</code></td>
+<td>uint32_t</td>
+<td>Version</td>
+<td>Must be <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">3</code></td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x008</code></td>
+<td>uint32_t</td>
+<td>UID</td>
+<td>Used to correlate a movie with its savestate</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x00C</code></td>
+<td>uint8_t</td>
+<td>VIs</td>
+<td>The amount of VIs during the recording.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x010</code></td>
+<td>uint32_t</td>
+<td>Rerecord count (Low)</td>
+<td>The lower dword of the number of savestates loaded while recording the movie. If the count exceeds <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xFFFFFFFF</code>, the upper half from the extended data section is also used.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x014</code></td>
+<td>uint8_t</td>
+<td>VI/s</td>
+<td>The amount of VIs generated per second.<br>Can also be determined using the country code.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x015</code></td>
+<td>uint8_t</td>
+<td>Controller count</td>
+<td>The amount of connected controllers<br>Must be lower than or equal to <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">4</code><br>Can also be determined using the controller flags.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x016</code></td>
+<td>uint8_t</td>
+<td>Extended version</td>
+<td>The version number of the extended section.<br>See extended format section.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x017</code></td>
+<td>uint8_t</td>
+<td>Extended flags</td>
+<td>The extended flags.<br>See extended format section.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x018</code></td>
+<td>uint32_t</td>
+<td>Sample count</td>
+<td>Number of input samples. Determines the element count of the input stream beginning at offset <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x400</code>.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x01C</code></td>
+<td>uint16_t</td>
+<td>Start type</td>
+<td>The movie start type.<br><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">1</code> - Start from savestate<br><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">2</code> - Start from reset<br><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">4</code> - Start from EEPROM</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x01E</code></td>
+<td>uint8_t[2]</td>
+<td>Reserved</td>
+<td>Must be zero-filled</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x020</code></td>
+<td>uint32_t</td>
+<td>Controller flags</td>
+<td>The controller flags, a bitfield containing data for each controller sequentially.<br><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">n</code> - Present<br><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">n+4</code> - Mempak<br><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">n+8</code> - Rumblepak<br>Substitute <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">n</code> for the controller index (relative to 0).</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x024</code></td>
+<td>uint8_t[32]</td>
+<td>Extended data</td>
+<td>The extended data.<br>See extended format section.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x044</code></td>
+<td>uint8_t[128]</td>
+<td>Reserved</td>
+<td>Must be zero-filled</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x0C4</code></td>
+<td>char[32] (ASCII)</td>
+<td>ROM Name</td>
+<td>The name of the ROM the movie was recorded on</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x0E4</code></td>
+<td>uint32_t</td>
+<td>ROM CRC</td>
+<td>The CRC of the ROM the movie was recorded on</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x0E8</code></td>
+<td>uint16_t</td>
+<td>ROM Country Code</td>
+<td>The country code of the ROM the movie was recorded on</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x0EA</code></td>
+<td>uint8_t[56]</td>
+<td>Reserved</td>
+<td>Must be zero-filled</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x122</code></td>
+<td>char[64] (ASCII)</td>
+<td>Video Plugin Name</td>
+<td>The name of the video plugin used during movie recording</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x162</code></td>
+<td>char[64] (ASCII)</td>
+<td>Audio Plugin Name</td>
+<td>The name of the audio plugin used during movie recording</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x1A2</code></td>
+<td>char[64] (ASCII)</td>
+<td>Input Plugin Name</td>
+<td>The name of the input plugin used during movie recording</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x1E2</code></td>
+<td>char[64] (ASCII)</td>
+<td>RSP Plugin Name</td>
+<td>The name of the RSP plugin used during movie recording</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x222</code></td>
+<td>char[222] (UTF-8)</td>
+<td>Author</td>
+<td>The movie&#39;s author</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x300</code></td>
+<td>char[256] (UTF-8)</td>
+<td>Description</td>
+<td>Additional info about the movie</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x400</code></td>
+<td>uint32_t[sample_count]</td>
+<td>Input data</td>
+<td>Array of input data of element count <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">Sample count</code><br>See input sample section.</td>
+</tr>
+</tbody></table>
+<h2 id="input-sample" class="doc-heading scroll-mt-24 my-3 text-2xl">Input Sample <a class="doc-heading-link" href="#input-sample" title="Copy link to heading" aria-label="Copy link to “Input Sample” heading"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg></a></h2>
+<p class="my-2">An input sample consists of 32 bits and represents the input state for a specific frame.</p>
+<p class="my-2">It is structured as follows:</p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Bit length</th>
+<th>Name</th>
+<th>Additional info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>C-Right</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>C-Left</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>C-Down</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>C-Up</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>R</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>L</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Reserved (1)</td>
+<td>If both reserved fields are set, the emulator will reset on that frame.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Reserved (2)</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>D-Right</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>D-Left</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>D-Down</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>D-Up</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Start</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Z</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>B</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>A</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Joystick X</td>
+<td>Interpreted as <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">int8_t</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Joystick Y</td>
+<td>Interpreted as <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">int8_t</code></td>
+</tr>
+</tbody></table>
+<h2 id="extended-format" class="doc-heading scroll-mt-24 my-3 text-2xl">Extended Format <a class="doc-heading-link" href="#extended-format" title="Copy link to heading" aria-label="Copy link to “Extended Format” heading"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg></a></h2>
+<p class="my-2">The extended format is an updated version of the M64 format.</p>
+<p class="my-2">It keeps the same version number for compatibility reasons, but defines new data in the data gaps of the old format. An extended version of <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0</code> indicates an old movie with no extended data. The latest extended version is <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">4</code>.</p>
+<h3 id="flags" class="doc-heading scroll-mt-24 my-2 text-xl">Flags <a class="doc-heading-link" href="#flags" title="Copy link to heading" aria-label="Copy link to “Flags” heading"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg></a></h3>
+<p class="my-2"><em>Version 1</em></p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Bit</th>
+<th>Name</th>
+<th>Additional Info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>WiiVC</td>
+<td>Whether the movie was recorded with WiiVC emulation mode enabled.</td>
+</tr>
+<tr>
+<td>Rest</td>
+<td>Reserved</td>
+<td>Must be 0, or a warning will be shown on playback.</td>
+</tr>
+</tbody></table>
+<p class="my-2"><em>Version 2</em></p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Bit</th>
+<th>Name</th>
+<th>Additional Info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>WiiVC</td>
+<td>Whether the movie was recorded with WiiVC emulation mode enabled.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>c.eq.s accurate</td>
+<td>Whether the movie was recorded with an accurate implementation of the <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">c.eq.s</code> instruction where <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">(NaN == any) == false</code> instead of <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">(NaN == any) == true</code> (legacy behavior).</td>
+</tr>
+<tr>
+<td>Rest</td>
+<td>Reserved</td>
+<td>Must be 0, or a warning will be shown on playback.</td>
+</tr>
+</tbody></table>
+<p class="my-2"><em>Version 3-4</em></p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Bit</th>
+<th>Name</th>
+<th>Additional Info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>WiiVC</td>
+<td>Whether the movie was recorded with WiiVC emulation mode enabled.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>c.eq.s accurate</td>
+<td>Whether the movie was recorded with an accurate implementation of the <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">c.eq.s</code> instruction where <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">(NaN == any) == false</code> instead of <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">(NaN == any) == true</code> (legacy behavior).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Accurate RDP completion</td>
+<td>Whether the movie was recorded with RDP task completion signalled after RSP task completion, instead of both being signalled at the same instant (legacy behavior).</td>
+</tr>
+<tr>
+<td>Rest</td>
+<td>Reserved</td>
+<td>Must be 0, or a warning will be shown on playback.</td>
+</tr>
+</tbody></table>
+<h3 id="extended-data" class="doc-heading scroll-mt-24 my-2 text-xl">Extended Data <a class="doc-heading-link" href="#extended-data" title="Copy link to heading" aria-label="Copy link to “Extended Data” heading"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg></a></h3>
+<p class="my-2">The extended data block is 32 bytes long and begins at offset <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x024</code> in the movie header.</p>
+<p class="my-2"><em>Versions 1–3</em></p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Additional Info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x024</code></td>
+<td>uint8_t[4]</td>
+<td>Authorship tag</td>
+<td>Identifies the program or tool which created the movie. Mupen64 writes <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x4D55504E</code> (<code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">MUPN</code>).</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x028</code></td>
+<td>uint32_t</td>
+<td>Bruteforce extra data</td>
+<td>Additional data regarding bruteforcing.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x02C</code></td>
+<td>uint32_t</td>
+<td>Rerecord count (High)</td>
+<td>The upper dword of the number of savestates loaded while recording the movie. The complete count is <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">(High &lt;&lt; 32) | Low</code>.</td>
+</tr>
+<tr>
+<td>Rest</td>
+<td>-</td>
+<td>Reserved</td>
+<td>Must be zero-filled.</td>
+</tr>
+</tbody></table>
+<p class="my-2"><em>Version 4</em></p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Additional Info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x024</code></td>
+<td>uint8_t[4]</td>
+<td>Authorship tag</td>
+<td>Identifies the program or tool which created the movie. Mupen64 writes <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x4D55504E</code> (<code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">MUPN</code>).</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x028</code></td>
+<td>uint32_t</td>
+<td>Bruteforce extra data</td>
+<td>Additional data regarding bruteforcing.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x02C</code></td>
+<td>uint32_t</td>
+<td>Rerecord count (High)</td>
+<td>The upper dword of the number of savestates loaded while recording the movie. The complete count is <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">(High &lt;&lt; 32) | Low</code>.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x030</code></td>
+<td>double</td>
+<td>CPU counter factor</td>
+<td>The CPU counter factor used during recording.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x038</code></td>
+<td>double</td>
+<td>RCP lag factor</td>
+<td>The factor by which RCP lag was multiplied during recording.</td>
+</tr>
+<tr>
+<td>Rest</td>
+<td>-</td>
+<td>Reserved</td>
+<td>Must be zero-filled.</td>
+</tr>
+</tbody></table>
+<p class="my-2">The extended data block is only valid when the extended version is nonzero.</p>
+<h1 id="st" class="doc-heading scroll-mt-24 my-4 text-3xl font-bold separator-below">ST <a class="doc-heading-link" href="#st" title="Copy link to heading" aria-label="Copy link to “ST” heading"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg></a></h1>
+<p class="my-2">Mupen64 will create savestates compressed using <a class="app-link" href="https://en.wikipedia.org/wiki/LZ4_(compression_algorithm)">lz4</a> by default. This can be switched to <a class="app-link" href="https://en.wikipedia.org/wiki/Gzip">Gzip</a> in the settings (&quot;Core &gt; Fast Savestates&quot;).</p>
+<p class="my-2">Savestates that are uncompressed, gzip-compressed, or lz4-compressed are automatically detected and loaded seamlessly.</p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x0</code></td>
+<td>32</td>
+<td>Current ROM&#39;s MD5 Hash</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x20</code></td>
+<td>40</td>
+<td>RDRAM registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x48</code></td>
+<td>36</td>
+<td>MI registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x6c</code></td>
+<td>52</td>
+<td>PI registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA0</code></td>
+<td>52</td>
+<td>SP registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xD4</code></td>
+<td>8</td>
+<td>RSP register</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xDC</code></td>
+<td>16</td>
+<td>SI registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xEC</code></td>
+<td>60</td>
+<td>VI registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x128</code></td>
+<td>32</td>
+<td>RI registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x148</code></td>
+<td>40</td>
+<td>AI registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x170</code></td>
+<td>48</td>
+<td>DPC registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x1A0</code></td>
+<td>16</td>
+<td>DPS registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x1B0</code></td>
+<td>8388608</td>
+<td>RDRAM - Always 8MB since there&#39;s no option to disable expansion slot</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x8001B0</code></td>
+<td>4096</td>
+<td>SP DMEM</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x8011B0</code></td>
+<td>4096</td>
+<td>SP IMEM</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x8021B0</code></td>
+<td>64</td>
+<td>PIF RAM</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x8021F0</code></td>
+<td>4</td>
+<td>Flashram active</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x8021F4</code></td>
+<td>4</td>
+<td>Flashram mode</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x8021F8</code></td>
+<td>8</td>
+<td>Flashram status</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x802200</code></td>
+<td>4</td>
+<td>Flashram erase offset</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x802204</code></td>
+<td>4</td>
+<td>Flashram write pointer</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x802208</code></td>
+<td>1048576</td>
+<td>TLB LUT R</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x902208</code></td>
+<td>1048576</td>
+<td>TLB LUT W</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02208</code></td>
+<td>4</td>
+<td>LLBit register</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA0220C</code></td>
+<td>256</td>
+<td>CPU registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA0230C</code></td>
+<td>256</td>
+<td>MMU registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA0240C</code></td>
+<td>8</td>
+<td>lo register</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02414</code></td>
+<td>8</td>
+<td>hi register</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA0241C</code></td>
+<td>256</td>
+<td>FPU registers</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA0251C</code></td>
+<td>4</td>
+<td>FCR0 register</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02520</code></td>
+<td>4</td>
+<td>FCR31 register (FPU status)</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02524</code></td>
+<td>1664</td>
+<td>TLB E</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BA4</code></td>
+<td>4</td>
+<td>PC register</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BA8</code></td>
+<td>4</td>
+<td>next interrupt</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BAC</code></td>
+<td>4</td>
+<td>next VI</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BB0</code></td>
+<td>4</td>
+<td>VI field</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BB4</code></td>
+<td>-</td>
+<td>Interrupt queue.<br>Arbitrary-length sequence of <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">uint32_t</code>.<br>Ends with <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xFFFFFFFF</code>.</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BB4</code> + Interrupt queue length</td>
+<td>4</td>
+<td>Savestate belongs to a movie?</td>
+</tr>
+<tr>
+<td>VCR freeze buffer (only if this savestate belongs to a movie):</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BB8</code> + Interrupt queue length</td>
+<td>4</td>
+<td>VCR freeze buffer length (bytes)</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BBC</code> + Interrupt queue length</td>
+<td>4</td>
+<td>Movie UID</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BC0</code> + Interrupt queue length</td>
+<td>4</td>
+<td>Input frame count when this ST was made</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BC4</code> + Interrupt queue length</td>
+<td>4</td>
+<td>VI frame count when this ST was made</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BC8</code> + Interrupt queue length</td>
+<td>4</td>
+<td>Sample count - Movie&#39;s length sample count when this ST file was made</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BCC</code> + Interrupt queue length</td>
+<td>4 * (Sample count + 1)</td>
+<td>Movie input data up till point of ST creation</td>
+</tr>
+<tr>
+<td>Video buffer (only present if user enabled it):</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BCC</code> + Interrupt queue length + 4 * (Sample count + 1)</td>
+<td>4</td>
+<td>Video section identifier - <code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0x53435200</code> (st file ends here on savestates without this section)</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BCC</code> + Interrupt queue length + 4 * (Sample count + 1) + 4</td>
+<td>4</td>
+<td>Video buffer width</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BCC</code> + Interrupt queue length + 4 * (Sample count + 1) + 8</td>
+<td>4</td>
+<td>Video buffer height</td>
+</tr>
+<tr>
+<td><code class="rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80">0xA02BCC</code> + Interrupt queue length + 4 * (Sample count + 1) + 12</td>
+<td>width * height * 4</td>
+<td>32bpp BGRA Video buffer data.</td>
+</tr>
+</tbody></table>
+<!----></div></section></main><!--]--><!--]--><!----></div></div><!--]--><!--]--><!----><!--]--></div> <footer class="grid-300-45 w-full bg-slate-100/70 dark:bg-slate-900/70"><hr class="border-dashed border-slate-400/70 dark:border-slate-600/70"/> <div class="flex flex-col items-center justify-center p-10 text-center"><div class="mb-5 flex flex-row items-center gap-2"><img src="data:image/svg+xml,%3c?xml%20version='1.0'?%3e%3csvg%20width='116'%20height='116'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:svg='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20version='1.0'%3e%3cmetadata%20id='metadata7'%3eimage/svg+xmlMupen64plus%20Program%20IconAugust%2017,%202008Tillin9Copyright%20(C)%20Tillin9GPL%20(v2%20or%20later)This%20icon%20is%20original%20work%20created%20by%20Tillin9%20for%20Mupen64plus.%20This%20icon%20is%20free%20software;%20you%20can%20redistribute%20it%20and/or%20modify%20it%20under%20the%20terms%20of%20the%20GNU%20General%20Public%20License%20as%20published%20by%20the%20Free%20Software%20Foundation;%20either%20version%202%20of%20the%20License,%20or%20(at%20your%20option)%20any%20later%20version.%20You%20may%20also%20copy%20it%20under%20the%20Creative%20Common%20Attribution-ShareAlike%203.0%20license,%20as%20found%20here:%20http://creativecommons.org/licenses/by-sa/3.0/%20It%20is%20the%20author&amp;%23x27;s%20desire%20that%20SVG%20/%20vector%20format%20copies%20be%20GPLed%20and%20rasterizations%20licensed%20under%20Creative%20Commons.%20This%20is%20because%20there%20are%20no%20clear%20guidelines%20to%20applying%20the%20GPL%20to%20artwork,%20whereas%20vector%20data%20consitutes%20source.%3c/metadata%3e%3cg%20class='layer'%20display='inline'%20transform='translate(4,0)'%3e%3ctitle%3eLayer%201%3c/title%3e%3cpath%20d='m54.01,0.73c-0.27,0.01%20-0.54,0.08%20-0.78,0.19l-13.32,6.5c-0.39,0.2%20-0.71,0.51%20-0.9,0.91l-21.97,11.09c-0.55,-0.27%20-1.2,-0.27%20-1.75,0l-13.31,6.5c-0.7,0.34%20-1.13,1.04%20-1.13,1.81l0,61c0,0.77%200.43,1.48%201.13,1.82l13.31,6.5c0.55,0.26%201.2,0.26%201.75,0l13.34,-6.5c0.7,-0.34%201.13,-1.05%201.13,-1.82l0,-9.9c0.43,0.1%200.88,0.05%201.28,-0.13l6,-2.87l0,31.4c-0.01,0.77%200.43,1.48%201.12,1.82l13.32,6.5c0.55,0.26%201.19,0.26%201.75,0l13.34,-6.5c0.69,-0.34%201.13,-1.05%201.13,-1.82l0,-31.4l6,2.87c0.38,0.19%200.82,0.24%201.25,0.16l0,9.87c-0.01,0.77%200.43,1.48%201.12,1.82l13.34,6.5c0.56,0.26%201.2,0.26%201.75,0l13.32,-6.5c0.69,-0.34%201.13,-1.05%201.12,-1.82l0,-61c0.01,-0.77%20-0.43,-1.47%20-1.12,-1.81l-13.32,-6.5c-0.55,-0.27%20-1.19,-0.27%20-1.75,0l-21.93,-11.09c-0.2,-0.4%20-0.52,-0.71%20-0.91,-0.91l-13.34,-6.5c-0.31,-0.14%20-0.64,-0.21%20-0.97,-0.19l0,0z'%20fill='currentColor'%20fill-rule='evenodd'%20id='path4621'%20stroke-linejoin='round'%20stroke-miterlimit='4'/%3e%3cpath%20d='m29.5,75.73l0,13l-13.33,6.5l0,-39'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3742'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m40.78,107.23l13.32,6.5l0,-61l-13.32,-6.5l-12.3,12l-12.31,-24l-13.32,-6.5l0,61l13.32,6.5l0,-39l8.9,17.34l6.83,3.34l8.88,-8.68l0,39z'%20fill='currentColor'%20fill-rule='evenodd'%20id='path2384'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m16.17,34.23l-13.32,-6.5l51.16,-25'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3796'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m76.31,76.9l-8.88,-4.26l0,-4.41l8.88,8.67z'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3895'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m78.71,75.73l0,13l13.32,6.5l0,-39'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3897'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m67.43,107.23l-13.33,6.5l0,-61l13.33,-6.5l12.3,12l12.3,-24l13.33,-6.5l0,61l-13.33,6.5l0,-39l-8.89,17.34l-6.83,3.34l-8.88,-8.68l0,39z'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3899'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3cpath%20d='m92.03,34.23l13.33,-6.5l-51.35,-25'%20fill='currentColor'%20fill-rule='evenodd'%20id='path3901'%20stroke='%23ffffff'%20stroke-linejoin='round'%20stroke-miterlimit='4'%20stroke-width='2'/%3e%3c/g%3e%3c/svg%3e" alt="Mupen64 Logo" class="object-fit w-10"/> <p class="text-2xl font-bold">Mupen64 Organization</p></div> <p class="mb-5 max-w-2xl text-center">The Mupen64 Organization is a shared-ownership organization maintained by developers around
+				the world. <br/> Feel free to contribute!</p> <p class="mb-5 max-w-2xl text-center">Need support? Join our Discord server for live support and community discussions.</p> <!--[0--><a href="https://discord.gg/hFANcme32k" class="text-center font-medium inline-flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-700 focus-within:ring-primary-300 dark:focus-within:ring-primary-800 px-4 py-2 text-sm focus-within:ring-4 focus-within:outline-hidden rounded-full mb-5"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="shrink-0 w-5 h-5" viewBox="0 0 24 24" aria-hidden="true"><!--[-1--><!--]--><!--[-1--><!--]--><path d="M18.942 5.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.586 11.586 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3 17.392 17.392 0 0 0-2.868 11.662 15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.638 10.638 0 0 1-1.706-.83c.143-.106.283-.217.418-.331a11.664 11.664 0 0 0 10.118 0c.137.114.277.225.418.331-.544.328-1.116.606-1.71.832a12.58 12.58 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM8.678 14.813a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.929 1.929 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"></path></svg><!----> <span class="ml-2">Discord server</span><!----></a><!--]--><!----> <a class="app-link" href="https://github.com/mupen64">© 2026 Mupen64 Organization</a> <p>Licensed under GNU GPL v2 License</p></div></footer></div><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_1iinp90 = {
+						base: new URL("../../..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../../_app/immutable/entry/start.BApnoKoU.js"),
+						import("../../../_app/immutable/entry/app.7-M0zthI.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2, 7],
+							data: [null,{type:"data",data:{docs_tree:[{id:"mupen64-stable",label:"Mupen64",icon:"mupen64",channel:"stable",href:"/docs/mupen64/stable",children:[{id:"mupen64-stable-1._Getting_Started",label:" Getting Started",href:"/docs/mupen64/stable/1._Getting_Started"},{id:"mupen64-stable-2._FAQ",label:" FAQ",href:"/docs/mupen64/stable/2._FAQ"},{id:"mupen64-stable-3._Actions",label:" Actions",href:"/docs/mupen64/stable/3._Actions"},{id:"mupen64-stable-4._Settings",label:" Settings",href:"/docs/mupen64/stable/4._Settings"},{id:"mupen64-stable-5._Capturing",label:" Capturing",href:"/docs/mupen64/stable/5._Capturing"},{id:"mupen64-stable-6._M64s-and-Sidecar-Files",label:" M64s and Sidecar Files",href:"/docs/mupen64/stable/6._M64s-and-Sidecar-Files"},{id:"mupen64-stable-7._Piano-Roll",label:" Piano Roll",href:"/docs/mupen64/stable/7._Piano-Roll"},{id:"mupen64-stable-8._Data-Formats",label:" Data Formats",href:"/docs/mupen64/stable/8._Data-Formats"},{id:"mupen64-stable-9._Lua-Scripting",label:" Lua Scripting",href:"/docs/mupen64/stable/9._Lua-Scripting"}]},{id:"mupen64-nightly",label:"Mupen64",icon:"mupen64",channel:"nightly",href:"/docs/mupen64/nightly",children:[{id:"mupen64-nightly-1._Getting_Started",label:" Getting Started",href:"/docs/mupen64/nightly/1._Getting_Started"},{id:"mupen64-nightly-2._FAQ",label:" FAQ",href:"/docs/mupen64/nightly/2._FAQ"},{id:"mupen64-nightly-3._Actions",label:" Actions",href:"/docs/mupen64/nightly/3._Actions"},{id:"mupen64-nightly-4._Settings",label:" Settings",href:"/docs/mupen64/nightly/4._Settings"},{id:"mupen64-nightly-5._Capturing",label:" Capturing",href:"/docs/mupen64/nightly/5._Capturing"},{id:"mupen64-nightly-6._M64s-and-Sidecar-Files",label:" M64s and Sidecar Files",href:"/docs/mupen64/nightly/6._M64s-and-Sidecar-Files"},{id:"mupen64-nightly-7._Piano-Roll",label:" Piano Roll",href:"/docs/mupen64/nightly/7._Piano-Roll"},{id:"mupen64-nightly-8._Data-Formats",label:" Data Formats",href:"/docs/mupen64/nightly/8._Data-Formats"},{id:"mupen64-nightly-9._Lua-Scripting",label:" Lua Scripting",href:"/docs/mupen64/nightly/9._Lua-Scripting"}]},{id:"redux-stable",label:"SM64 Lua Redux",icon:"redux",channel:"stable",href:"/docs/redux/stable",children:[{id:"redux-stable-1._TAS",label:" TAS",href:"/docs/redux/stable/1._TAS"},{id:"redux-stable-2._Tools",label:" Tools",href:"/docs/redux/stable/2._Tools"},{id:"redux-stable-3._Timer",label:" Timer",href:"/docs/redux/stable/3._Timer"},{id:"redux-stable-4._Settings",label:" Settings",href:"/docs/redux/stable/4._Settings"},{id:"redux-stable-5._Semantic Workflow",label:" Semantic Workflow",href:"/docs/redux/stable/5._Semantic%20Workflow"},{id:"redux-stable-6._Customization",label:" Customization",href:"/docs/redux/stable/6._Customization"}]},{id:"redux-nightly",label:"SM64 Lua Redux",icon:"redux",channel:"nightly",href:"/docs/redux/nightly",children:[{id:"redux-nightly-1._TAS",label:" TAS",href:"/docs/redux/nightly/1._TAS"},{id:"redux-nightly-2._Tools",label:" Tools",href:"/docs/redux/nightly/2._Tools"},{id:"redux-nightly-3._Timer",label:" Timer",href:"/docs/redux/nightly/3._Timer"},{id:"redux-nightly-4._Settings",label:" Settings",href:"/docs/redux/nightly/4._Settings"},{id:"redux-nightly-5._Semantic Workflow",label:" Semantic Workflow",href:"/docs/redux/nightly/5._Semantic%20Workflow"},{id:"redux-nightly-6._Customization",label:" Customization",href:"/docs/redux/nightly/6._Customization"}]}]},uses:{}},{type:"data",data:{product:"mupen64",product_label:"Mupen64",channel:"nightly",channel_links:[{channel:"stable",href:"/docs/mupen64/stable/8._Data-Formats",available:true},{channel:"nightly",href:"/docs/mupen64/nightly/8._Data-Formats",available:true}],content:"\u003Ch1 id=\"m64\" class=\"doc-heading scroll-mt-24 my-4 text-3xl font-bold separator-below\">M64 \u003Ca class=\"doc-heading-link\" href=\"#m64\" title=\"Copy link to heading\" aria-label=\"Copy link to “M64” heading\">\u003Csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" aria-hidden=\"true\">\u003Cpath stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244\"/>\u003C/svg>\u003C/a>\u003C/h1>\n\u003Cp class=\"my-2\">Movies (.m64 files, also called &quot;m64s&quot;) are the storage formats for TASes created using Mupen64.\u003C/p>\n\u003Cp class=\"my-2\">They are made up of a 1024-byte long header, followed by a variable-size sequence of input samples.\u003C/p>\n\u003Ctable class=\"doc-table\">\n\u003Cthead>\n\u003Ctr>\n\u003Cth>Offset\u003C/th>\n\u003Cth>Type\u003C/th>\n\u003Cth>Name\u003C/th>\n\u003Cth>Additional Info\u003C/th>\n\u003C/tr>\n\u003C/thead>\n\u003Ctbody>\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x000\u003C/code>\u003C/td>\n\u003Ctd>uint8_t[4]\u003C/td>\n\u003Ctd>Magic\u003C/td>\n\u003Ctd>Must be \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x4D36341A\u003C/code>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x004\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>Version\u003C/td>\n\u003Ctd>Must be \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">3\u003C/code>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x008\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>UID\u003C/td>\n\u003Ctd>Used to correlate a movie with its savestate\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x00C\u003C/code>\u003C/td>\n\u003Ctd>uint8_t\u003C/td>\n\u003Ctd>VIs\u003C/td>\n\u003Ctd>The amount of VIs during the recording.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x010\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>Rerecord count (Low)\u003C/td>\n\u003Ctd>The lower dword of the number of savestates loaded while recording the movie. If the count exceeds \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xFFFFFFFF\u003C/code>, the upper half from the extended data section is also used.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x014\u003C/code>\u003C/td>\n\u003Ctd>uint8_t\u003C/td>\n\u003Ctd>VI/s\u003C/td>\n\u003Ctd>The amount of VIs generated per second.\u003Cbr>Can also be determined using the country code.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x015\u003C/code>\u003C/td>\n\u003Ctd>uint8_t\u003C/td>\n\u003Ctd>Controller count\u003C/td>\n\u003Ctd>The amount of connected controllers\u003Cbr>Must be lower than or equal to \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">4\u003C/code>\u003Cbr>Can also be determined using the controller flags.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x016\u003C/code>\u003C/td>\n\u003Ctd>uint8_t\u003C/td>\n\u003Ctd>Extended version\u003C/td>\n\u003Ctd>The version number of the extended section.\u003Cbr>See extended format section.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x017\u003C/code>\u003C/td>\n\u003Ctd>uint8_t\u003C/td>\n\u003Ctd>Extended flags\u003C/td>\n\u003Ctd>The extended flags.\u003Cbr>See extended format section.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x018\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>Sample count\u003C/td>\n\u003Ctd>Number of input samples. Determines the element count of the input stream beginning at offset \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x400\u003C/code>.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x01C\u003C/code>\u003C/td>\n\u003Ctd>uint16_t\u003C/td>\n\u003Ctd>Start type\u003C/td>\n\u003Ctd>The movie start type.\u003Cbr>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">1\u003C/code> - Start from savestate\u003Cbr>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">2\u003C/code> - Start from reset\u003Cbr>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">4\u003C/code> - Start from EEPROM\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x01E\u003C/code>\u003C/td>\n\u003Ctd>uint8_t[2]\u003C/td>\n\u003Ctd>Reserved\u003C/td>\n\u003Ctd>Must be zero-filled\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x020\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>Controller flags\u003C/td>\n\u003Ctd>The controller flags, a bitfield containing data for each controller sequentially.\u003Cbr>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">n\u003C/code> - Present\u003Cbr>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">n+4\u003C/code> - Mempak\u003Cbr>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">n+8\u003C/code> - Rumblepak\u003Cbr>Substitute \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">n\u003C/code> for the controller index (relative to 0).\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x024\u003C/code>\u003C/td>\n\u003Ctd>uint8_t[32]\u003C/td>\n\u003Ctd>Extended data\u003C/td>\n\u003Ctd>The extended data.\u003Cbr>See extended format section.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x044\u003C/code>\u003C/td>\n\u003Ctd>uint8_t[128]\u003C/td>\n\u003Ctd>Reserved\u003C/td>\n\u003Ctd>Must be zero-filled\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x0C4\u003C/code>\u003C/td>\n\u003Ctd>char[32] (ASCII)\u003C/td>\n\u003Ctd>ROM Name\u003C/td>\n\u003Ctd>The name of the ROM the movie was recorded on\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x0E4\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>ROM CRC\u003C/td>\n\u003Ctd>The CRC of the ROM the movie was recorded on\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x0E8\u003C/code>\u003C/td>\n\u003Ctd>uint16_t\u003C/td>\n\u003Ctd>ROM Country Code\u003C/td>\n\u003Ctd>The country code of the ROM the movie was recorded on\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x0EA\u003C/code>\u003C/td>\n\u003Ctd>uint8_t[56]\u003C/td>\n\u003Ctd>Reserved\u003C/td>\n\u003Ctd>Must be zero-filled\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x122\u003C/code>\u003C/td>\n\u003Ctd>char[64] (ASCII)\u003C/td>\n\u003Ctd>Video Plugin Name\u003C/td>\n\u003Ctd>The name of the video plugin used during movie recording\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x162\u003C/code>\u003C/td>\n\u003Ctd>char[64] (ASCII)\u003C/td>\n\u003Ctd>Audio Plugin Name\u003C/td>\n\u003Ctd>The name of the audio plugin used during movie recording\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x1A2\u003C/code>\u003C/td>\n\u003Ctd>char[64] (ASCII)\u003C/td>\n\u003Ctd>Input Plugin Name\u003C/td>\n\u003Ctd>The name of the input plugin used during movie recording\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x1E2\u003C/code>\u003C/td>\n\u003Ctd>char[64] (ASCII)\u003C/td>\n\u003Ctd>RSP Plugin Name\u003C/td>\n\u003Ctd>The name of the RSP plugin used during movie recording\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x222\u003C/code>\u003C/td>\n\u003Ctd>char[222] (UTF-8)\u003C/td>\n\u003Ctd>Author\u003C/td>\n\u003Ctd>The movie&#39;s author\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x300\u003C/code>\u003C/td>\n\u003Ctd>char[256] (UTF-8)\u003C/td>\n\u003Ctd>Description\u003C/td>\n\u003Ctd>Additional info about the movie\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x400\u003C/code>\u003C/td>\n\u003Ctd>uint32_t[sample_count]\u003C/td>\n\u003Ctd>Input data\u003C/td>\n\u003Ctd>Array of input data of element count \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">Sample count\u003C/code>\u003Cbr>See input sample section.\u003C/td>\n\u003C/tr>\n\u003C/tbody>\u003C/table>\n\u003Ch2 id=\"input-sample\" class=\"doc-heading scroll-mt-24 my-3 text-2xl\">Input Sample \u003Ca class=\"doc-heading-link\" href=\"#input-sample\" title=\"Copy link to heading\" aria-label=\"Copy link to “Input Sample” heading\">\u003Csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" aria-hidden=\"true\">\u003Cpath stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244\"/>\u003C/svg>\u003C/a>\u003C/h2>\n\u003Cp class=\"my-2\">An input sample consists of 32 bits and represents the input state for a specific frame.\u003C/p>\n\u003Cp class=\"my-2\">It is structured as follows:\u003C/p>\n\u003Ctable class=\"doc-table\">\n\u003Cthead>\n\u003Ctr>\n\u003Cth>Bit length\u003C/th>\n\u003Cth>Name\u003C/th>\n\u003Cth>Additional info\u003C/th>\n\u003C/tr>\n\u003C/thead>\n\u003Ctbody>\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>C-Right\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>C-Left\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>C-Down\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>C-Up\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>R\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>L\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>Reserved (1)\u003C/td>\n\u003Ctd>If both reserved fields are set, the emulator will reset on that frame.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>Reserved (2)\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>D-Right\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>D-Left\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>D-Down\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>D-Up\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>Start\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>Z\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>B\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>A\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>8\u003C/td>\n\u003Ctd>Joystick X\u003C/td>\n\u003Ctd>Interpreted as \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">int8_t\u003C/code>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>8\u003C/td>\n\u003Ctd>Joystick Y\u003C/td>\n\u003Ctd>Interpreted as \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">int8_t\u003C/code>\u003C/td>\n\u003C/tr>\n\u003C/tbody>\u003C/table>\n\u003Ch2 id=\"extended-format\" class=\"doc-heading scroll-mt-24 my-3 text-2xl\">Extended Format \u003Ca class=\"doc-heading-link\" href=\"#extended-format\" title=\"Copy link to heading\" aria-label=\"Copy link to “Extended Format” heading\">\u003Csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" aria-hidden=\"true\">\u003Cpath stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244\"/>\u003C/svg>\u003C/a>\u003C/h2>\n\u003Cp class=\"my-2\">The extended format is an updated version of the M64 format.\u003C/p>\n\u003Cp class=\"my-2\">It keeps the same version number for compatibility reasons, but defines new data in the data gaps of the old format. An extended version of \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0\u003C/code> indicates an old movie with no extended data. The latest extended version is \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">4\u003C/code>.\u003C/p>\n\u003Ch3 id=\"flags\" class=\"doc-heading scroll-mt-24 my-2 text-xl\">Flags \u003Ca class=\"doc-heading-link\" href=\"#flags\" title=\"Copy link to heading\" aria-label=\"Copy link to “Flags” heading\">\u003Csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" aria-hidden=\"true\">\u003Cpath stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244\"/>\u003C/svg>\u003C/a>\u003C/h3>\n\u003Cp class=\"my-2\">\u003Cem>Version 1\u003C/em>\u003C/p>\n\u003Ctable class=\"doc-table\">\n\u003Cthead>\n\u003Ctr>\n\u003Cth>Bit\u003C/th>\n\u003Cth>Name\u003C/th>\n\u003Cth>Additional Info\u003C/th>\n\u003C/tr>\n\u003C/thead>\n\u003Ctbody>\u003Ctr>\n\u003Ctd>0\u003C/td>\n\u003Ctd>WiiVC\u003C/td>\n\u003Ctd>Whether the movie was recorded with WiiVC emulation mode enabled.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>Rest\u003C/td>\n\u003Ctd>Reserved\u003C/td>\n\u003Ctd>Must be 0, or a warning will be shown on playback.\u003C/td>\n\u003C/tr>\n\u003C/tbody>\u003C/table>\n\u003Cp class=\"my-2\">\u003Cem>Version 2\u003C/em>\u003C/p>\n\u003Ctable class=\"doc-table\">\n\u003Cthead>\n\u003Ctr>\n\u003Cth>Bit\u003C/th>\n\u003Cth>Name\u003C/th>\n\u003Cth>Additional Info\u003C/th>\n\u003C/tr>\n\u003C/thead>\n\u003Ctbody>\u003Ctr>\n\u003Ctd>0\u003C/td>\n\u003Ctd>WiiVC\u003C/td>\n\u003Ctd>Whether the movie was recorded with WiiVC emulation mode enabled.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>c.eq.s accurate\u003C/td>\n\u003Ctd>Whether the movie was recorded with an accurate implementation of the \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">c.eq.s\u003C/code> instruction where \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">(NaN == any) == false\u003C/code> instead of \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">(NaN == any) == true\u003C/code> (legacy behavior).\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>Rest\u003C/td>\n\u003Ctd>Reserved\u003C/td>\n\u003Ctd>Must be 0, or a warning will be shown on playback.\u003C/td>\n\u003C/tr>\n\u003C/tbody>\u003C/table>\n\u003Cp class=\"my-2\">\u003Cem>Version 3-4\u003C/em>\u003C/p>\n\u003Ctable class=\"doc-table\">\n\u003Cthead>\n\u003Ctr>\n\u003Cth>Bit\u003C/th>\n\u003Cth>Name\u003C/th>\n\u003Cth>Additional Info\u003C/th>\n\u003C/tr>\n\u003C/thead>\n\u003Ctbody>\u003Ctr>\n\u003Ctd>0\u003C/td>\n\u003Ctd>WiiVC\u003C/td>\n\u003Ctd>Whether the movie was recorded with WiiVC emulation mode enabled.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>1\u003C/td>\n\u003Ctd>c.eq.s accurate\u003C/td>\n\u003Ctd>Whether the movie was recorded with an accurate implementation of the \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">c.eq.s\u003C/code> instruction where \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">(NaN == any) == false\u003C/code> instead of \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">(NaN == any) == true\u003C/code> (legacy behavior).\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>2\u003C/td>\n\u003Ctd>Accurate RDP completion\u003C/td>\n\u003Ctd>Whether the movie was recorded with RDP task completion signalled after RSP task completion, instead of both being signalled at the same instant (legacy behavior).\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>Rest\u003C/td>\n\u003Ctd>Reserved\u003C/td>\n\u003Ctd>Must be 0, or a warning will be shown on playback.\u003C/td>\n\u003C/tr>\n\u003C/tbody>\u003C/table>\n\u003Ch3 id=\"extended-data\" class=\"doc-heading scroll-mt-24 my-2 text-xl\">Extended Data \u003Ca class=\"doc-heading-link\" href=\"#extended-data\" title=\"Copy link to heading\" aria-label=\"Copy link to “Extended Data” heading\">\u003Csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" aria-hidden=\"true\">\u003Cpath stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244\"/>\u003C/svg>\u003C/a>\u003C/h3>\n\u003Cp class=\"my-2\">The extended data block is 32 bytes long and begins at offset \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x024\u003C/code> in the movie header.\u003C/p>\n\u003Cp class=\"my-2\">\u003Cem>Versions 1–3\u003C/em>\u003C/p>\n\u003Ctable class=\"doc-table\">\n\u003Cthead>\n\u003Ctr>\n\u003Cth>Offset\u003C/th>\n\u003Cth>Type\u003C/th>\n\u003Cth>Name\u003C/th>\n\u003Cth>Additional Info\u003C/th>\n\u003C/tr>\n\u003C/thead>\n\u003Ctbody>\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x024\u003C/code>\u003C/td>\n\u003Ctd>uint8_t[4]\u003C/td>\n\u003Ctd>Authorship tag\u003C/td>\n\u003Ctd>Identifies the program or tool which created the movie. Mupen64 writes \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x4D55504E\u003C/code> (\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">MUPN\u003C/code>).\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x028\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>Bruteforce extra data\u003C/td>\n\u003Ctd>Additional data regarding bruteforcing.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x02C\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>Rerecord count (High)\u003C/td>\n\u003Ctd>The upper dword of the number of savestates loaded while recording the movie. The complete count is \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">(High &lt;&lt; 32) | Low\u003C/code>.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>Rest\u003C/td>\n\u003Ctd>-\u003C/td>\n\u003Ctd>Reserved\u003C/td>\n\u003Ctd>Must be zero-filled.\u003C/td>\n\u003C/tr>\n\u003C/tbody>\u003C/table>\n\u003Cp class=\"my-2\">\u003Cem>Version 4\u003C/em>\u003C/p>\n\u003Ctable class=\"doc-table\">\n\u003Cthead>\n\u003Ctr>\n\u003Cth>Offset\u003C/th>\n\u003Cth>Type\u003C/th>\n\u003Cth>Name\u003C/th>\n\u003Cth>Additional Info\u003C/th>\n\u003C/tr>\n\u003C/thead>\n\u003Ctbody>\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x024\u003C/code>\u003C/td>\n\u003Ctd>uint8_t[4]\u003C/td>\n\u003Ctd>Authorship tag\u003C/td>\n\u003Ctd>Identifies the program or tool which created the movie. Mupen64 writes \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x4D55504E\u003C/code> (\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">MUPN\u003C/code>).\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x028\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>Bruteforce extra data\u003C/td>\n\u003Ctd>Additional data regarding bruteforcing.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x02C\u003C/code>\u003C/td>\n\u003Ctd>uint32_t\u003C/td>\n\u003Ctd>Rerecord count (High)\u003C/td>\n\u003Ctd>The upper dword of the number of savestates loaded while recording the movie. The complete count is \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">(High &lt;&lt; 32) | Low\u003C/code>.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x030\u003C/code>\u003C/td>\n\u003Ctd>double\u003C/td>\n\u003Ctd>CPU counter factor\u003C/td>\n\u003Ctd>The CPU counter factor used during recording.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x038\u003C/code>\u003C/td>\n\u003Ctd>double\u003C/td>\n\u003Ctd>RCP lag factor\u003C/td>\n\u003Ctd>The factor by which RCP lag was multiplied during recording.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>Rest\u003C/td>\n\u003Ctd>-\u003C/td>\n\u003Ctd>Reserved\u003C/td>\n\u003Ctd>Must be zero-filled.\u003C/td>\n\u003C/tr>\n\u003C/tbody>\u003C/table>\n\u003Cp class=\"my-2\">The extended data block is only valid when the extended version is nonzero.\u003C/p>\n\u003Ch1 id=\"st\" class=\"doc-heading scroll-mt-24 my-4 text-3xl font-bold separator-below\">ST \u003Ca class=\"doc-heading-link\" href=\"#st\" title=\"Copy link to heading\" aria-label=\"Copy link to “ST” heading\">\u003Csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" aria-hidden=\"true\">\u003Cpath stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244\"/>\u003C/svg>\u003C/a>\u003C/h1>\n\u003Cp class=\"my-2\">Mupen64 will create savestates compressed using \u003Ca class=\"app-link\" href=\"https://en.wikipedia.org/wiki/LZ4_(compression_algorithm)\">lz4\u003C/a> by default. This can be switched to \u003Ca class=\"app-link\" href=\"https://en.wikipedia.org/wiki/Gzip\">Gzip\u003C/a> in the settings (&quot;Core &gt; Fast Savestates&quot;).\u003C/p>\n\u003Cp class=\"my-2\">Savestates that are uncompressed, gzip-compressed, or lz4-compressed are automatically detected and loaded seamlessly.\u003C/p>\n\u003Ctable class=\"doc-table\">\n\u003Cthead>\n\u003Ctr>\n\u003Cth>Offset\u003C/th>\n\u003Cth>Length (bytes)\u003C/th>\n\u003Cth>Description\u003C/th>\n\u003C/tr>\n\u003C/thead>\n\u003Ctbody>\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x0\u003C/code>\u003C/td>\n\u003Ctd>32\u003C/td>\n\u003Ctd>Current ROM&#39;s MD5 Hash\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x20\u003C/code>\u003C/td>\n\u003Ctd>40\u003C/td>\n\u003Ctd>RDRAM registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x48\u003C/code>\u003C/td>\n\u003Ctd>36\u003C/td>\n\u003Ctd>MI registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x6c\u003C/code>\u003C/td>\n\u003Ctd>52\u003C/td>\n\u003Ctd>PI registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA0\u003C/code>\u003C/td>\n\u003Ctd>52\u003C/td>\n\u003Ctd>SP registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xD4\u003C/code>\u003C/td>\n\u003Ctd>8\u003C/td>\n\u003Ctd>RSP register\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xDC\u003C/code>\u003C/td>\n\u003Ctd>16\u003C/td>\n\u003Ctd>SI registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xEC\u003C/code>\u003C/td>\n\u003Ctd>60\u003C/td>\n\u003Ctd>VI registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x128\u003C/code>\u003C/td>\n\u003Ctd>32\u003C/td>\n\u003Ctd>RI registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x148\u003C/code>\u003C/td>\n\u003Ctd>40\u003C/td>\n\u003Ctd>AI registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x170\u003C/code>\u003C/td>\n\u003Ctd>48\u003C/td>\n\u003Ctd>DPC registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x1A0\u003C/code>\u003C/td>\n\u003Ctd>16\u003C/td>\n\u003Ctd>DPS registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x1B0\u003C/code>\u003C/td>\n\u003Ctd>8388608\u003C/td>\n\u003Ctd>RDRAM - Always 8MB since there&#39;s no option to disable expansion slot\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x8001B0\u003C/code>\u003C/td>\n\u003Ctd>4096\u003C/td>\n\u003Ctd>SP DMEM\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x8011B0\u003C/code>\u003C/td>\n\u003Ctd>4096\u003C/td>\n\u003Ctd>SP IMEM\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x8021B0\u003C/code>\u003C/td>\n\u003Ctd>64\u003C/td>\n\u003Ctd>PIF RAM\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x8021F0\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Flashram active\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x8021F4\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Flashram mode\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x8021F8\u003C/code>\u003C/td>\n\u003Ctd>8\u003C/td>\n\u003Ctd>Flashram status\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x802200\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Flashram erase offset\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x802204\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Flashram write pointer\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x802208\u003C/code>\u003C/td>\n\u003Ctd>1048576\u003C/td>\n\u003Ctd>TLB LUT R\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x902208\u003C/code>\u003C/td>\n\u003Ctd>1048576\u003C/td>\n\u003Ctd>TLB LUT W\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02208\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>LLBit register\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA0220C\u003C/code>\u003C/td>\n\u003Ctd>256\u003C/td>\n\u003Ctd>CPU registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA0230C\u003C/code>\u003C/td>\n\u003Ctd>256\u003C/td>\n\u003Ctd>MMU registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA0240C\u003C/code>\u003C/td>\n\u003Ctd>8\u003C/td>\n\u003Ctd>lo register\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02414\u003C/code>\u003C/td>\n\u003Ctd>8\u003C/td>\n\u003Ctd>hi register\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA0241C\u003C/code>\u003C/td>\n\u003Ctd>256\u003C/td>\n\u003Ctd>FPU registers\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA0251C\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>FCR0 register\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02520\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>FCR31 register (FPU status)\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02524\u003C/code>\u003C/td>\n\u003Ctd>1664\u003C/td>\n\u003Ctd>TLB E\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BA4\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>PC register\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BA8\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>next interrupt\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BAC\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>next VI\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BB0\u003C/code>\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>VI field\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BB4\u003C/code>\u003C/td>\n\u003Ctd>-\u003C/td>\n\u003Ctd>Interrupt queue.\u003Cbr>Arbitrary-length sequence of \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">uint32_t\u003C/code>.\u003Cbr>Ends with \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xFFFFFFFF\u003C/code>.\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BB4\u003C/code> + Interrupt queue length\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Savestate belongs to a movie?\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>VCR freeze buffer (only if this savestate belongs to a movie):\u003C/td>\n\u003Ctd>\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BB8\u003C/code> + Interrupt queue length\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>VCR freeze buffer length (bytes)\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BBC\u003C/code> + Interrupt queue length\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Movie UID\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BC0\u003C/code> + Interrupt queue length\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Input frame count when this ST was made\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BC4\u003C/code> + Interrupt queue length\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>VI frame count when this ST was made\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BC8\u003C/code> + Interrupt queue length\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Sample count - Movie&#39;s length sample count when this ST file was made\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BCC\u003C/code> + Interrupt queue length\u003C/td>\n\u003Ctd>4 * (Sample count + 1)\u003C/td>\n\u003Ctd>Movie input data up till point of ST creation\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>Video buffer (only present if user enabled it):\u003C/td>\n\u003Ctd>\u003C/td>\n\u003Ctd>\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BCC\u003C/code> + Interrupt queue length + 4 * (Sample count + 1)\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Video section identifier - \u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0x53435200\u003C/code> (st file ends here on savestates without this section)\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BCC\u003C/code> + Interrupt queue length + 4 * (Sample count + 1) + 4\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Video buffer width\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BCC\u003C/code> + Interrupt queue length + 4 * (Sample count + 1) + 8\u003C/td>\n\u003Ctd>4\u003C/td>\n\u003Ctd>Video buffer height\u003C/td>\n\u003C/tr>\n\u003Ctr>\n\u003Ctd>\u003Ccode class=\"rounded bg-slate-200 px-1 py-0.5 font-mono text-[0.95em] dark:bg-slate-700/80\">0xA02BCC\u003C/code> + Interrupt queue length + 4 * (Sample count + 1) + 12\u003C/td>\n\u003Ctd>width * height * 4\u003C/td>\n\u003Ctd>32bpp BGRA Video buffer data.\u003C/td>\n\u003C/tr>\n\u003C/tbody>\u003C/table>\n",title:" Data Formats"},uses:{params:["product","channel","slug"]}}],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
