@@ -23,6 +23,7 @@
 	const discordUrl = 'https://discord.gg/hFANcme32k';
 	let projectsOpen = $state(false);
 	let navOpen = $state(false);
+	let orgOpen = $state(false);
 
 	const projectItems = [
 		{ name: 'Mupen64', href: resolve('/'), icon: mupen64 },
@@ -78,6 +79,27 @@
 													<span>{item.name}</span>
 												</a>
 					{/each}
+				</div>
+			</div>
+			<div class="group relative w-full md:w-auto">
+				<button
+					type="button"
+					class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
+					aria-haspopup="true"
+					aria-expanded={orgOpen}
+					onclick={() => (orgOpen = !orgOpen)}
+				>
+					Org
+					<span aria-hidden="true" class="text-xs transition-transform group-hover:rotate-180">
+						<ChevronDownOutline />
+					</span>
+				</button>
+				<div
+					class={`${megaMenuClass} ${orgOpen ? 'visible opacity-100' : 'invisible opacity-0'} absolute top-full left-0 !mt-0 min-w-48 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100`}
+				>
+					<a href={resolve('/org/expenses')} class={megaMenuItemClass}>
+						<span>Expenses</span>
+					</a>
 				</div>
 			</div>
 			<a
