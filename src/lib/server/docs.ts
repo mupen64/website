@@ -34,6 +34,14 @@ export type DocsTreeNode = {
 	children?: DocsTreeNode[];
 };
 
+export type DocsSearchItem = {
+	title: string;
+	href: string;
+	product: string;
+	channel: DocsChannel;
+	content: string;
+};
+
 const DOCS_PRODUCT_LABELS: Record<DocsProduct, string> = {
 	mupen64: 'Mupen64',
 	redux: 'SM64 Lua Redux'
@@ -78,6 +86,17 @@ function normalizeSlug(slug: string) {
 		.join('/');
 }
 
+function getSearchableContent(content: string) {
+	return content
+		.replace(/^---[\s\S]*?---/m, '')
+		.replace(/```[\s\S]*?```/g, ' ')
+		.replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+		.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+		.replace(/[#>*_`~-]/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+}
+
 const docs: IndexedDoc[] = Object.entries(modules)
 	.flatMap(([filePath, content]) => {
 		const match = filePath.match(/^\/static\/docs\/([^/]+)\/([^/]+)\/(.+)\.md$/);
@@ -111,6 +130,16 @@ export function buildDocHref(product: DocsProduct, channel: DocsChannel, slug: s
 	const encodedSlug = normalizeSlug(slug).split('/').map(encodeURIComponent).join('/');
 
 	return `/docs/${product}/${channel}/${encodedSlug}`;
+}
+
+export async function getDocsSearchIndex(): Promise<DocsSearchItem[]> {
+	return docs.map((doc) => ({
+		title: doc_name_to_friendly_name(doc.slug),
+		href: buildDocHref(doc.product, doc.channel, doc.slug),
+		product: getDocsProductLabel(doc.product),
+		channel: doc.channel,
+		content: getSearchableContent(doc.content)
+	}));
 }
 
 export async function listDocSlugs(product: DocsProduct, channel: DocsChannel) {

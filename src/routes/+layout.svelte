@@ -8,8 +8,18 @@
 	import { resolve } from '$app/paths';
 	import { NavBrand, Navbar, Button } from 'flowbite-svelte';
 	import { ChevronDownOutline, DiscordSolid } from 'flowbite-svelte-icons';
+	import DocsSearch from '$lib/components/DocsSearch.svelte';
+	import type { Snippet } from 'svelte';
 
-	let { children } = $props();
+	type DocsSearchItem = {
+		title: string;
+		href: string;
+		product: string;
+		channel: string;
+		content: string;
+	};
+
+	let { children, data }: { children: Snippet; data: { docs_search: DocsSearchItem[] } } = $props();
 
 	const maintenance = false;
 	const navItemClass =
@@ -40,7 +50,7 @@
 <div
 	class="sticky top-0 z-50 mx-auto w-full border-b border-dashed border-slate-400/70 bg-white/85 md:border-x shadow-sm backdrop-blur-md md:max-w-6xl md:rounded-b-xl dark:border-slate-600/70 dark:bg-slate-950/85"
 >
-	<Navbar class="mr-auto ml-auto max-w-6xl bg-transparent!">
+	<Navbar class="relative mr-auto ml-auto max-w-6xl bg-transparent!">
 		<NavBrand href={resolve('/')} class="text-xl font-semibold text-slate-900 dark:text-slate-100">
 			<img src={org} alt="Mupen64 Logo" class="object-fit w-8 pr-1" />
 			<span>Mupen64 Organization</span>
@@ -54,7 +64,7 @@
 			onclick={() => (navOpen = !navOpen)}
 		>☰</button>
 
-		<div class={`${navOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`}>
+		<div class={`${navOpen ? 'block' : 'hidden'} w-full md:block md:absolute md:top-1/2 md:left-1/2 md:w-auto md:-translate-x-1/2 md:-translate-y-1/2`}>
 			<div class="flex w-full items-center gap-1 md:flex md:w-auto">
 				<div class={`${navListClass} md:items-stretch md:self-stretch`}>
 			<div class="group relative w-full md:flex md:w-auto md:items-stretch md:self-stretch">
@@ -113,7 +123,11 @@
 			</div>
 		</div>
 	</div>
-	</Navbar>
+
+	<div class="w-full md:mr-2 md:ml-auto md:w-xs">
+		<DocsSearch items={data.docs_search} />
+	</div>
+</Navbar>
 </div>
 
 <div class="flex min-h-screen flex-col">
