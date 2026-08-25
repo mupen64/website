@@ -15,7 +15,7 @@
 	const navItemClass =
 		'!text-slate-900 hover:!bg-slate-200/70 hover:!text-primary-600 dark:!text-slate-100 dark:hover:!bg-slate-800/70 dark:hover:!text-primary-400';
 	const navListClass =
-		'flex w-full flex-col gap-1 rounded-lg !border-b border-dotted border-slate-400 bg-slate-100/90 p-2 dark:border-slate-600 dark:bg-slate-900/90 md:w-auto md:flex-row md:overflow-visible md:border-0 md:bg-transparent md:p-0';
+		'flex w-full flex-col gap-1 rounded-lg border-slate-400 p-2 dark:border-slate-600 md:w-auto md:flex-row md:overflow-visible md:border-0 md:p-0';
 	const megaMenuClass =
 		'z-50 mt-2 w-fit rounded-xl !border-b border-dotted border-slate-400 bg-slate-100/95 p-2 text-slate-900 shadow-lg backdrop-blur-md dark:border-slate-500 dark:bg-slate-800/95 dark:text-slate-100';
 	const megaMenuItemClass =
@@ -38,9 +38,9 @@
 </svelte:head>
 
 <div
-	class="sticky top-0 z-50 mx-auto w-full border-b border-dashed border-slate-400/70 bg-white/20 md:border-x shadow-sm backdrop-blur-xs md:max-w-6xl md:rounded-b-xl dark:border-slate-600/70 dark:bg-slate-950/10"
+	class="sticky top-0 z-50 mx-auto w-full border-b border-dashed border-slate-400/70 bg-white/85 md:border-x shadow-sm backdrop-blur-md md:max-w-6xl md:rounded-b-xl dark:border-slate-600/70 dark:bg-slate-950/85"
 >
-	<Navbar class="mr-auto ml-auto max-w-6xl bg-transparent">
+	<Navbar class="mr-auto ml-auto max-w-6xl bg-transparent!">
 		<NavBrand href={resolve('/')} class="text-xl font-semibold text-slate-900 dark:text-slate-100">
 			<img src={org} alt="Mupen64 Logo" class="object-fit w-8 pr-1" />
 			<span>Mupen64 Organization</span>
@@ -55,9 +55,9 @@
 		>☰</button>
 
 		<div class={`${navOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`}>
-			<div class="flex items-center gap-1 md:flex">
-				<div class={navListClass}>
-			<div class="group relative w-full md:w-auto">
+			<div class="flex w-full items-center gap-1 md:flex md:w-auto">
+				<div class={`${navListClass} md:items-stretch md:self-stretch`}>
+			<div class="group relative w-full md:flex md:w-auto md:items-stretch md:self-stretch">
 				<button
 					type="button"
 					class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
@@ -81,7 +81,7 @@
 					{/each}
 				</div>
 			</div>
-			<div class="group relative w-full md:w-auto">
+			<div class="group relative w-full md:flex md:w-auto md:items-stretch md:self-stretch">
 				<button
 					type="button"
 					class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
@@ -104,9 +104,9 @@
 			</div>
 			<a
 				href={resolve('/docs/mupen64/stable')}
-				class={`${navItemClass} block w-full rounded-lg px-3 py-2 text-sm font-medium md:w-auto`}>Docs</a
+				class={`${navItemClass} flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium md:flex md:w-auto md:justify-start`}>Docs</a
 			>
-			<Button href={discordUrl} class="w-full sm:w-auto md:rounded-r-lg!" size="sm" pill>
+			<Button href={discordUrl} class="w-full sm:w-auto m-1" size="sm">
 				<DiscordSolid />
 				<span class="ml-2">Discord server</span>
 			</Button>
