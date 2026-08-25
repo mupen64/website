@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button, Card, Dropdown, DropdownItem } from 'flowbite-svelte';
-	import { ChevronDownOutline, WindowsSolid } from 'flowbite-svelte-icons';
+	import { ChevronDownOutline, QuestionCircleSolid, WindowsSolid } from 'flowbite-svelte-icons';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import lua from '$lib/assets/lua.svg';
 	import demo from '$lib/assets/demo.webp';
@@ -13,6 +13,10 @@
 		startDownloadFromChannel,
 		type Channel
 	} from '$lib/helpers/RepackDownloadHelper';
+	import ChannelPill from '$lib/components/ChannelPill.svelte';
+	import Pill from '$lib/components/Pill.svelte';
+
+	const released_150 = false;
 
 	function handle_download(event: MouseEvent, channel: Channel) {
 		event.preventDefault();
@@ -38,39 +42,55 @@
 	>
 		{#snippet button(dark: boolean)}
 			<div class="flex w-full flex-nowrap items-stretch justify-center gap-2 md:w-auto">
-				<Button
-					href={downloadUrls['stable-windows-x86']}
-					color="blue"
-					class="inline-flex w-fit max-w-full items-center justify-start gap-2 text-left border-b-blue-900 border-b-4 active:border-b-0 active:mt-1"
-					onclick={(event: MouseEvent) => handle_download(event, 'stable-windows-x86')}
-				>
-					<WindowsSolid class="h-5 w-5 shrink-0" />
-					<span>Download 32-bit for Windows</span>
-				</Button>
-
+				{#if released_150}
+					<Button
+						href={downloadUrls['stable-windows-x64']}
+						color="blue"
+						class="inline-flex w-fit max-w-full items-center justify-start gap-2 border-b-4 border-b-blue-900 text-left active:mt-1 active:border-b-0"
+						onclick={(event: MouseEvent) => handle_download(event, 'stable-windows-x64')}
+					>
+						<WindowsSolid class="h-5 w-5 shrink-0" />
+						<span>Download 64-bit for Windows</span>
+					</Button>
+				{:else}
+					<Button
+						href={downloadUrls['stable-windows-x86']}
+						color="blue"
+						class="inline-flex w-fit max-w-full items-center justify-start gap-2 border-b-4 border-b-blue-900 text-left active:mt-1 active:border-b-0"
+						onclick={(event: MouseEvent) => handle_download(event, 'stable-windows-x86')}
+					>
+						<WindowsSolid class="h-5 w-5 shrink-0" />
+						<span>Download 32-bit for Windows</span>
+					</Button>
+				{/if}
 				<Button
 					type="button"
 					aria-label="More download options"
 					color="blue"
-					class="inline-flex self-stretch items-center gap-2 border-b-blue-900 border-b-4 active:border-b-0 active:mt-1"
+					class="inline-flex items-center gap-2 self-stretch border-b-4 border-b-blue-900 active:mt-1 active:border-b-0"
 				>
 					<ChevronDownOutline class="h-5 w-5" />
 				</Button>
 
 				<Dropdown placement="bottom-end" class="list-none">
-					<!-- Unavailable until 1.5.0 -->
-					<!-- <DropdownItem
-					href={downloadUrls['stable-windows-x64']}
-					onclick={(event) => handle_download(event, 'stable-windows-x64')}
-				>
-					<div class="flex w-full flex-col items-start text-left leading-tight">
-						<p class="text-base">Download stable (64-bit)</p>
-						<p class="text-xs font-light opacity-70">
-						Stable release for 64-bit devices.<br>
-						Doesn't work with Jabo's plugins.
-						</p>
-					</div>
-				</DropdownItem> -->
+					{#if released_150}
+						<DropdownItem
+							href={downloadUrls['stable-windows-x86']}
+							onclick={(event) => handle_download(event, 'stable-windows-x86')}
+						>
+							<div class="flex w-full flex-col items-start text-left leading-tight">
+								<div class="flex flex-row items-center gap-1">
+									<WindowsSolid class="mb-px h-4 w-4" />
+									<p class="text-base">Windows (32-bit)</p>
+									<ChannelPill channel="stable" />
+								</div>
+								<p class="text-xs font-light opacity-70">
+									Compatible with Jabo's plugins. Not recommended for general use.
+								</p>
+							</div>
+						</DropdownItem>
+					{/if}
+
 					<DropdownItem
 						href={downloadUrls['nightly-windows-x86']}
 						onclick={(event) => handle_download(event, 'nightly-windows-x86')}
@@ -78,7 +98,8 @@
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<div class="flex flex-row items-center gap-1">
 								<WindowsSolid class="mb-px h-4 w-4" />
-								<p class="text-base">Download nightly (32-bit)</p>
+								<p class="text-base">Download (32-bit)</p>
+								<ChannelPill channel="nightly" />
 							</div>
 							<p class="text-xs font-light opacity-70">
 								Bleeding-edge features with potential instability
@@ -92,7 +113,8 @@
 						<div class="flex w-full flex-col items-start text-left leading-tight">
 							<div class="flex flex-row items-center gap-1">
 								<WindowsSolid class="mb-px h-4 w-4" />
-								<p class="text-base">Download nightly (64-bit)</p>
+								<p class="text-base">Download (64-bit)</p>
+								<ChannelPill channel="nightly" />
 							</div>
 							<p class="text-xs font-light opacity-70">
 								Bleeding-edge features with potential instability
@@ -101,7 +123,11 @@
 					</DropdownItem>
 					<DropdownItem>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
-							<p class="text-base">Download for Linux</p>
+							<div class="flex flex-row items-center gap-1">
+								<QuestionCircleSolid class="mb-px h-4 w-4" />
+								<p class="text-base">Download for Linux</p>
+								<Pill color="gray" text="Unavailable" />
+							</div>
 							<p class="text-xs font-light opacity-70">
 								To run Mupen64 on Linux, use <a class="app-link" href="https://usebottles.com/"
 									>Bottles</a

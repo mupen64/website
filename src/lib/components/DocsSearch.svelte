@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import ChannelPill from './ChannelPill.svelte';
 
 	type DocsSearchItem = {
 		title: string;
@@ -107,10 +108,7 @@
 								<span class="font-normal text-slate-500 dark:text-slate-400">{result.product}</span
 								></span
 							>
-							<span
-								class={`inline-block shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold uppercase ${result.channel === 'stable' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300' : 'bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300'}`}
-								>{result.channel}</span
-							>
+							<ChannelPill channel={result.channel} />
 						</span>
 						<span class="mt-1 line-clamp-2 block text-sm text-slate-600 dark:text-slate-300"
 							>{result.content.slice(0, 150)}{result.content.length > 150 ? '…' : ''}</span
