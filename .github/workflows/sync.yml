@@ -1,4 +1,4 @@
-name: Sync docs
+name: Sync
 
 on:
   schedule:
@@ -9,11 +9,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: sync-docs
+  group: sync
   cancel-in-progress: false
 
 jobs:
-  sync-docs:
+  sync:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -70,7 +70,7 @@ jobs:
             rsync -a --delete "${src}/." "${dest}/"
           }
 
-          workdir="${RUNNER_TEMP}/sync-docs"
+          workdir="${RUNNER_TEMP}/sync"
           rm -rf "${workdir}"
           mkdir -p "${workdir}"
 
