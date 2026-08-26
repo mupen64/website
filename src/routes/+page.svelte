@@ -2,6 +2,7 @@
 	import { Button, Card, Dropdown, DropdownItem } from 'flowbite-svelte';
 	import { ChevronDownOutline, QuestionCircleSolid, WindowsSolid } from 'flowbite-svelte-icons';
 	import mupen64 from '$lib/assets/mupen64.svg';
+	import GithubLogo from '$lib/assets/GithubLogo.svelte';
 	import lua from '$lib/assets/lua.svg';
 	import demo from '$lib/assets/demo.webp';
 	import Hero from '$lib/components/Hero.svelte';
@@ -151,7 +152,22 @@
 		{/snippet}
 	</Hero>
 
-	<section id="showcase" class="p-16 pb-0">
+	<section class="pt-8 pb-8">
+		<div class="mx-auto max-w-6xl">
+			<Card class="mx-auto flex w-fit flex-row flex-nowrap items-center gap-3 px-4 py-2">
+				<a href="https://github.com/mupen64/mupen64-rr-lua">
+					<GithubLogo class="h-8 w-8 shrink-0" />
+				</a>
+				<p class="text-base">
+					Enjoying Mupen64? <br />
+					Spare us a star ⭐ on
+					<a class="app-link" href="https://github.com/mupen64/mupen64-rr-lua">GitHub</a>
+				</p>
+			</Card>
+		</div>
+	</section>
+
+	<section id="showcase" class="p-16 pt-0 pb-0">
 		<div class="mx-auto max-w-6xl">
 			<Title id="showcase">Showcase</Title>
 			<div class="flex flex-col items-center justify-center">
