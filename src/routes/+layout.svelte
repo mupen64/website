@@ -48,7 +48,7 @@
 </svelte:head>
 
 <div
-	class="sticky top-0 z-50 mx-auto w-full border-b border-dashed border-slate-400/70 bg-white/85 md:border-x shadow-sm backdrop-blur-md md:max-w-6xl md:rounded-b-xl dark:border-slate-600/70 dark:bg-slate-950/85"
+	class="sticky top-0 z-50 mx-auto w-full border-b border-dashed border-slate-400/70 bg-white/85 shadow-sm backdrop-blur-md md:max-w-6xl md:rounded-b-xl md:border-x dark:border-slate-600/70 dark:bg-slate-950/85"
 >
 	<Navbar class="relative mr-auto ml-auto max-w-6xl bg-transparent!">
 		<NavBrand href={resolve('/')} class="text-xl font-semibold text-slate-900 dark:text-slate-100">
@@ -61,73 +61,76 @@
 			class="inline-flex items-center rounded-lg p-2 text-xl text-slate-900 hover:bg-slate-200 md:hidden dark:text-slate-100 dark:hover:bg-slate-800"
 			aria-label={navOpen ? 'Close main menu' : 'Open main menu'}
 			aria-expanded={navOpen}
-			onclick={() => (navOpen = !navOpen)}
-		>☰</button>
+			onclick={() => (navOpen = !navOpen)}>☰</button
+		>
 
-		<div class={`${navOpen ? 'block' : 'hidden'} w-full md:block md:absolute md:top-1/2 md:left-1/2 md:w-auto md:-translate-x-1/2 md:-translate-y-1/2`}>
+		<div
+			class={`${navOpen ? 'block' : 'hidden'} w-full md:absolute md:top-1/2 md:left-1/2 md:block md:w-auto md:-translate-x-1/2 md:-translate-y-1/2`}
+		>
 			<div class="flex w-full items-center gap-1 md:flex md:w-auto">
 				<div class={`${navListClass} md:items-stretch md:self-stretch`}>
-			<div class="group relative w-full md:flex md:w-auto md:items-stretch md:self-stretch">
-				<button
-					type="button"
-					class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
-					aria-haspopup="true"
-					aria-expanded={projectsOpen}
-					onclick={() => (projectsOpen = !projectsOpen)}
-				>
-					Projects
-					<span aria-hidden="true" class="text-xs transition-transform group-hover:rotate-180">
-						<ChevronDownOutline />
-					</span>
-				</button>
-				<div
-					class={`${megaMenuClass} ${projectsOpen ? 'visible opacity-100' : 'invisible opacity-0'} absolute top-full left-0 !mt-0 min-w-48 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100`}
-				>
-					{#each projectItems as item (item.name)}
-						<a href={item.href} class={`${megaMenuItemClass} flex items-center gap-2`}>
-													<img src={item.icon} alt="" class="h-5 w-5 shrink-0 rounded-sm object-contain" />
-													<span>{item.name}</span>
-												</a>
-					{/each}
+					<div class="group relative w-full md:flex md:w-auto md:items-stretch md:self-stretch">
+						<button
+							type="button"
+							class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
+							aria-haspopup="true"
+							aria-expanded={projectsOpen}
+							onclick={() => (projectsOpen = !projectsOpen)}
+						>
+							Projects
+							<span aria-hidden="true" class="text-xs transition-transform group-hover:rotate-180">
+								<ChevronDownOutline />
+							</span>
+						</button>
+						<div
+							class={`${megaMenuClass} ${projectsOpen ? 'visible opacity-100' : 'invisible opacity-0'} absolute top-full left-0 !mt-0 min-w-48 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100`}
+						>
+							{#each projectItems as item (item.name)}
+								<a href={item.href} class={`${megaMenuItemClass} flex items-center gap-2`}>
+									<img src={item.icon} alt="" class="h-5 w-5 shrink-0 rounded-sm object-contain" />
+									<span>{item.name}</span>
+								</a>
+							{/each}
+						</div>
+					</div>
+					<div class="group relative w-full md:flex md:w-auto md:items-stretch md:self-stretch">
+						<button
+							type="button"
+							class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
+							aria-haspopup="true"
+							aria-expanded={orgOpen}
+							onclick={() => (orgOpen = !orgOpen)}
+						>
+							Org
+							<span aria-hidden="true" class="text-xs transition-transform group-hover:rotate-180">
+								<ChevronDownOutline />
+							</span>
+						</button>
+						<div
+							class={`${megaMenuClass} ${orgOpen ? 'visible opacity-100' : 'invisible opacity-0'} absolute top-full left-0 !mt-0 min-w-48 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100`}
+						>
+							<a href={resolve('/org/expenses')} class={megaMenuItemClass}>
+								<span>Expenses</span>
+							</a>
+						</div>
+					</div>
+					<a
+						href={resolve('/docs/mupen64/stable')}
+						class={`${navItemClass} flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium md:flex md:w-auto md:justify-start`}
+						>Docs</a
+					>
+					<Button href={discordUrl} class="m-1 w-full sm:w-auto" size="sm">
+						<DiscordSolid />
+						<span class="ml-2">Discord server</span>
+					</Button>
 				</div>
-			</div>
-			<div class="group relative w-full md:flex md:w-auto md:items-stretch md:self-stretch">
-				<button
-					type="button"
-					class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
-					aria-haspopup="true"
-					aria-expanded={orgOpen}
-					onclick={() => (orgOpen = !orgOpen)}
-				>
-					Org
-					<span aria-hidden="true" class="text-xs transition-transform group-hover:rotate-180">
-						<ChevronDownOutline />
-					</span>
-				</button>
-				<div
-					class={`${megaMenuClass} ${orgOpen ? 'visible opacity-100' : 'invisible opacity-0'} absolute top-full left-0 !mt-0 min-w-48 transition-opacity group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100`}
-				>
-					<a href={resolve('/org/expenses')} class={megaMenuItemClass}>
-						<span>Expenses</span>
-					</a>
-				</div>
-			</div>
-			<a
-				href={resolve('/docs/mupen64/stable')}
-				class={`${navItemClass} flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium md:flex md:w-auto md:justify-start`}>Docs</a
-			>
-			<Button href={discordUrl} class="w-full sm:w-auto m-1" size="sm">
-				<DiscordSolid />
-				<span class="ml-2">Discord server</span>
-			</Button>
 			</div>
 		</div>
-	</div>
 
-	<div class="w-full md:mr-2 md:ml-auto md:w-xs">
-		<DocsSearch items={data.docs_search} />
-	</div>
-</Navbar>
+		<div class="w-full md:mr-2 md:ml-auto md:w-xs">
+			<DocsSearch items={data.docs_search} />
+		</div>
+	</Navbar>
 </div>
 
 <div class="flex min-h-screen flex-col">
@@ -160,7 +163,7 @@
 		{/if}
 	</div>
 
-	<footer class="grid-300-45 w-full bg-slate-100/70 dark:bg-slate-900/70">
+	<footer class="noise w-full bg-slate-100/70 dark:bg-slate-900/70">
 		<hr class="border-dashed border-slate-400/70 dark:border-slate-600/70" />
 		<div class="flex flex-col items-center justify-center p-10 text-center">
 			<div class="mb-5 flex flex-row items-center gap-2">
