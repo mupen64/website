@@ -61,7 +61,10 @@
 </script>
 
 <div class="mb-12 flex flex-row items-center justify-center gap-4 text-3xl font-bold">
-	<hr class="w-full max-w-3xs border-2 border-dashed border-red-600" />
+	<div class="flex w-full max-w-3xs flex-col gap-4">
+		<hr class="w-full border-2 border-dashed border-red-800" />
+		<hr class="w-full border-2 border-dashed border-red-800" />
+	</div>
 	<span class="text-red-600" aria-hidden="true">[</span>
 	<h1 {id} class="doc-heading scroll-mt-24 pr-8 pl-8 whitespace-nowrap">
 		{@render children?.()}
@@ -90,7 +93,10 @@
 		{/if}
 	</h1>
 	<span class="text-red-600" aria-hidden="true">]</span>
-	<hr class="w-full max-w-3xs border-2 border-dashed border-red-600" />
+	<div class="flex w-full max-w-3xs flex-col gap-4">
+		<hr class="w-full border-2 border-dashed border-red-800" />
+		<hr class="w-full border-2 border-dashed border-red-800" />
+	</div>
 </div>
 
 <style>
