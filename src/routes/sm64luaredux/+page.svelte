@@ -28,7 +28,7 @@
 
 	<section id="about" class="mb-12 p-16 pb-0">
 		<div class="mx-auto max-w-6xl">
-			<Title>About</Title>
+			<Title id="about">About</Title>
 			<div class="flex flex-col items-center justify-center">
 				<p>SM64 Lua Redux is a powerful TASing utility Lua script for Super Mario 64.</p>
 			</div>

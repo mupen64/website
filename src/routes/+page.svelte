@@ -143,7 +143,7 @@
 
 	<section id="showcase" class="p-16 pb-0">
 		<div class="mx-auto max-w-6xl">
-			<Title>Showcase</Title>
+			<Title id="showcase">Showcase</Title>
 			<div class="flex flex-col items-center justify-center">
 				<img src={demo} alt="Demo" class="object-contain" />
 			</div>
@@ -152,7 +152,7 @@
 
 	<section id="features" class="p-16">
 		<div class="mx-auto max-w-6xl">
-			<Title>Features</Title>
+			<Title id="features">Features</Title>
 			<div class="flex flex-row flex-wrap justify-center gap-8">
 				<Card class="w-80 max-w-72 p-4">
 					<p class="text-xl font-semibold">🔋 Batteries Included</p>

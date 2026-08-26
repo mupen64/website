@@ -47,8 +47,7 @@
 	];
 
 	type ExpenseInput =
-		| { date: string; text: string; billed: string; sum: string }
-		| { date: string; note: string };
+		{ date: string; text: string; billed: string; sum: string } | { date: string; note: string };
 
 	type Statement = {
 		year: number;
@@ -107,7 +106,7 @@
 
 	<section class="pt-16 pb-16">
 		<div class="mx-auto max-w-6xl">
-			<Title>Expenses by Year</Title>
+			<Title id="expenses">Expenses by Year</Title>
 
 			<div class="mb-12 last:mb-0">
 				<h2 class="mb-3 text-xl font-semibold">2022-2024</h2>
