@@ -10,7 +10,9 @@
 		button = undefined,
 		bg_color_from,
 		bg_color_to,
-		dark
+		dark,
+		version = undefined,
+		version_hovered = false
 	} = $props();
 
 	const bg_style = $derived(`
@@ -31,9 +33,24 @@
 			<img src={logo} alt="{name} Logo" fetchpriority="high" class="object-fit h-48 w-48" />
 			<div class="flex flex-col gap-4">
 				<div
-					class="flex flex-col items-center gap-2 text-center text-5xl leading-tight font-bold md:flex-row"
+					class="flex flex-col items-start justify-start gap-2 text-left text-5xl leading-tight font-bold md:flex-row md:items-center"
 				>
 					<p>{name}</p>
+					{#if version}
+						<span class="inline-block h-[1.25em] overflow-hidden leading-tight">
+							<span
+								class={`block transition-transform duration-200 ${version_hovered ? '-translate-y-full' : ''}`}
+							>
+								{version}
+							</span>
+
+							<span
+								class={`block transition-transform duration-200 ${version_hovered ? '-translate-y-full' : ''}`}
+							>
+								Nightly
+							</span>
+						</span>
+					{/if}
 				</div>
 				<p class="text-center text-lg md:text-left">{description}</p>
 				<div class="flex flex-wrap items-center justify-center gap-4 md:justify-start">

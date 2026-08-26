@@ -15,8 +15,10 @@
 	} from '$lib/helpers/RepackDownloadHelper';
 	import ChannelPill from '$lib/components/ChannelPill.svelte';
 	import Pill from '$lib/components/Pill.svelte';
+	import versions from '$lib/assets/versions.json';
 
 	const released_150 = false;
+	let nightly_hovered = $state(false);
 
 	function handle_download(event: MouseEvent, channel: Channel) {
 		event.preventDefault();
@@ -33,6 +35,8 @@
 <main>
 	<Hero
 		name="Mupen64"
+		version={versions.mupen64}
+		version_hovered={nightly_hovered}
 		description="Advanced N64 TASing emulator."
 		logo={mupen64}
 		repository="https://github.com/mupen64/mupen64-rr-lua"
@@ -92,7 +96,10 @@
 					{/if}
 
 					<DropdownItem
+						class="group/nightly"
 						href={downloadUrls['nightly-windows-x86']}
+						onmouseenter={() => (nightly_hovered = true)}
+						onmouseleave={() => (nightly_hovered = false)}
 						onclick={(event) => handle_download(event, 'nightly-windows-x86')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">
@@ -107,7 +114,10 @@
 						</div>
 					</DropdownItem>
 					<DropdownItem
+						class="group/nightly"
 						href={downloadUrls['nightly-windows-x64']}
+						onmouseenter={() => (nightly_hovered = true)}
+						onmouseleave={() => (nightly_hovered = false)}
 						onclick={(event) => handle_download(event, 'nightly-windows-x64')}
 					>
 						<div class="flex w-full flex-col items-start text-left leading-tight">

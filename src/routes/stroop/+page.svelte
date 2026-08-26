@@ -2,11 +2,13 @@
 	import stroop from '$lib/assets/stroop.svg';
 	import Hero from '$lib/components/Hero.svelte';
 	import Title from '$lib/components/Title.svelte';
+	import versions from '$lib/assets/versions.json';
 </script>
 
 <main>
 	<Hero
 		name="STROOP Refactor"
+		version={versions.stroop}
 		description="Advanced diagnostic tool for Super Mario 64."
 		logo={stroop}
 		repository="https://github.com/FramePerfection/STROOP"

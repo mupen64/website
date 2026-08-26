@@ -3,11 +3,13 @@
 	import sm64luaredux from '$lib/assets/sm64luaredux.webp';
 	import Hero from '$lib/components/Hero.svelte';
 	import Title from '$lib/components/Title.svelte';
+	import versions from '$lib/assets/versions.json';
 </script>
 
 <main>
 	<Hero
 		name="SM64 Lua Redux"
+		version={versions.sm64luaredux}
 		description="Powerful SM64 TASing utility."
 		logo={sm64luaredux}
 		repository="https://github.com/mupen64/SM64LuaRedux"

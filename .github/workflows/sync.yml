@@ -35,6 +35,7 @@ jobs:
 
           mupen_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/mupen64/mupen64-rr-lua/releases/latest | jq -r '.tag_name')"
           redux_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/mupen64/SM64LuaRedux/releases/latest | jq -r '.tag_name')"
+          stroop_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/FramePerfection/STROOP/releases/latest | jq -r '.tag_name')"
 
           if [ -z "${mupen_release_tag}" ] || [ "${mupen_release_tag}" = "null" ]; then
             echo "Failed to resolve latest release tag for mupen64/mupen64-rr-lua" >&2
@@ -46,10 +47,26 @@ jobs:
             exit 1
           fi
 
+          if [ -z "${stroop_release_tag}" ] || [ "${stroop_release_tag}" = "null" ]; then
+            echo "Failed to resolve latest release tag for FramePerfection/STROOP" >&2
+            exit 1
+          fi
+
           {
             echo "mupen_release_tag=${mupen_release_tag}"
             echo "redux_release_tag=${redux_release_tag}"
+            echo "stroop_release_tag=${stroop_release_tag}"
           } >> "${GITHUB_OUTPUT}"
+
+      - name: Write release versions
+        run: |
+          set -euo pipefail
+          jq -n \
+            --arg mupen64 "${{ steps.refs.outputs.mupen_release_tag }}" \
+            --arg sm64luaredux "${{ steps.refs.outputs.redux_release_tag }}" \
+            --arg stroop "${{ steps.refs.outputs.stroop_release_tag }}" \
+            '{mupen64: $mupen64, sm64luaredux: $sm64luaredux, stroop: $stroop}' \
+            > src/lib/assets/versions.json
 
       - name: Sync upstream docs
         run: |
@@ -91,7 +108,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add static/docs/mupen64/stable static/docs/mupen64/nightly static/docs/redux/stable static/docs/redux/nightly
+          git add src/lib/assets/versions.json static/docs/mupen64/stable static/docs/mupen64/nightly static/docs/redux/stable static/docs/redux/nightly
 
           if git diff --cached --quiet; then
             echo "No documentation changes to commit"
