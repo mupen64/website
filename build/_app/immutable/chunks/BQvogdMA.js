@@ -1,1 +1,0 @@
-import{a7 as a,$ as o,Z as t,a8 as c,a1 as l}from"./CG3FBivf.js";function f(n){t===null&&a(),c&&t.l!==null?u(t).m.push(n):o(()=>{const e=l(n);if(typeof e=="function")return e})}function u(n){var e=n.l;return e.u??={a:[],b:[],m:[]}}export{f as o};
