@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { ChevronDownOutline } from 'flowbite-svelte-icons';
+	import { ChevronDownOutline, ArrowUpRightFromSquareOutline } from 'flowbite-svelte-icons';
 	import { SvelteSet } from 'svelte/reactivity';
 	import mupen64Icon from '$lib/assets/mupen64.svg';
 	import reduxIcon from '$lib/assets/sm64luaredux.webp';
+	import stroopIcon from '$lib/assets/stroop.svg';
 	import type { DocsTreeNode } from '$lib/server/docs';
 	import DocsTree from './DocsTree.svelte';
 
@@ -63,12 +64,15 @@
 						<span class="flex min-w-0 items-center gap-1.5 truncate">
 							{#if node.icon}
 								<img
-									src={node.icon === 'mupen64' ? mupen64Icon : reduxIcon}
+									src={node.icon === 'mupen64' ? mupen64Icon : node.icon === 'redux' ? reduxIcon : stroopIcon}
 									alt=""
 									class="h-4 w-4 shrink-0 rounded-sm object-contain"
 								/>
 							{/if}
 							<span class="truncate">{node.label}</span>
+							{#if node.external}
+								<ArrowUpRightFromSquareOutline class="h-3.5 w-3.5 shrink-0 text-slate-500 dark:text-slate-400" />
+							{/if}
 							{#if node.channel === 'nightly'}
 								<span class="shrink-0 rounded-full bg-red-100 px-1.5 py-0.5 text-[0.65rem] leading-none font-semibold text-red-700 uppercase dark:bg-red-900/40 dark:text-red-300">nightly</span>
 							{:else if node.channel === 'stable'}

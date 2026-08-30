@@ -3,8 +3,17 @@ import { doc_name_to_friendly_name } from '$lib/helpers/DocNameConverter';
 export const DOCS_PRODUCTS = ['mupen64', 'redux'] as const;
 export const DOCS_CHANNELS = ['stable', 'nightly'] as const;
 
+// Products whose docs live entirely off-site: the doc tree links straight to
+// them and /docs/<product> redirects to the external URL.
+export const DOCS_LINK_PRODUCTS = ['stroop-original'] as const;
+
+export const DOCS_LINK_TARGETS: Record<(typeof DOCS_LINK_PRODUCTS)[number], string> = {
+	'stroop-original': 'https://stroop.sm64.us/'
+};
+
 export type DocsProduct = (typeof DOCS_PRODUCTS)[number];
 export type DocsChannel = (typeof DOCS_CHANNELS)[number];
+export type DocsLinkProduct = (typeof DOCS_LINK_PRODUCTS)[number];
 
 export type DocsNavItem = {
 	slug: string;
@@ -29,7 +38,8 @@ export type DocsTreeNode = {
 	id: string;
 	label: string;
 	href?: string;
-	icon?: DocsProduct;
+	icon?: DocsProduct | DocsLinkProduct;
+	external?: boolean;
 	channel?: DocsChannel;
 	children?: DocsTreeNode[];
 };
@@ -46,6 +56,14 @@ const DOCS_PRODUCT_LABELS: Record<DocsProduct, string> = {
 	mupen64: 'Mupen64',
 	redux: 'SM64 Lua Redux'
 };
+
+const DOCS_LINK_PRODUCT_LABELS: Record<DocsLinkProduct, string> = {
+	'stroop-original': 'Stroop Original'
+};
+
+export function getDocsLinkProductLabel(product: DocsLinkProduct) {
+	return DOCS_LINK_PRODUCT_LABELS[product];
+}
 
 export function getDocsProductLabel(product: DocsProduct) {
 	return DOCS_PRODUCT_LABELS[product];
@@ -218,6 +236,18 @@ export async function getDocsTree(): Promise<DocsTreeNode[]> {
 
 			roots.push(root);
 		}
+	}
+
+	for (const product of DOCS_LINK_PRODUCTS) {
+		roots.push({
+			id: `${product}-stable`,
+			label: getDocsLinkProductLabel(product),
+			icon: product,
+			external: true,
+			channel: 'stable',
+			// Point at our own route, which redirects to the external target.
+			href: `/docs/${product}`
+		});
 	}
 
 	return roots;
