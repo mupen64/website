@@ -41,6 +41,7 @@
 		description="Advanced N64 TASing emulator."
 		logo={mupen64}
 		repository="https://github.com/mupen64/mupen64-rr-lua"
+		docs={resolve('/docs/[product]', { product: 'mupen64' })}
 		bg_color_from="#ff0000"
 		bg_color_to="#ee0000"
 		dark={true}

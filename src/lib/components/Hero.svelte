@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button } from 'flowbite-svelte';
+	import { BookOutline } from 'flowbite-svelte-icons';
 	import GithubLogo from '$lib/assets/GithubLogo.svelte';
 
 	let {
@@ -7,6 +8,7 @@
 		description,
 		logo,
 		repository,
+		docs = undefined,
 		button = undefined,
 		bg_color_from,
 		bg_color_to,
@@ -56,6 +58,17 @@
 				<div class="flex flex-wrap items-center justify-center gap-4 md:justify-start">
 					{#if button}
 						{@render button(dark)}
+					{/if}
+
+					{#if docs}
+						<Button
+							href={docs}
+							color={dark ? 'light' : 'dark'}
+							class="inline-flex items-center gap-2 shadow-sm"
+						>
+							<BookOutline class="h-6 w-6" />
+							<span>Docs</span>
+						</Button>
 					{/if}
 
 					<Button

@@ -13,6 +13,7 @@
 		description="Powerful SM64 TASing utility."
 		logo={sm64luaredux}
 		repository="https://github.com/mupen64/SM64LuaRedux"
+		docs={resolve('/docs/[product]', { product: 'redux' })}
 		bg_color_from="#ffffff"
 		bg_color_to="#dddddd"
 		dark={false}
