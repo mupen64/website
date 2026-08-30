@@ -1,1 +1,0 @@
-import{ac as o,e as a,b as t,ad as c,h as l}from"./BRXDqr-N.js";function f(e){t===null&&o(),c&&t.l!==null?u(t).m.push(e):a(()=>{const n=l(e);if(typeof n=="function")return n})}function u(e){var n=e.l;return n.u??={a:[],b:[],m:[]}}export{f as o};
