@@ -39,7 +39,8 @@
 		{ name: 'Mupen64', href: resolve('/'), icon: mupen64 },
 		{ name: 'SM64 Lua Redux', href: resolve('/sm64luaredux'), icon: sm64luaredux },
 		{ name: 'ugui', href: resolve('/ugui'), icon: ugui },
-		{ name: 'STROOP', href: resolve('/stroop'), icon: stroop }
+		{ name: 'STROOP Original', href: resolve('/stroop-original'), icon: stroop },
+		{ name: 'STROOP Refactor', href: resolve('/stroop-refactor'), icon: stroop }
 	];
 </script>
 
