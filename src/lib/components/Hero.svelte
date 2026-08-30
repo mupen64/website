@@ -35,7 +35,7 @@
 			<img src={logo} alt="{name} Logo" fetchpriority="high" class="object-fit h-48 w-48" />
 			<div class="flex flex-col gap-4">
 				<div
-					class="flex flex-col items-start justify-start gap-2 text-left text-5xl leading-tight font-bold md:flex-row md:items-center"
+					class="flex flex-col items-center justify-center gap-2 text-center text-5xl leading-tight font-bold md:flex-row md:items-center md:justify-start md:text-left"
 				>
 					<p>{name}</p>
 					{#if version}
