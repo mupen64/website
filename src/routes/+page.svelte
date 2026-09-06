@@ -18,7 +18,7 @@
 	import Pill from '$lib/components/Pill.svelte';
 	import versions from '$lib/assets/versions.json';
 
-	const released_150 = false;
+	const released_150 = true;
 	let nightly_hovered = $state(false);
 
 	function handle_download(event: MouseEvent, channel: Channel) {
