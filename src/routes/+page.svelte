@@ -17,6 +17,7 @@
 	import ChannelPill from '$lib/components/ChannelPill.svelte';
 	import Pill from '$lib/components/Pill.svelte';
 	import versions from '$lib/assets/versions.json';
+	import StarBeg from '$lib/components/StarBeg.svelte';
 
 	const released_150 = true; //
 	let nightly_hovered = $state(false);
@@ -153,22 +154,7 @@
 		{/snippet}
 	</Hero>
 
-	<section class="pt-8 pb-8">
-		<div class="mx-auto max-w-6xl">
-			<Card class="mx-auto flex w-fit flex-row flex-nowrap items-center gap-3 px-4 py-2">
-				<a href="https://github.com/mupen64/mupen64-rr-lua">
-					<GithubLogo class="h-8 w-8 shrink-0" />
-				</a>
-				<p class="text-base">
-					Enjoying Mupen64? <br />
-					Spare us a star ⭐ on
-					<a class="app-link" href="https://github.com/mupen64/mupen64-rr-lua">GitHub</a>
-				</p>
-			</Card>
-		</div>
-	</section>
-
-	<section id="showcase" class="p-16 pt-0 pb-0">
+	<section id="showcase" class="p-16 pt-16 pb-0">
 		<div class="mx-auto max-w-6xl">
 			<Title id="showcase">Showcase</Title>
 			<div class="flex flex-col items-center justify-center">

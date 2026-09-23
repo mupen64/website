@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import type { Channel } from '$lib/helpers/RepackDownloadHelper';
@@ -7,6 +6,7 @@
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import { Button, Card } from 'flowbite-svelte';
 	import { HeartSolid } from 'flowbite-svelte-icons';
+	import StarBeg from '$lib/components/StarBeg.svelte';
 	const channel = page.params.channel as Channel;
 
 	const channelToDocs: Partial<Record<Channel, string>> = {
@@ -48,19 +48,7 @@
 					>.
 				</p>
 
-				<Card class="mt-8 flex flex-col items-center gap-4 p-4 text-center">
-					<div class="flex flex-row items-center gap-2 text-xl">
-						<HeartSolid class="h-8 w-8 text-red-600" />
-						<p>Appreciate the project?</p>
-					</div>
-
-					<p>You can star Mupen64 on GitHub if you think our work is valuable. It helps visibility.</p>
-
-					<Button pill href="https://github.com/mupen64/mupen64-rr-lua">
-						<HeartSolid class="h-4 w-4 mr-1" />
-						Star on GitHub
-					</Button>
-				</Card>
+				<StarBeg class="mt-8 max-w-xl" />
 			</div>
 		</div>
 	</section>

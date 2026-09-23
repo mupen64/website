@@ -7,9 +7,11 @@
 	import org from '$lib/assets/org.svg';
 	import { resolve } from '$app/paths';
 	import { NavBrand, Navbar, Button } from 'flowbite-svelte';
-	import { ChevronDownOutline, DiscordSolid } from 'flowbite-svelte-icons';
+	import { ChevronDownOutline, DiscordSolid, HeartSolid } from 'flowbite-svelte-icons';
 	import DocsSearch from '$lib/components/DocsSearch.svelte';
 	import type { Snippet } from 'svelte';
+	import StarBeg from '$lib/components/StarBeg.svelte';
+	import GithubLogo from '$lib/assets/GithubLogo.svelte';
 
 	type DocsSearchItem = {
 		title: string;
@@ -195,10 +197,20 @@
 				Need support? Join our Discord server for live support and community discussions.
 			</p>
 
-			<Button href={discordUrl} class="mb-5" size="sm" pill>
-				<DiscordSolid />
-				<span class="ml-2">Discord server</span>
-			</Button>
+			<div class="flex flex-row gap-2">
+				<Button href={discordUrl} class="mb-5" size="sm" pill>
+					<DiscordSolid />
+					<span class="ml-2">Discord server</span>
+				</Button>
+				<Button class="mb-5" size="sm" pill href="https://github.com/mupen64">
+					<GithubLogo class="w-5" />
+					<span class="ml-2">Follow on GitHub</span>
+				</Button>
+				<Button class="mb-5" size="sm" pill href="https://codeberg.org/mupen64">
+					<HeartSolid />
+					<span class="ml-2">Follow on Codeberg</span>
+				</Button>
+			</div>
 
 			<a class="app-link" href="https://github.com/mupen64">© 2026 Mupen64 Organization</a>
 			<p>Licensed under GNU GPL v2 License</p>
