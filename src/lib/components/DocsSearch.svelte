@@ -92,7 +92,7 @@
 		<div
 			id="docs-search-results"
 			role="listbox"
-			class="absolute top-full right-0 left-0 z-50 mt-2 max-h-96 overflow-y-auto rounded-xl border border-slate-300 bg-slate-100/95 p-2 text-slate-900 shadow-xl backdrop-blur-md md:left-auto md:w-[min(32rem,calc(100vw-2rem))] dark:border-slate-600 dark:bg-slate-800/95 dark:text-slate-100"
+			class="absolute top-full right-0 left-0 z-50 mt-2 max-h-96 overflow-y-auto rounded-xl border border-slate-300 bg-slate-100/95 p-2 text-slate-900 shadow-xl md:left-auto md:w-[min(32rem,calc(100vw-2rem))] dark:border-slate-600 dark:bg-slate-800/95 dark:text-slate-100"
 		>
 			{#if results.length > 0}
 				{#each results as result (result.href)}

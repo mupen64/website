@@ -11,7 +11,7 @@
 <main class="h-full">
 	<div class="flex h-full items-center justify-center p-8">
 		<div
-			class="w-full max-w-xl rounded-2xl border border-dashed border-slate-400/70 bg-slate-100/90 p-10 text-center shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/90"
+			class="w-full max-w-xl rounded-2xl border border-dashed border-slate-400/70 bg-slate-100/90 p-10 text-center shadow-sm dark:border-slate-600/70 dark:bg-slate-900/90"
 		>
 			<img src={org} alt="Mupen64 Organization Logo" class="object-fit mx-auto mb-6 w-24" />
 			<p class="mb-2 text-4xl font-bold text-slate-900 dark:text-slate-100">

@@ -18,7 +18,7 @@
 <div class="relative mx-auto flex max-w-7xl items-start">
 	<button
 		type="button"
-		class="fixed top-20 left-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-slate-100/95 text-xl text-slate-900 shadow-lg backdrop-blur-md md:hidden dark:border-slate-700 dark:bg-slate-900/95 dark:text-slate-100"
+		class="fixed top-20 left-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-slate-100/95 text-xl text-slate-900 shadow-lg md:hidden dark:border-slate-700 dark:bg-slate-900/95 dark:text-slate-100"
 		aria-label="Open documentation navigation"
 		onclick={() => (sidebarOpen = true)}
 	>☰</button>
@@ -34,7 +34,7 @@
 
 	<aside
 		class:translate-x-0={sidebarOpen}
-		class="fixed top-20 bottom-0 left-0 z-40 w-72 -translate-x-full overflow-y-auto border-r border-slate-300 bg-slate-100/95 p-4 shadow-xl backdrop-blur-md transition-transform dark:border-slate-700 dark:bg-slate-900/95 md:sticky md:top-18 md:z-0 md:block md:h-[calc(100vh-5rem)] md:translate-x-0 md:shadow-none md:mt-14 md:mb-14 md:max-h-[calc(100vh-5rem)] md:rounded-xl md:border"
+		class="fixed top-20 bottom-0 left-0 z-40 w-72 -translate-x-full overflow-y-auto border-r border-slate-300 bg-slate-100/95 p-4 shadow-xl transition-transform dark:border-slate-700 dark:bg-slate-900/95 md:sticky md:top-18 md:z-0 md:block md:h-[calc(100vh-5rem)] md:translate-x-0 md:shadow-none md:mt-14 md:mb-14 md:max-h-[calc(100vh-5rem)] md:rounded-xl md:border"
 	>
 		<div class="mb-4 flex items-center justify-between">
 			<h2 class="text-sm font-bold tracking-wide text-slate-900 uppercase dark:text-slate-100">Documentation</h2>

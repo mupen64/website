@@ -27,7 +27,7 @@
 	const navListClass =
 		'flex w-full flex-col gap-1 rounded-lg border-slate-400 p-2 dark:border-slate-600 md:w-auto md:flex-row md:overflow-visible md:border-0 md:p-0';
 	const megaMenuClass =
-		'z-50 mt-2 w-fit rounded-xl !border-b border-dotted border-slate-400 bg-slate-100/95 p-2 text-slate-900 shadow-lg backdrop-blur-md dark:border-slate-500 dark:bg-slate-800/95 dark:text-slate-100';
+		'z-50 mt-2 w-fit rounded-xl !border-b border-dotted border-slate-400 bg-slate-100/95 p-2 text-slate-900 shadow-lg dark:border-slate-500 dark:bg-slate-800/95 dark:text-slate-100';
 	const megaMenuItemClass =
 		'block -mx-2 w-[calc(100%+1rem)] !border-b border-dotted border-slate-400/70 px-4 py-2 text-sm text-slate-900 transition-colors hover:bg-slate-200/70 hover:text-primary-600 first:rounded-t-lg last:!border-b-0 last:rounded-b-lg dark:border-slate-500/70 dark:bg-slate-800/95 dark:text-slate-100 dark:hover:bg-slate-700/95 dark:hover:text-primary-300';
 	const discordUrl = 'https://discord.gg/hFANcme32k';
@@ -50,7 +50,7 @@
 
 <div class="flex min-h-dvh flex-col">
 	<div
-		class="sticky top-0 z-50 mx-auto w-full shrink-0 border-b border-dashed border-slate-400/70 bg-white/85 shadow-sm backdrop-blur-md md:max-w-6xl md:rounded-b-xl md:border-x dark:border-slate-600/70 dark:bg-slate-950/85"
+		class="sticky top-0 z-50 mx-auto w-full shrink-0 border-b border-slate-400 bg-white shadow-sm md:max-w-6xl md:rounded-b-xl md:border-x dark:border-slate-600 dark:bg-slate-900"
 	>
 		<Navbar class="relative mr-auto ml-auto max-w-6xl bg-transparent!">
 			<NavBrand
@@ -152,7 +152,7 @@
 		{#if maintenance}
 			<div class="flex min-h-[60vh] items-center justify-center p-8">
 				<div
-					class="w-full max-w-xl rounded-2xl border border-dashed border-slate-400/70 bg-slate-100/90 p-10 text-center shadow-sm backdrop-blur-md dark:border-slate-600/70 dark:bg-slate-900/90"
+					class="w-full max-w-xl rounded-2xl border border-dashed border-slate-400/70 bg-slate-100/90 p-10 text-center shadow-sm dark:border-slate-600/70 dark:bg-slate-900/90"
 				>
 					<img
 						src={org}
