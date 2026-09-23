@@ -77,7 +77,8 @@ type IndexedDoc = {
 };
 
 const modules = import.meta.glob('/static/docs/{mupen64,redux}/{stable,nightly}/**/*.md', {
-	as: 'raw',
+	query: '?raw',
+	import: 'default',
 	eager: true
 }) as Record<string, string>;
 
