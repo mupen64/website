@@ -1,1 +1,0 @@
-import{ae as o,f as a,b as t,af as c,i as l}from"./DLDCazAY.js";function i(e){t===null&&o(),c&&t.l!==null?u(t).m.push(e):a(()=>{const n=l(e);if(typeof n=="function")return n})}function u(e){var n=e.l;return n.u??={a:[],b:[],m:[]}}export{i as o};
