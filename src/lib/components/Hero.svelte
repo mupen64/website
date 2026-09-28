@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Button } from 'flowbite-svelte';
-	import { BookOutline } from 'flowbite-svelte-icons';
-	import GithubLogo from '$lib/assets/GithubLogo.svelte';
+	import { BookOutline, CodeOutline } from 'flowbite-svelte-icons';
 
 	let {
 		name,
@@ -76,8 +75,8 @@
 						color={dark ? 'light' : 'dark'}
 						class="inline-flex items-center gap-2 shadow-sm"
 					>
-						<GithubLogo class="h-6 w-6"></GithubLogo>
-						<span>See on GitHub</span>
+						<CodeOutline class="h-6 w-6" />
+						<span>See Source</span>
 					</Button>
 				</div>
 			</div>
