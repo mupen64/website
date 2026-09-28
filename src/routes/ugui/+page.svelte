@@ -9,7 +9,7 @@
 		name="ugui"
 		description="Flexible immediate-mode Lua GUI library."
 		logo={ugui}
-		repository="https://github.com/mupen64/ugui"
+		repository="https://codeberg.org/mupen64/ugui"
 		bg_color_from="#0000ff"
 		bg_color_to="rgb(39, 17, 209)"
 		dark={true}
