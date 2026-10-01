@@ -1,6 +1,8 @@
 <script lang="ts">
 
 	import { resolve } from '$app/paths';
+	import mupen64Icon from '$lib/assets/mupen64.svg';
+	import reduxIcon from '$lib/assets/sm64luaredux.webp';
 	import ChannelPill from './ChannelPill.svelte';
 
 	type DocsSearchItem = {
@@ -14,6 +16,7 @@
 	let { items }: { items: DocsSearchItem[] } = $props();
 	let query = $state('');
 	let focused = $state(false);
+	let selectedChannels = $state(['stable', 'nightly']);
 	let searchInput: HTMLInputElement;
 
 	function focusSearch(event: KeyboardEvent) {
@@ -34,7 +37,7 @@
 				const content = item.content.toLowerCase();
 				const searchable = `${title} ${content}`;
 				const matches = terms.filter((term) => searchable.includes(term)).length;
-				if (matches !== terms.length) return null;
+				if (matches !== terms.length || !selectedChannels.includes(item.channel)) return null;
 
 				const titleMatches = terms.filter((term) => title.includes(term)).length;
 				return { item, score: titleMatches * 10 + matches };
@@ -54,6 +57,36 @@
 
 	function closeResults() {
 		setTimeout(() => (focused = false), 100);
+	}
+
+	function toggleChannel(channel: string) {
+		selectedChannels = selectedChannels.includes(channel)
+			? selectedChannels.filter((selected) => selected !== channel)
+			: [...selectedChannels, channel];
+	}
+
+	function getProductIcon(product: string) {
+		return product === 'Mupen64' ? mupen64Icon : reduxIcon;
+	}
+
+	function highlightParts(text: string) {
+		const terms = query.trim().split(/\s+/).filter(Boolean);
+		if (terms.length === 0) return [{ text, matched: false }];
+
+		const escapedTerms = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+		const regex = new RegExp(`(${escapedTerms.join('|')})`, 'gi');
+		const parts: { text: string; matched: boolean }[] = [];
+		let lastIndex = 0;
+
+		for (const match of text.matchAll(regex)) {
+			const index = match.index ?? 0;
+			if (index > lastIndex) parts.push({ text: text.slice(lastIndex, index), matched: false });
+			parts.push({ text: match[0], matched: true });
+			lastIndex = index + match[0].length;
+		}
+
+		if (lastIndex < text.length) parts.push({ text: text.slice(lastIndex), matched: false });
+		return parts;
 	}
 
 	function resolveDocHref(href: string) {
@@ -101,9 +134,19 @@
 	{#if showResults}
 		<div
 			id="docs-search-results"
-			role="listbox"
 			class="absolute top-full right-0 left-0 z-50 mt-2 max-h-96 overflow-y-auto rounded-xl border border-slate-300 bg-slate-100/95 p-2 text-slate-900 shadow-xl md:left-auto md:w-[min(32rem,calc(100vw-2rem))] dark:border-slate-600 dark:bg-slate-800/95 dark:text-slate-100"
 		>
+			<div class="flex items-center gap-2 border-b border-slate-300 px-3 pb-2 dark:border-slate-600">
+				<span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Channels:</span>
+				{#each ['stable', 'nightly'] as channel (channel)}
+					<ChannelPill
+						{channel}
+						active={selectedChannels.includes(channel)}
+						onclick={() => toggleChannel(channel)}
+					/>
+				{/each}
+			</div>
+			<div role="listbox" aria-label="Search results" class="pt-2">
 			{#if results.length > 0}
 				{#each results as result (result.href)}
 					<a
@@ -113,21 +156,25 @@
 						class="block rounded-lg px-3 py-2 transition-colors hover:bg-slate-200/80 dark:hover:bg-slate-700/80"
 					>
 						<span class="flex items-center gap-2 text-base font-semibold">
-							<span
-								>{result.title} ·
-								<span class="font-normal text-slate-500 dark:text-slate-400">{result.product}</span
-								></span
-							>
+							<img src={getProductIcon(result.product)} alt="" class="h-5 w-5 shrink-0 object-contain" />
+							<span class="min-w-0 truncate">
+								{#each highlightParts(result.title) as part, index (index)}
+									{#if part.matched}<span class="font-semibold">{part.text}</span>{:else}{part.text}{/if}
+								{/each}
+							</span>
 							<ChannelPill channel={result.channel} />
 						</span>
-						<span class="mt-1 line-clamp-2 block text-sm text-slate-600 dark:text-slate-300"
-							>{result.content.slice(0, 150)}{result.content.length > 150 ? '…' : ''}</span
-						>
+						<span class="mt-1 line-clamp-2 block text-sm text-slate-600 dark:text-slate-300">
+							{#each highlightParts(`${result.content.slice(0, 150)}${result.content.length > 150 ? '…' : ''}`) as part, index (index)}
+								{#if part.matched}<span class="font-semibold text-slate-900 dark:text-slate-100">{part.text}</span>{:else}{part.text}{/if}
+							{/each}
+						</span>
 					</a>
 				{/each}
 			{:else}
 				<p class="px-3 py-2 text-sm text-slate-500 dark:text-slate-400">No documentation found.</p>
 			{/if}
+			</div>
 		</div>
 	{/if}
 </div>
