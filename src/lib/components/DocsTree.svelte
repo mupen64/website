@@ -15,8 +15,18 @@
 	} = $props();
 
 	function expandableNodeIds(items: DocsTreeNode[]): string[] {
-		return items.flatMap((item) =>
-			item.children?.length ? [item.id, ...expandableNodeIds(item.children)] : []
+		return items.flatMap((item) => {
+			if (!item.children?.length) return [];
+			const descendants = item.channel === 'nightly' ? [] : [item.id];
+			return [...descendants, ...expandableNodeIds(item.children)];
+		});
+	}
+
+	function containsActiveHref(node: DocsTreeNode): boolean {
+		return (
+			(node.href !== undefined &&
+				(activeHref === node.href || activeHref.startsWith(`${node.href}/`))) ||
+			(node.children?.some(containsActiveHref) ?? false)
 		);
 	}
 
@@ -24,9 +34,16 @@
 	let initialized = false;
 
 	$effect(() => {
-		if (initialized) return;
-		for (const id of expandableNodeIds(nodes)) expanded.add(id);
-		initialized = true;
+		if (!initialized) {
+			for (const id of expandableNodeIds(nodes)) expanded.add(id);
+			initialized = true;
+		}
+
+		for (const node of nodes) {
+			if (node.channel === 'nightly' && node.children?.length && containsActiveHref(node)) {
+				expanded.add(node.id);
+			}
+		}
 	});
 
 	function toggle(node: DocsTreeNode) {
