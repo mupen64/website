@@ -1,4 +1,5 @@
 <script lang="ts">
+
 	import { resolve } from '$app/paths';
 	import ChannelPill from './ChannelPill.svelte';
 
@@ -54,6 +55,15 @@
 	function closeResults() {
 		setTimeout(() => (focused = false), 100);
 	}
+
+	function resolveDocHref(href: string) {
+		const [, , product, channel, ...slug] = href.split('/');
+		return resolve('/docs/[product]/[channel]/[...slug]', {
+			product,
+			channel,
+			slug: slug.map(decodeURIComponent).join('/')
+		});
+	}
 </script>
 
 <svelte:window onkeydown={focusSearch} />
@@ -97,7 +107,7 @@
 			{#if results.length > 0}
 				{#each results as result (result.href)}
 					<a
-						href={resolve(result.href as '/docs')}
+						href={resolveDocHref(result.href)}
 						role="option"
 						aria-selected="false"
 						class="block rounded-lg px-3 py-2 transition-colors hover:bg-slate-200/80 dark:hover:bg-slate-700/80"
