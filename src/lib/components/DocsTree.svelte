@@ -6,6 +6,7 @@
 	import stroopIcon from '$lib/assets/stroop.svg';
 	import type { DocsTreeNode } from '$lib/server/docs';
 	import DocsTree from './DocsTree.svelte';
+	import ChannelPill from './ChannelPill.svelte';
 
 	let { nodes, activeHref, onNavigate }: {
 		nodes: DocsTreeNode[];
@@ -73,10 +74,8 @@
 							{#if node.external}
 								<ArrowUpRightFromSquareOutline class="h-3.5 w-3.5 shrink-0 text-slate-500 dark:text-slate-400" />
 							{/if}
-							{#if node.channel === 'nightly'}
-								<span class="shrink-0 rounded-full bg-red-100 px-1.5 py-0.5 text-[0.65rem] leading-none font-semibold text-red-700 uppercase dark:bg-red-900/40 dark:text-red-300">nightly</span>
-							{:else if node.channel === 'stable'}
-								<span class="shrink-0 rounded-full bg-slate-200 px-1.5 py-0.5 text-[0.65rem] leading-none font-semibold text-slate-600 uppercase dark:bg-slate-700 dark:text-slate-300">stable</span>
+							{#if node.channel}
+								<ChannelPill channel={node.channel} />
 							{/if}
 						</span>
 					</a>
