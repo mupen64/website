@@ -34,7 +34,7 @@ jobs:
           )
 
           mupen_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/mupen64/mupen64-rr-lua/releases/latest | jq -r '.tag_name')"
-          redux_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/mupen64/SM64LuaRedux/releases/latest | jq -r '.tag_name')"
+          redux_release_tag="$(curl -fsSL "${api_headers[@]}" https://codeberg.org/api/v1/repos/mupen64/SM64LuaRedux/releases/latest | jq -r '.tag_name')"
           stroop_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/FramePerfection/STROOP/releases/latest | jq -r '.tag_name')"
 
           if [ -z "${mupen_release_tag}" ] || [ "${mupen_release_tag}" = "null" ]; then
@@ -43,7 +43,7 @@ jobs:
           fi
 
           if [ -z "${redux_release_tag}" ] || [ "${redux_release_tag}" = "null" ]; then
-            echo "Failed to resolve latest release tag for mupen64/SM64LuaRedux" >&2
+            echo "Failed to resolve latest release tag for codeberg.org/mupen64/SM64LuaRedux" >&2
             exit 1
           fi
 
@@ -93,8 +93,8 @@ jobs:
 
           git clone --depth 1 --branch "${{ steps.refs.outputs.mupen_release_tag }}" https://github.com/mupen64/mupen64-rr-lua.git "${workdir}/mupen64-stable"
           git clone --depth 1 --branch main https://github.com/mupen64/mupen64-rr-lua.git "${workdir}/mupen64-nightly"
-          git clone --depth 1 --branch "${{ steps.refs.outputs.redux_release_tag }}" https://github.com/mupen64/SM64LuaRedux.git "${workdir}/redux-stable"
-          git clone --depth 1 --branch main https://github.com/mupen64/SM64LuaRedux.git "${workdir}/redux-nightly"
+          git clone --depth 1 --branch "${{ steps.refs.outputs.redux_release_tag }}" https://codeberg.org/mupen64/SM64LuaRedux.git "${workdir}/redux-stable"
+          git clone --depth 1 --branch main https://codeberg.org/mupen64/SM64LuaRedux.git "${workdir}/redux-nightly"
 
           sync_if_exists "${workdir}/mupen64-stable/docs/win" static/docs/mupen64/stable "mupen64 stable docs"
           sync_if_exists "${workdir}/mupen64-nightly/docs/win" static/docs/mupen64/nightly "mupen64 nightly docs"
