@@ -34,7 +34,7 @@ jobs:
           )
 
           mupen_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/mupen64/mupen64-rr-lua/releases/latest | jq -r '.tag_name')"
-          redux_release_tag="$(curl -fsSL "${api_headers[@]}" https://codeberg.org/api/v1/repos/mupen64/SM64LuaRedux/releases/latest | jq -r '.tag_name')"
+          redux_release_tag="$(curl -fsSL https://codeberg.org/api/v1/repos/mupen64/SM64LuaRedux/releases/latest | jq -r '.tag_name')"
           stroop_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/FramePerfection/STROOP/releases/latest | jq -r '.tag_name')"
 
           if [ -z "${mupen_release_tag}" ] || [ "${mupen_release_tag}" = "null" ]; then
