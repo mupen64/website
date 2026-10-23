@@ -35,6 +35,7 @@ jobs:
 
           mupen_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/mupen64/mupen64-rr-lua/releases/latest | jq -r '.tag_name')"
           redux_release_tag="$(curl -fsSL https://codeberg.org/api/v1/repos/mupen64/SM64LuaRedux/releases/latest | jq -r '.tag_name')"
+          ugui_release_tag="$(curl -fsSL https://codeberg.org/api/v1/repos/mupen64/ugui/releases/latest | jq -r '.tag_name')"
           stroop_release_tag="$(curl -fsSL "${api_headers[@]}" https://api.github.com/repos/FramePerfection/STROOP/releases/latest | jq -r '.tag_name')"
 
           if [ -z "${mupen_release_tag}" ] || [ "${mupen_release_tag}" = "null" ]; then
@@ -47,6 +48,11 @@ jobs:
             exit 1
           fi
 
+          if [ -z "${ugui_release_tag}" ] || [ "${ugui_release_tag}" = "null" ]; then
+            echo "Failed to resolve latest release tag for codeberg.org/mupen64/ugui" >&2
+            exit 1
+          fi
+
           if [ -z "${stroop_release_tag}" ] || [ "${stroop_release_tag}" = "null" ]; then
             echo "Failed to resolve latest release tag for FramePerfection/STROOP" >&2
             exit 1
@@ -55,6 +61,7 @@ jobs:
           {
             echo "mupen_release_tag=${mupen_release_tag}"
             echo "redux_release_tag=${redux_release_tag}"
+            echo "ugui_release_tag=${ugui_release_tag}"
             echo "stroop_release_tag=${stroop_release_tag}"
           } >> "${GITHUB_OUTPUT}"
 
@@ -95,11 +102,21 @@ jobs:
           git clone --depth 1 --branch main https://github.com/mupen64/mupen64-rr-lua.git "${workdir}/mupen64-nightly"
           git clone --depth 1 --branch "${{ steps.refs.outputs.redux_release_tag }}" https://codeberg.org/mupen64/SM64LuaRedux.git "${workdir}/redux-stable"
           git clone --depth 1 --branch main https://codeberg.org/mupen64/SM64LuaRedux.git "${workdir}/redux-nightly"
+          git clone --depth 1 --branch "${{ steps.refs.outputs.ugui_release_tag }}" https://codeberg.org/mupen64/ugui.git "${workdir}/ugui-stable"
+          git clone --depth 1 --branch main https://codeberg.org/mupen64/ugui.git "${workdir}/ugui-nightly"
 
           sync_if_exists "${workdir}/mupen64-stable/docs/win" static/docs/mupen64/stable "mupen64 stable docs"
           sync_if_exists "${workdir}/mupen64-nightly/docs/win" static/docs/mupen64/nightly "mupen64 nightly docs"
           sync_if_exists "${workdir}/redux-stable/docs" static/docs/redux/stable "redux stable docs"
           sync_if_exists "${workdir}/redux-nightly/docs" static/docs/redux/nightly "redux nightly docs"
+
+          mkdir -p static/changelogs/{mupen64,redux,ugui}/{stable,nightly}
+          cp "${workdir}/mupen64-stable/CHANGELOG.md" static/changelogs/mupen64/stable/CHANGELOG.md
+          cp "${workdir}/mupen64-nightly/CHANGELOG.md" static/changelogs/mupen64/nightly/CHANGELOG.md
+          cp "${workdir}/redux-stable/CHANGELOG.md" static/changelogs/redux/stable/CHANGELOG.md
+          cp "${workdir}/redux-nightly/CHANGELOG.md" static/changelogs/redux/nightly/CHANGELOG.md
+          cp "${workdir}/ugui-stable/CHANGELOG.md" static/changelogs/ugui/stable/CHANGELOG.md
+          cp "${workdir}/ugui-nightly/CHANGELOG.md" static/changelogs/ugui/nightly/CHANGELOG.md
 
       - name: Commit and push changes
         run: |
@@ -108,7 +125,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add src/lib/assets/versions.json static/docs/mupen64/stable static/docs/mupen64/nightly static/docs/redux/stable static/docs/redux/nightly
+          git add src/lib/assets/versions.json static/docs/mupen64/stable static/docs/mupen64/nightly static/docs/redux/stable static/docs/redux/nightly static/changelogs
 
           if git diff --cached --quiet; then
             echo "No documentation changes to commit"
