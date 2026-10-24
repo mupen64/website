@@ -75,7 +75,7 @@ function parseHeading(heading: Tokens.Heading) {
 	const match = heading.text
 		.trim()
 		.match(
-			/^(v?\d+(?:\.\d+)*(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?(?:\+[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?|\[(?:v?\d+(?:\.\d+)*(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?(?:\+[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?|Unreleased)\](?:\([^\n]*\)|\[[^\]\n]*\])?)(?:\s+(?:-\s*)?\(?([0-9]{4}-[0-9]{2}-[0-9]{2})\)?)?$/i
+			/^(Unreleased|v?\d+(?:\.\d+)*(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?(?:\+[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?|\[(?:v?\d+(?:\.\d+)*(?:-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?(?:\+[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?|Unreleased)\](?:\([^\n]*\)|\[[^\]\n]*\])?)(?:\s+(?:-\s*)?\(?([0-9]{4}-[0-9]{2}-[0-9]{2})\)?)?$/i
 		);
 	if (!match) return null;
 	const label = match[1].startsWith('[') ? match[1].slice(1, match[1].indexOf(']')) : match[1];
