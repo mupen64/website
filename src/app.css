@@ -181,3 +181,7 @@ body {
 		display: none;
 	}
 }
+
+* {
+    border-radius: 0 !important;
+}
