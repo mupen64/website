@@ -133,7 +133,8 @@ jobs:
           sync_changelog_if_exists "${workdir}/ugui-stable/CHANGELOG.md" static/changelogs/ugui/stable "ugui stable"
           sync_changelog_if_exists "${workdir}/ugui-nightly/CHANGELOG.md" static/changelogs/ugui/nightly "ugui nightly"
 
-      - name: Commit, push changes, and trigger website build
+      - name: Commit and push changes
+        id: commit
         run: |
           set -euo pipefail
 
@@ -149,5 +150,8 @@ jobs:
 
           git commit -m "chore: sync docs"
           git push
+          echo "changed=true" >> "${GITHUB_OUTPUT}"
 
-          gh workflow run build.yml --ref "${GITHUB_REF_NAME}"
+      - name: Trigger website build
+        if: steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        run: gh workflow run build.yml --ref "${GITHUB_REF_NAME}"
