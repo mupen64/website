@@ -20,6 +20,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{data.product_label} Documentation ({data.channel}) · Mupen64</title>
+	<meta
+		name="description"
+		content={`Browse ${data.channel} documentation for ${data.product_label} and switch between available documentation channels.`}
+	/>
+</svelte:head>
+
 <main>
 	<section id="wiki" class="mx-auto max-w-6xl p-4 py-16">
 		<div

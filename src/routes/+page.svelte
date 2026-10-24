@@ -34,6 +34,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Mupen64</title>
+	<meta
+		name="description"
+		content="Download Mupen64, an advanced Nintendo 64 TASing emulator with rerecording, Lua scripting, video capture, and a rich ecosystem of tools."
+	/>
+</svelte:head>
+
 <main>
 	<Hero
 		name="Mupen64"

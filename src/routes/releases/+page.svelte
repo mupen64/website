@@ -106,10 +106,10 @@
 </script>
 
 <svelte:head>
-	<title>Releases · Mupen64 Organization</title>
+	<title>Releases · Mupen64</title>
 	<meta
 		name="description"
-		content="What's new in Mupen64, SM64 Lua Redux, and ugui. Explore stable releases and the latest nightly changes."
+		content="Latest releases from the Mupen64 project family."
 	/>
 </svelte:head>
 

@@ -5,6 +5,14 @@
 	import versions from '$lib/assets/versions.json';
 </script>
 
+<svelte:head>
+	<title>STROOP Refactor · Mupen64</title>
+	<meta
+		name="description"
+		content="STROOP Refactor, an advanced diagnostic tool for Super Mario 64, offering improved performance and new features over the original STROOP."
+	/>
+</svelte:head>
+
 <main>
 	<Hero
 		name="STROOP Refactor"

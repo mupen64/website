@@ -4,6 +4,14 @@
 	import Title from '$lib/components/Title.svelte';
 </script>
 
+<svelte:head>
+	<title>ugui · Mupen64</title>
+	<meta
+		name="description"
+		content="ugui is a flexible immediate-mode Lua GUI library used by projects in the Mupen64 Lua script ecosystem."
+	/>
+</svelte:head>
+
 <main>
 	<Hero
 		name="ugui"

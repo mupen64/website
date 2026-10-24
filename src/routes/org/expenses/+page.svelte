@@ -92,6 +92,14 @@
 	const grandTotal = statements.reduce((sum, statement) => sum + yearTotal(statement), 0);
 </script>
 
+<svelte:head>
+	<title>Expenses · Mupen64</title>
+	<meta
+		name="description"
+		content="The Mupen64 Organization's expenses."
+	/>
+</svelte:head>
+
 <main>
 	<section
 		class="border-b border-dashed border-slate-400/70 bg-slate-100/50 p-16 pt-24 pb-12 shadow-sm dark:border-slate-600/70 dark:bg-slate-900/30"

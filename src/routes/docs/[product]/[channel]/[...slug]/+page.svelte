@@ -102,6 +102,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{data.title} · {data.product_label} ({data.channel}) · Mupen64</title>
+	<meta
+		name="description"
+		content={`${data.title} — ${data.channel} documentation for ${data.product_label}.`}
+	/>
+</svelte:head>
+
 <main>
 	<section id="wiki" class="mx-auto max-w-6xl p-4 py-16">
 		<div

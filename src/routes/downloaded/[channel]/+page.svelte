@@ -17,6 +17,14 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Download {page.params.channel} · Mupen64</title>
+	<meta
+		name="description"
+		content={`Thank you for downloading Mupen64 ${page.params.channel}.`}
+	/>
+</svelte:head>
+
 <main>
 	<section id="wiki" class="mx-auto max-w-6xl p-4 py-16">
 		<div

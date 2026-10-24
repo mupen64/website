@@ -6,6 +6,14 @@
 	import versions from '$lib/assets/versions.json';
 </script>
 
+<svelte:head>
+	<title>SM64 Lua Redux · Mupen64</title>
+	<meta
+		name="description"
+		content="SM64 Lua Redux is a powerful Lua scripting utility for Super Mario 64 TASing, included in the Mupen64 Repack."
+	/>
+</svelte:head>
+
 <main>
 	<Hero
 		name="SM64 Lua Redux"

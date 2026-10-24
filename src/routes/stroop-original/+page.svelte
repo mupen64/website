@@ -5,6 +5,14 @@
 	import { resolve } from '$app/paths';
 </script>
 
+<svelte:head>
+	<title>STROOP Original · Mupen64</title>
+	<meta
+		name="description"
+		content="STROOP, an advanced diagnostic tool for Super Mario 64."
+	/>
+</svelte:head>
+
 <main>
 	<Hero
 		name="STROOP Original"
