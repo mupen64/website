@@ -3,7 +3,7 @@
 	import redux from '$lib/assets/sm64luaredux.webp';
 	import ugui from '$lib/assets/ugui.webp';
 	import type { PageData } from './$types';
-	import { browser } from '$app/environment';
+
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
@@ -31,7 +31,7 @@
 	}
 
 	const selectedProducts = $derived(
-		browser
+		filtersReady
 			? readSelection(
 					page.url.searchParams.get('product'),
 					products.map((product) => product.id)
@@ -39,7 +39,7 @@
 			: []
 	);
 	const selectedChannels = $derived.by((): Channel[] => {
-		if (!browser) return ['stable'];
+		if (!filtersReady) return ['stable'];
 		const value = page.url.searchParams.get('channel');
 		if (value === 'all') return [];
 		const selected = readSelection(value, channels);
@@ -110,163 +110,153 @@
 		<h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Releases</h1>
 	</header>
 
-	{#if filtersReady}
-		<div
-			class="mb-8 flex flex-wrap gap-x-10 gap-y-6 rounded-2xl border border-slate-300 bg-slate-100/80 p-5 dark:border-slate-700 dark:bg-slate-900/70"
-		>
-			<fieldset class="min-w-0">
-				<legend
-					class="mb-3 text-xs font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
-					>Channel</legend
-				>
-				<div class="flex flex-wrap gap-2">
-					{#each channels as channel (channel)}
-						<button
-							type="button"
-							class={chipClass(selectedChannels.includes(channel))}
-							aria-pressed={selectedChannels.includes(channel)}
-							onclick={() => toggleChannel(channel)}
-						>
-							<span
-								aria-hidden="true"
-								class={`h-2 w-2 rounded-full ${channel === 'nightly' ? 'bg-amber-400' : 'bg-emerald-400'}`}
-							></span>
-							<span class="capitalize">{channel}</span>
-						</button>
-					{/each}
-				</div>
-			</fieldset>
-			<fieldset class="min-w-0">
-				<legend
-					class="mb-3 text-xs font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
-					>Product</legend
-				>
-				<div class="flex flex-wrap gap-2">
-					{#each products as product (product.id)}
-						<button
-							type="button"
-							class={chipClass(selectedProducts.includes(product.id))}
-							aria-pressed={selectedProducts.includes(product.id)}
-							onclick={() => toggleProduct(product.id)}
-						>
-							<img src={product.icon} alt="" class="h-5 w-5 rounded-sm object-contain" />
-							{product.label}
-						</button>
-					{/each}
-				</div>
-			</fieldset>
-			<button
-				type="button"
-				class="ml-auto shrink-0 self-end rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
-				disabled={!selectedChannels.length && !selectedProducts.length}
-				onclick={resetFilters}>Clear filters</button
+	<div
+		class="mb-8 flex flex-wrap gap-x-10 gap-y-6 rounded-2xl border border-slate-300 bg-slate-100/80 p-5 dark:border-slate-700 dark:bg-slate-900/70"
+	>
+		<fieldset class="min-w-0">
+			<legend
+				class="mb-3 text-xs font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
+				>Channel</legend
 			>
-		</div>
-
-		<div
-			class="mb-5 flex flex-wrap items-center justify-between gap-2 text-sm text-slate-500 dark:text-slate-400"
+			<div class="flex flex-wrap gap-2">
+				{#each channels as channel (channel)}
+					<button
+						type="button"
+						class={chipClass(selectedChannels.includes(channel))}
+						aria-pressed={selectedChannels.includes(channel)}
+						onclick={() => toggleChannel(channel)}
+					>
+						<span
+							aria-hidden="true"
+							class={`h-2 w-2 rounded-full ${channel === 'nightly' ? 'bg-amber-400' : 'bg-emerald-400'}`}
+						></span>
+						<span class="capitalize">{channel}</span>
+					</button>
+				{/each}
+			</div>
+		</fieldset>
+		<fieldset class="min-w-0">
+			<legend
+				class="mb-3 text-xs font-bold tracking-widest text-slate-500 uppercase dark:text-slate-400"
+				>Product</legend
+			>
+			<div class="flex flex-wrap gap-2">
+				{#each products as product (product.id)}
+					<button
+						type="button"
+						class={chipClass(selectedProducts.includes(product.id))}
+						aria-pressed={selectedProducts.includes(product.id)}
+						onclick={() => toggleProduct(product.id)}
+					>
+						<img src={product.icon} alt="" class="h-5 w-5 rounded-sm object-contain" />
+						{product.label}
+					</button>
+				{/each}
+			</div>
+		</fieldset>
+		<button
+			type="button"
+			class="ml-auto shrink-0 self-end rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+			disabled={!selectedChannels.length && !selectedProducts.length}
+			onclick={resetFilters}>Clear filters</button
 		>
-			<p role="status">
-				{filteredReleases.length}
-				{filteredReleases.length === 1 ? 'release' : 'releases'}
-			</p>
-		</div>
+	</div>
 
-		<div class="flex flex-col gap-6">
-			{#each filteredReleases as release (release.id)}
-				{@const product = products.find((product) => product.id === release.product)!}
-				<article
-					id={release.id}
-					class={`scroll-mt-28 overflow-hidden rounded-2xl border bg-white/80 shadow-sm dark:bg-slate-900/80 ${release.channel === 'nightly' ? 'border-amber-300 dark:border-amber-800' : 'border-slate-300 dark:border-slate-700'}`}
-				>
-					<div
-						class={`h-1 ${release.channel === 'nightly' ? 'bg-amber-400 dark:bg-amber-500' : 'bg-emerald-500 dark:bg-emerald-600'}`}
-					></div>
-					<div class="p-6 sm:p-8">
-						<header class="mb-6 flex items-center gap-4">
-							<div
-								class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 p-2.5 dark:border-slate-700 dark:bg-slate-800"
-							>
-								<img src={product.icon} alt="" class="h-full w-full object-contain" />
-							</div>
-							<div class="flex min-w-0 flex-1 flex-wrap items-center gap-1.5">
-								<h2 class="text-xl font-bold break-words sm:text-2xl">
-									<a
-										href={`#${release.id}`}
-										class="hover:text-primary-600 dark:hover:text-primary-400"
-									>
-										{product.label}
-										<span class="font-normal text-slate-500 dark:text-slate-400"
-											>{release.title}</span
-										>
-									</a>
-								</h2>
-								<span
-									class={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold capitalize ${release.channel === 'nightly' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300'}`}
-									>{release.channel}</span
-								>
-								{#if release.date}
-									<ReleaseDate
-										date={release.date}
-										class="text-sm text-slate-500 dark:text-slate-400"
-									/>
-								{/if}
-							</div>
-						</header>
+	<div
+		class="mb-5 flex flex-wrap items-center justify-between gap-2 text-sm text-slate-500 dark:text-slate-400"
+	>
+		<p role="status">
+			{filteredReleases.length}
+			{filteredReleases.length === 1 ? 'release' : 'releases'}
+		</p>
+	</div>
 
-						<CollapsibleReleaseNotes>
-							<div class="release-content min-w-0 text-slate-700 dark:text-slate-300">
-								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								{@html release.content}
-							</div>
-						</CollapsibleReleaseNotes>
-
-						<!-- eslint-disable svelte/no-navigation-without-resolve -->
-						<footer
-							class="mt-7 flex flex-wrap items-center gap-4 border-t border-slate-200 pt-5 dark:border-slate-800"
-						>
-							<a
-								href={release.href}
-								class="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600"
-							>
-								{release.channel === 'nightly'
-									? release.product === 'ugui'
-										? 'View source'
-										: 'View release'
-									: 'View release'}
-								<span aria-hidden="true">↗</span>
-							</a>
-							{#if release.sourceHref}
-								<a href={release.sourceHref} class="app-link text-sm">Changelog</a>
-							{/if}
-						</footer>
-						<!-- eslint-enable svelte/no-navigation-without-resolve -->
-					</div>
-				</article>
-			{:else}
+	<div class="flex flex-col gap-6">
+		{#each filteredReleases as release (release.id)}
+			{@const product = products.find((product) => product.id === release.product)!}
+			<article
+				id={release.id}
+				class={`scroll-mt-28 overflow-hidden rounded-2xl border bg-white/80 shadow-sm dark:bg-slate-900/80 ${release.channel === 'nightly' ? 'border-amber-300 dark:border-amber-800' : 'border-slate-300 dark:border-slate-700'}`}
+			>
 				<div
-					class="rounded-2xl border border-dashed border-slate-400 bg-slate-100/70 px-6 py-16 text-center dark:border-slate-600 dark:bg-slate-900/70"
-				>
-					<h2 class="text-2xl font-bold">No releases to show</h2>
-					<p class="mt-3 text-slate-600 dark:text-slate-400">
-						There aren’t any known releases for this selection yet. Try another product or channel.
-					</p>
-					{#if selectedChannels.length || selectedProducts.length}
-						<button type="button" class="app-link mt-5" onclick={resetFilters}
-							>Show all releases</button
+					class={`h-1 ${release.channel === 'nightly' ? 'bg-amber-400 dark:bg-amber-500' : 'bg-emerald-500 dark:bg-emerald-600'}`}
+				></div>
+				<div class="p-6 sm:p-8">
+					<header class="mb-6 flex items-center gap-4">
+						<div
+							class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 p-2.5 dark:border-slate-700 dark:bg-slate-800"
 						>
-					{/if}
+							<img src={product.icon} alt="" class="h-full w-full object-contain" />
+						</div>
+						<div class="flex min-w-0 flex-1 flex-wrap items-center gap-1.5">
+							<h2 class="text-xl font-bold break-words sm:text-2xl">
+								<a
+									href={`#${release.id}`}
+									class="hover:text-primary-600 dark:hover:text-primary-400"
+								>
+									{product.label}
+									<span class="font-normal text-slate-500 dark:text-slate-400">{release.title}</span
+									>
+								</a>
+							</h2>
+							<span
+								class={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold capitalize ${release.channel === 'nightly' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300'}`}
+								>{release.channel}</span
+							>
+							{#if release.date}
+								<ReleaseDate
+									date={release.date}
+									class="text-sm text-slate-500 dark:text-slate-400"
+								/>
+							{/if}
+						</div>
+					</header>
+
+					<CollapsibleReleaseNotes>
+						<div class="release-content min-w-0 text-slate-700 dark:text-slate-300">
+							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+							{@html release.content}
+						</div>
+					</CollapsibleReleaseNotes>
+
+					<!-- eslint-disable svelte/no-navigation-without-resolve -->
+					<footer
+						class="mt-7 flex flex-wrap items-center gap-4 border-t border-slate-200 pt-5 dark:border-slate-800"
+					>
+						<a
+							href={release.href}
+							class="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600"
+						>
+							{release.channel === 'nightly'
+								? release.product === 'ugui'
+									? 'View source'
+									: 'View release'
+								: 'View release'}
+							<span aria-hidden="true">↗</span>
+						</a>
+						{#if release.sourceHref}
+							<a href={release.sourceHref} class="app-link text-sm">Changelog</a>
+						{/if}
+					</footer>
+					<!-- eslint-enable svelte/no-navigation-without-resolve -->
 				</div>
-			{/each}
-		</div>
-	{:else}
-		<div
-			role="status"
-			class="rounded-2xl border border-slate-300 bg-slate-100/80 p-6 text-slate-500 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-400"
-		>
-			Loading releases…
-		</div>
-	{/if}
+			</article>
+		{:else}
+			<div
+				class="rounded-2xl border border-dashed border-slate-400 bg-slate-100/70 px-6 py-16 text-center dark:border-slate-600 dark:bg-slate-900/70"
+			>
+				<h2 class="text-2xl font-bold">No releases to show</h2>
+				<p class="mt-3 text-slate-600 dark:text-slate-400">
+					There aren’t any known releases for this selection yet. Try another product or channel.
+				</p>
+				{#if selectedChannels.length || selectedProducts.length}
+					<button type="button" class="app-link mt-5" onclick={resetFilters}
+						>Show all releases</button
+					>
+				{/if}
+			</div>
+		{/each}
+	</div>
 </main>
 
 <style>
