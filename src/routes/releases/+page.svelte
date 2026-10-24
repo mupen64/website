@@ -8,6 +8,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import ReleaseDate from '$lib/components/ReleaseDate.svelte';
+	import CollapsibleReleaseNotes from '$lib/components/CollapsibleReleaseNotes.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -213,10 +214,12 @@
 							</div>
 						</header>
 
-						<div class="release-content min-w-0 text-slate-700 dark:text-slate-300">
-							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-							{@html release.content}
-						</div>
+						<CollapsibleReleaseNotes>
+							<div class="release-content min-w-0 text-slate-700 dark:text-slate-300">
+								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+								{@html release.content}
+							</div>
+						</CollapsibleReleaseNotes>
 
 						<!-- eslint-disable svelte/no-navigation-without-resolve -->
 						<footer
