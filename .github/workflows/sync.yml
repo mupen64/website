@@ -133,6 +133,14 @@ jobs:
           sync_changelog_if_exists "${workdir}/ugui-stable/CHANGELOG.md" static/changelogs/ugui/stable "ugui stable"
           sync_changelog_if_exists "${workdir}/ugui-nightly/CHANGELOG.md" static/changelogs/ugui/nightly "ugui nightly"
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Sync release metadata
+        run: node scripts/sync-release-metadata.mjs
+
       - name: Commit and push changes
         id: commit
         run: |

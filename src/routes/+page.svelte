@@ -18,6 +18,18 @@
 	import Pill from '$lib/components/Pill.svelte';
 	import versions from '$lib/assets/versions.json';
 	import StarBeg from '$lib/components/StarBeg.svelte';
+	import redux from '$lib/assets/sm64luaredux.webp';
+	import ugui from '$lib/assets/ugui.webp';
+	import type { PageData } from './$types';
+	import ReleaseDate from '$lib/components/ReleaseDate.svelte';
+
+	let { data }: { data: PageData } = $props();
+
+	const releaseProducts = {
+		mupen64: { label: 'Mupen64', icon: mupen64 },
+		redux: { label: 'SM64 Lua Redux', icon: redux },
+		ugui: { label: 'ugui', icon: ugui }
+	};
 
 	const released_150 = true; //
 	let nightly_hovered = $state(false);
@@ -161,6 +173,63 @@
 			</div>
 		{/snippet}
 	</Hero>
+
+	{#if data.releases.length}
+		<section class="px-4 pt-16 sm:px-8 lg:px-16" aria-labelledby="latest-releases">
+			<div class="mx-auto max-w-6xl">
+				<Title id="latest-releases">Latest releases</Title>
+				<div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+					<p class="text-slate-600 dark:text-slate-400">
+						The latest Mupen64 project family updates.
+					</p>
+					<a href={resolve('/releases')} class="app-link text-sm font-semibold">All releases →</a>
+				</div>
+				<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+				<div
+					class="flex snap-x snap-mandatory gap-5 overflow-x-auto rounded-2xl pb-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
+					role="region"
+					aria-label="Latest release summaries"
+					tabindex="0"
+				>
+					{#each data.releases as release (release.id)}
+						{@const product = releaseProducts[release.product]}
+						<article
+							class="flex w-80 max-w-[85vw] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-slate-300 bg-white/80 shadow-sm dark:border-slate-700 dark:bg-slate-900/80"
+						>
+							<div class="h-1 bg-emerald-500 dark:bg-emerald-600"></div>
+							<div class="flex flex-1 flex-col p-6">
+								<header class="mb-4 flex items-center gap-3">
+									<img src={product.icon} alt="" class="h-10 w-10 shrink-0 object-contain" />
+									<div class="min-w-0">
+										<p class="text-sm text-slate-500 dark:text-slate-400">{product.label}</p>
+										<h2 class="text-xl font-bold break-words">{release.title}</h2>
+									</div>
+								</header>
+								{#if release.date}
+									<ReleaseDate
+										date={release.date}
+										class="mb-3 text-xs text-slate-500 dark:text-slate-400"
+									/>
+								{/if}
+								<p
+									class="mb-6 line-clamp-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300"
+								>
+									{release.summary || 'Explore the changes in this release.'}
+								</p>
+								<a
+									href={resolve(`/releases#${release.id}`)}
+									class="app-link mt-auto text-sm font-semibold"
+									aria-label={`Read release notes for ${product.label} ${release.title}`}
+								>
+									Read release notes →
+								</a>
+							</div>
+						</article>
+					{/each}
+				</div>
+			</div>
+		</section>
+	{/if}
 
 	<section id="showcase" class="p-16 pt-16 pb-0">
 		<div class="mx-auto max-w-6xl">

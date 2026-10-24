@@ -1,4 +1,5 @@
 import { Marked, type Token, type Tokens, type TokensList } from 'marked';
+import releaseMetadata from '../../../static/changelogs/metadata.json';
 
 export type ReleaseProduct = 'mupen64' | 'redux' | 'ugui';
 export type ReleaseChannel = 'stable' | 'nightly';
@@ -164,7 +165,17 @@ export function getReleases(): Release[] {
 				/^\/static\/changelogs\/(mupen64|redux|ugui)\/(stable|nightly)\/CHANGELOG\.md$/
 			);
 			if (!match) return [];
-			return parseChangelog(content, match[1] as ReleaseProduct, match[2] as ReleaseChannel);
+			const product = match[1] as ReleaseProduct;
+			const channel = match[2] as ReleaseChannel;
+			const metadata = releaseMetadata[product];
+			return parseChangelog(content, product, channel).map((release) => ({
+				...release,
+				date:
+					(channel === 'nightly'
+						? metadata.nightly
+						: (metadata.stable as Record<string, string>)[release.title.replace(/^v/i, '')]) ??
+					(release.date ? `${release.date}T00:00:00Z` : null)
+			}));
 		})
 		.sort(compareReleases);
 

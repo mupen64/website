@@ -7,6 +7,7 @@
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import ReleaseDate from '$lib/components/ReleaseDate.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -96,21 +97,11 @@
 				: 'border-slate-300 bg-white/70 text-slate-600 hover:border-primary-400 hover:text-primary-700 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-300 dark:hover:border-primary-500 dark:hover:text-primary-300'
 		}`;
 	}
-
-	function formatDate(date: string) {
-		return new Intl.DateTimeFormat('en', {
-			dateStyle: 'long',
-			timeZone: 'UTC'
-		}).format(new Date(`${date}T00:00:00Z`));
-	}
 </script>
 
 <svelte:head>
 	<title>Releases · Mupen64</title>
-	<meta
-		name="description"
-		content="Latest releases from the Mupen64 project family."
-	/>
+	<meta name="description" content="Latest releases from the Mupen64 project family." />
 </svelte:head>
 
 <main class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
@@ -214,9 +205,10 @@
 									>{release.channel}</span
 								>
 								{#if release.date}
-									<time datetime={release.date} class="text-sm text-slate-500 dark:text-slate-400"
-										>{formatDate(release.date)}</time
-									>
+									<ReleaseDate
+										date={release.date}
+										class="text-sm text-slate-500 dark:text-slate-400"
+									/>
 								{/if}
 							</div>
 						</header>
