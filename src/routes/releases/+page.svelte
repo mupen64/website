@@ -233,7 +233,9 @@
 									: 'View release'}
 								<span aria-hidden="true">↗</span>
 							</a>
-							<a href={release.sourceHref} class="app-link text-sm">Changelog</a>
+							{#if release.sourceHref}
+								<a href={release.sourceHref} class="app-link text-sm">Changelog</a>
+							{/if}
 						</footer>
 						<!-- eslint-enable svelte/no-navigation-without-resolve -->
 					</div>
@@ -244,8 +246,7 @@
 				>
 					<h2 class="text-2xl font-bold">No releases to show</h2>
 					<p class="mt-3 text-slate-600 dark:text-slate-400">
-						There isn’t a supported changelog for this selection yet. Try another product or
-						channel.
+						There aren’t any known releases for this selection yet. Try another product or channel.
 					</p>
 					{#if selectedChannels.length || selectedProducts.length}
 						<button type="button" class="app-link mt-5" onclick={resetFilters}

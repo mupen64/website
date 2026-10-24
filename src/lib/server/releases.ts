@@ -12,7 +12,7 @@ export type Release = {
 	content: string;
 	date: string | null;
 	href: string;
-	sourceHref: string;
+	sourceHref: string | null;
 };
 
 type IndexedRelease = Release & { position: number; comparisonContent: string };
@@ -159,25 +159,47 @@ export function compareReleases(a: IndexedRelease, b: IndexedRelease) {
 }
 
 export function getReleases(): Release[] {
-	const releases = Object.entries(modules)
-		.flatMap(([path, content]) => {
-			const match = path.match(
-				/^\/static\/changelogs\/(mupen64|redux|ugui)\/(stable|nightly)\/CHANGELOG\.md$/
-			);
-			if (!match) return [];
-			const product = match[1] as ReleaseProduct;
-			const channel = match[2] as ReleaseChannel;
-			const metadata = releaseMetadata[product];
-			return parseChangelog(content, product, channel).map((release) => ({
-				...release,
-				date:
-					(channel === 'nightly'
-						? metadata.nightly
-						: (metadata.stable as Record<string, string>)[release.title.replace(/^v/i, '')]) ??
-					(release.date ? `${release.date}T00:00:00Z` : null)
-			}));
-		})
-		.sort(compareReleases);
+	const releases = Object.entries(modules).flatMap(([path, content]) => {
+		const match = path.match(
+			/^\/static\/changelogs\/(mupen64|redux|ugui)\/(stable|nightly)\/CHANGELOG\.md$/
+		);
+		if (!match) return [];
+		const product = match[1] as ReleaseProduct;
+		const channel = match[2] as ReleaseChannel;
+		const metadata = releaseMetadata[product];
+		return parseChangelog(content, product, channel).map((release) => ({
+			...release,
+			date:
+				(channel === 'nightly'
+					? metadata.nightly
+					: (metadata.stable as Record<string, string>)[release.title.replace(/^v/i, '')]) ??
+				(release.date ? `${release.date}T00:00:00Z` : null)
+		}));
+	});
+
+	const knownVersions = new Set(
+		releases
+			.filter((release) => release.channel === 'stable')
+			.map((release) => `${release.product}:${release.title.replace(/^v/i, '')}`)
+	);
+	for (const product of Object.keys(releaseMetadata) as ReleaseProduct[]) {
+		for (const [title, date] of Object.entries(releaseMetadata[product].stable)) {
+			if (knownVersions.has(`${product}:${title.replace(/^v/i, '')}`)) continue;
+			releases.push({
+				id: `${product}-stable-${encodeURIComponent(title)}-metadata`,
+				product,
+				channel: 'stable',
+				title,
+				date,
+				content: '<p>No changelog entry is available for this release.</p>',
+				comparisonContent: '',
+				href: `${repositories[product]}/releases/tag/${encodeURIComponent(title)}`,
+				sourceHref: null,
+				position: Number.MAX_SAFE_INTEGER
+			});
+		}
+	}
+	releases.sort(compareReleases);
 
 	return releases.map(({ position, comparisonContent, ...release }) => {
 		void position;
@@ -185,7 +207,7 @@ export function getReleases(): Release[] {
 			const latestStable = releases.find(
 				(candidate) => candidate.product === release.product && candidate.channel === 'stable'
 			);
-			if (latestStable && comparisonContent === latestStable.comparisonContent) {
+			if (latestStable?.sourceHref && comparisonContent === latestStable.comparisonContent) {
 				return { ...release, content: '<p>(same as stable)</p>' };
 			}
 		}
