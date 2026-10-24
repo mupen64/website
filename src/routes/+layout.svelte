@@ -132,6 +132,11 @@
 							</div>
 						</div>
 						<a
+							href={resolve('/releases')}
+							class={`${navItemClass} flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium md:flex md:w-auto md:justify-start`}
+							>Releases</a
+						>
+						<a
 							href={resolve('/docs/mupen64/stable')}
 							class={`${navItemClass} flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium md:flex md:w-auto md:justify-start`}
 							>Docs</a
