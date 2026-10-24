@@ -14,7 +14,7 @@ export type Release = {
 	sourceHref: string;
 };
 
-type IndexedRelease = Release & { position: number };
+type IndexedRelease = Release & { position: number; comparisonContent: string };
 
 const repositories: Record<ReleaseProduct, string> = {
 	mupen64: 'https://github.com/mupen64/mupen64-rr-lua',
@@ -118,6 +118,7 @@ export function parseChangelog(
 			channel,
 			title,
 			content: renderContent(section, base),
+			comparisonContent: renderContent(section, `${repository}/`).trim(),
 			date,
 			href:
 				channel === 'nightly'
@@ -157,7 +158,7 @@ export function compareReleases(a: IndexedRelease, b: IndexedRelease) {
 }
 
 export function getReleases(): Release[] {
-	return Object.entries(modules)
+	const releases = Object.entries(modules)
 		.flatMap(([path, content]) => {
 			const match = path.match(
 				/^\/static\/changelogs\/(mupen64|redux|ugui)\/(stable|nightly)\/CHANGELOG\.md$/
@@ -165,9 +166,18 @@ export function getReleases(): Release[] {
 			if (!match) return [];
 			return parseChangelog(content, match[1] as ReleaseProduct, match[2] as ReleaseChannel);
 		})
-		.sort(compareReleases)
-		.map(({ position, ...release }) => {
-			void position;
-			return release;
-		});
+		.sort(compareReleases);
+
+	return releases.map(({ position, comparisonContent, ...release }) => {
+		void position;
+		if (release.channel === 'nightly') {
+			const latestStable = releases.find(
+				(candidate) => candidate.product === release.product && candidate.channel === 'stable'
+			);
+			if (latestStable && comparisonContent === latestStable.comparisonContent) {
+				return { ...release, content: '<p>(same as stable)</p>' };
+			}
+		}
+		return release;
+	});
 }
