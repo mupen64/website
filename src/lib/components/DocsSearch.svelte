@@ -101,7 +101,7 @@
 
 <svelte:window onkeydown={focusSearch} />
 
-<div class="relative w-full md:mx-4 md:flex-1">
+<div class="relative w-full">
 	<label for="docs-search" class="sr-only">Search documentation</label>
 	<div class="relative">
 		<svg

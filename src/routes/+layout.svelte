@@ -27,7 +27,7 @@
 	const navItemClass =
 		'!text-slate-900 hover:!bg-slate-200/70 hover:!text-primary-600 dark:!text-slate-100 dark:hover:!bg-slate-800/70 dark:hover:!text-primary-400';
 	const navListClass =
-		'flex w-full flex-col gap-1 rounded-lg border-slate-400 p-2 dark:border-slate-600 md:w-auto md:flex-row md:overflow-visible md:border-0 md:p-0';
+		'flex w-full flex-col gap-1 rounded-lg border-slate-400 p-2 dark:border-slate-600 lg:w-auto lg:flex-row lg:overflow-visible lg:border-0 lg:p-0';
 	const megaMenuClass =
 		'z-50 mt-2 w-fit rounded-xl !border-b border-dotted border-slate-400 bg-slate-100/95 p-2 text-slate-900 shadow-lg dark:border-slate-500 dark:bg-slate-800/95 dark:text-slate-100';
 	const megaMenuItemClass =
@@ -54,7 +54,7 @@
 	<div
 		class="sticky top-0 z-50 mx-auto w-full shrink-0 border-b border-slate-400 bg-white shadow-sm md:max-w-6xl md:rounded-b-xl md:border-x dark:border-slate-600 dark:bg-slate-900"
 	>
-		<Navbar class="relative mr-auto ml-auto max-w-6xl bg-transparent!">
+		<Navbar fluid breakpoint="lg" class="relative mr-auto ml-auto max-w-6xl bg-transparent!">
 			<NavBrand
 				href={resolve('/')}
 				class="text-xl font-semibold text-slate-900 dark:text-slate-100"
@@ -65,18 +65,16 @@
 
 			<button
 				type="button"
-				class="inline-flex items-center rounded-lg p-2 text-xl text-slate-900 hover:bg-slate-200 md:hidden dark:text-slate-100 dark:hover:bg-slate-800"
+				class="inline-flex items-center rounded-lg p-2 text-xl text-slate-900 hover:bg-slate-200 lg:hidden dark:text-slate-100 dark:hover:bg-slate-800"
 				aria-label={navOpen ? 'Close main menu' : 'Open main menu'}
 				aria-expanded={navOpen}
 				onclick={() => (navOpen = !navOpen)}>☰</button
 			>
 
-			<div
-				class={`${navOpen ? 'block' : 'hidden'} w-full md:absolute md:top-1/2 md:left-1/2 md:block md:w-auto md:-translate-x-1/2 md:-translate-y-1/2`}
-			>
-				<div class="flex w-full items-center gap-1 md:flex md:w-auto">
-					<div class={`${navListClass} md:items-stretch md:self-stretch`}>
-						<div class="group relative w-full md:flex md:w-auto md:items-stretch md:self-stretch">
+			<div class={`${navOpen ? 'block' : 'hidden'} w-full lg:block lg:w-auto`}>
+				<div class="flex w-full items-center gap-1 lg:flex lg:w-auto">
+					<div class={`${navListClass} lg:items-stretch lg:self-stretch`}>
+						<div class="group relative w-full lg:flex lg:w-auto lg:items-stretch lg:self-stretch">
 							<button
 								type="button"
 								class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
@@ -107,7 +105,7 @@
 								{/each}
 							</div>
 						</div>
-						<div class="group relative w-full md:flex md:w-auto md:items-stretch md:self-stretch">
+						<div class="group relative w-full lg:flex lg:w-auto lg:items-stretch lg:self-stretch">
 							<button
 								type="button"
 								class={`${navItemClass} inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium`}
@@ -133,12 +131,12 @@
 						</div>
 						<a
 							href={resolve('/releases')}
-							class={`${navItemClass} flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium md:flex md:w-auto md:justify-start`}
+							class={`${navItemClass} flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium lg:flex lg:w-auto lg:justify-start`}
 							>Releases</a
 						>
 						<a
 							href={resolve('/docs/mupen64/stable')}
-							class={`${navItemClass} flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium md:flex md:w-auto md:justify-start`}
+							class={`${navItemClass} flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium lg:flex lg:w-auto lg:justify-start`}
 							>Docs</a
 						>
 						<Button href={discordUrl} class="m-1 w-full sm:w-auto" size="sm">
@@ -149,7 +147,7 @@
 				</div>
 			</div>
 
-			<div class="w-full md:mr-2 md:ml-auto md:w-xs">
+			<div class="w-full lg:mr-2 lg:ml-4 lg:min-w-0 lg:flex-1">
 				<DocsSearch items={data.docs_search} />
 			</div>
 		</Navbar>
