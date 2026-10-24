@@ -154,4 +154,4 @@ jobs:
 
       - name: Trigger website build
         if: steps.commit.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
-        run: gh workflow run build.yml --ref "${GITHUB_REF_NAME}"
+        run: gh workflow run build-and-deploy.yml --ref "${GITHUB_REF_NAME}"
