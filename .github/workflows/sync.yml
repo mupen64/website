@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
@@ -132,7 +133,7 @@ jobs:
           sync_changelog_if_exists "${workdir}/ugui-stable/CHANGELOG.md" static/changelogs/ugui/stable "ugui stable"
           sync_changelog_if_exists "${workdir}/ugui-nightly/CHANGELOG.md" static/changelogs/ugui/nightly "ugui nightly"
 
-      - name: Commit and push changes
+      - name: Commit, push changes, and trigger website build
         run: |
           set -euo pipefail
 
@@ -148,3 +149,5 @@ jobs:
 
           git commit -m "chore: sync docs"
           git push
+
+          gh workflow run build.yml --ref "${GITHUB_REF_NAME}"
