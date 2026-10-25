@@ -8,6 +8,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import ReleaseDate from '$lib/components/ReleaseDate.svelte';
+	import ChannelPill from '$lib/components/ChannelPill.svelte';
 	import CollapsibleReleaseNotes from '$lib/components/CollapsibleReleaseNotes.svelte';
 
 	let { data }: { data: PageData } = $props();
@@ -128,7 +129,7 @@
 					>
 						<span
 							aria-hidden="true"
-							class={`h-2 w-2 rounded-full ${channel === 'nightly' ? 'bg-amber-400' : 'bg-emerald-400'}`}
+							class={`h-2 w-2 rounded-full ${channel === 'nightly' ? 'bg-red-400' : 'bg-emerald-400'}`}
 						></span>
 						<span class="capitalize">{channel}</span>
 					</button>
@@ -176,19 +177,15 @@
 			{@const product = products.find((product) => product.id === release.product)!}
 			<article
 				id={release.id}
-				class={`scroll-mt-28 overflow-hidden rounded-2xl border bg-white/80 shadow-sm dark:bg-slate-900/80 ${release.channel === 'nightly' ? 'border-amber-300 dark:border-amber-800' : 'border-slate-300 dark:border-slate-700'}`}
+				class={`scroll-mt-28 overflow-hidden rounded-2xl border bg-white/80 shadow-sm dark:bg-slate-900/80 ${release.channel === 'nightly' ? 'border-red-300 dark:border-red-800' : 'border-slate-300 dark:border-slate-700'}`}
 			>
 				<div
-					class={`h-1 ${release.channel === 'nightly' ? 'bg-amber-400 dark:bg-amber-500' : 'bg-emerald-500 dark:bg-emerald-600'}`}
+					class={`h-1 ${release.channel === 'nightly' ? 'bg-red-400 dark:bg-red-500' : 'bg-emerald-500 dark:bg-emerald-600'}`}
 				></div>
 				<div class="p-6 sm:p-8">
 					<header class="mb-6 flex items-center gap-4">
-						<div
-							class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 p-2.5 dark:border-slate-700 dark:bg-slate-800"
-						>
-							<img src={product.icon} alt="" class="h-full w-full object-contain" />
-						</div>
-						<div class="flex min-w-0 flex-1 flex-wrap items-center gap-1.5">
+						<img src={product.icon} alt="" class="h-14 w-14 shrink-0 object-contain" />
+						<div class="flex min-w-0 flex-1 flex-col gap-1.5">
 							<h2 class="text-xl font-bold break-words sm:text-2xl">
 								<a
 									href={`#${release.id}`}
@@ -199,16 +196,15 @@
 									>
 								</a>
 							</h2>
-							<span
-								class={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold capitalize ${release.channel === 'nightly' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300'}`}
-								>{release.channel}</span
-							>
-							{#if release.date}
-								<ReleaseDate
-									date={release.date}
-									class="text-sm text-slate-500 dark:text-slate-400"
-								/>
-							{/if}
+							<div class="flex flex-wrap items-center gap-1.5">
+								<ChannelPill channel={release.channel} />
+								{#if release.date}
+									<ReleaseDate
+										date={release.date}
+										class="text-sm text-slate-500 dark:text-slate-400"
+									/>
+								{/if}
+							</div>
 						</div>
 					</header>
 
