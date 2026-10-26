@@ -1,4 +1,8 @@
-# [Unreleased]
+# Unreleased
+
+Nothing yet.
+
+# 7.0.0 
 
 ### ✨ Features
 
