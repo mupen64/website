@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SocialMetadata from '$lib/components/SocialMetadata.svelte';
 	import {
 		Table,
 		TableBody,
@@ -92,13 +93,7 @@
 	const grandTotal = statements.reduce((sum, statement) => sum + yearTotal(statement), 0);
 </script>
 
-<svelte:head>
-	<title>Expenses · Mupen64</title>
-	<meta
-		name="description"
-		content="The Mupen64 Organization's expenses."
-	/>
-</svelte:head>
+<SocialMetadata title="Expenses · Mupen64" description="The Mupen64 Organization's expenses." />
 
 <main>
 	<section

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SocialMetadata from '$lib/components/SocialMetadata.svelte';
 	import { Card } from 'flowbite-svelte';
 	import RepackDownloadButton from '$lib/components/RepackDownloadButton.svelte';
 	import mupen64 from '$lib/assets/mupen64.svg';
@@ -27,13 +28,10 @@
 	let nightly_hovered = $state(false);
 </script>
 
-<svelte:head>
-	<title>Mupen64</title>
-	<meta
-		name="description"
-		content="Download Mupen64, an advanced Nintendo 64 TASing emulator with rerecording, Lua scripting, video capture, and a rich ecosystem of tools."
-	/>
-</svelte:head>
+<SocialMetadata
+	title="Mupen64"
+	description="Mupen64 is an advanced N64 TASing emulator."
+/>
 
 <main>
 	<Hero

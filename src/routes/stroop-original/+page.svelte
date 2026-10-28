@@ -1,17 +1,15 @@
 <script lang="ts">
+	import SocialMetadata from '$lib/components/SocialMetadata.svelte';
 	import stroop from '$lib/assets/stroop.svg';
 	import Hero from '$lib/components/Hero.svelte';
 	import Title from '$lib/components/Title.svelte';
 	import { resolve } from '$app/paths';
 </script>
 
-<svelte:head>
-	<title>STROOP Original · Mupen64</title>
-	<meta
-		name="description"
-		content="STROOP, an advanced diagnostic tool for Super Mario 64."
-	/>
-</svelte:head>
+<SocialMetadata
+	title="STROOP Original · Mupen64"
+	description="STROOP, an advanced diagnostic tool for Super Mario 64."
+/>
 
 <main>
 	<Hero

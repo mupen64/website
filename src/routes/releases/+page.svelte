@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SocialMetadata from '$lib/components/SocialMetadata.svelte';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import redux from '$lib/assets/sm64luaredux.webp';
 	import ugui from '$lib/assets/ugui.webp';
@@ -125,10 +126,10 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Releases · Mupen64</title>
-	<meta name="description" content="Latest releases from the Mupen64 project family." />
-</svelte:head>
+<SocialMetadata
+	title="Releases · Mupen64"
+	description="Latest releases from the Mupen64 project family."
+/>
 
 <main class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
 	<header class="mb-8">

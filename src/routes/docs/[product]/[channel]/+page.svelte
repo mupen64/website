@@ -1,6 +1,7 @@
 <script lang="ts">
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import sm64luaredux from '$lib/assets/sm64luaredux.webp';
+	import SocialMetadata from '$lib/components/SocialMetadata.svelte';
 
 	let { data } = $props();
 
@@ -20,13 +21,10 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{data.product_label} Documentation ({data.channel}) · Mupen64</title>
-	<meta
-		name="description"
-		content={`Browse ${data.channel} documentation for ${data.product_label} and switch between available documentation channels.`}
-	/>
-</svelte:head>
+<SocialMetadata
+	title={`${data.product_label} Documentation (${data.channel}) · Mupen64`}
+	description={`Browse ${data.channel} documentation for ${data.product_label}.`}
+/>
 
 <main>
 	<section id="wiki" class="mx-auto max-w-6xl p-4 py-16">

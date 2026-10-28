@@ -7,6 +7,7 @@
 	import { Button, Card } from 'flowbite-svelte';
 	import { HeartSolid } from 'flowbite-svelte-icons';
 	import StarBeg from '$lib/components/StarBeg.svelte';
+	import SocialMetadata from '$lib/components/SocialMetadata.svelte';
 	const channel = page.params.channel as Channel;
 
 	const channelToDocs: Partial<Record<Channel, string>> = {
@@ -19,9 +20,12 @@
 
 <svelte:head>
 	<meta name="robots" content="noindex" />
-	<title>Download {page.params.channel} · Mupen64</title>
-	<meta name="description" content={`Thank you for downloading Mupen64 ${page.params.channel}.`} />
 </svelte:head>
+
+<SocialMetadata
+	title={`Download ${page.params.channel} · Mupen64`}
+	description={`Thank you for downloading Mupen64 ${page.params.channel}.`}
+/>
 
 <main>
 	<section id="wiki" class="mx-auto max-w-6xl p-4 py-16">

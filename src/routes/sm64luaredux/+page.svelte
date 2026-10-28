@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SocialMetadata from '$lib/components/SocialMetadata.svelte';
 	import { resolve } from '$app/paths';
 	import sm64luaredux from '$lib/assets/sm64luaredux.webp';
 	import Hero from '$lib/components/Hero.svelte';
@@ -6,13 +7,10 @@
 	import versions from '$lib/assets/versions.json';
 </script>
 
-<svelte:head>
-	<title>SM64 Lua Redux · Mupen64</title>
-	<meta
-		name="description"
-		content="SM64 Lua Redux is a powerful Lua scripting utility for Super Mario 64 TASing, included in the Mupen64 Repack."
-	/>
-</svelte:head>
+<SocialMetadata
+	title="SM64 Lua Redux · Mupen64"
+	description="SM64 Lua Redux is a powerful Lua scripting utility for Super Mario 64 TASing, included in the Mupen64 Repack."
+/>
 
 <main>
 	<Hero

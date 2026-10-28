@@ -1,16 +1,14 @@
 <script lang="ts">
+	import SocialMetadata from '$lib/components/SocialMetadata.svelte';
 	import ugui from '$lib/assets/ugui.webp';
 	import Hero from '$lib/components/Hero.svelte';
 	import Title from '$lib/components/Title.svelte';
 </script>
 
-<svelte:head>
-	<title>ugui · Mupen64</title>
-	<meta
-		name="description"
-		content="ugui is a flexible immediate-mode Lua GUI library used by projects in the Mupen64 Lua script ecosystem."
-	/>
-</svelte:head>
+<SocialMetadata
+	title="ugui · Mupen64"
+	description="ugui is a flexible immediate-mode Lua GUI library used by projects in the Mupen64 Lua script ecosystem."
+/>
 
 <main>
 	<Hero

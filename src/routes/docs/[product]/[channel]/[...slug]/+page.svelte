@@ -2,13 +2,13 @@
 	import { resolve } from '$app/paths';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import sm64luaredux from '$lib/assets/sm64luaredux.webp';
+	import SocialMetadata from '$lib/components/SocialMetadata.svelte';
 
 	type DocsPageData = {
 		product: 'mupen64' | 'redux';
 		product_label: string;
 		channel: 'stable' | 'nightly';
 		channel_links: Array<{ channel: 'stable' | 'nightly'; href: string; available: boolean }>;
-
 
 		content: string;
 		title: string;
@@ -19,8 +19,6 @@
 	let content_ref: HTMLDivElement | undefined = $state();
 
 	const check_icon_svg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>`;
-
-
 
 	async function write_clipboard(text: string) {
 		try {
@@ -102,13 +100,10 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{data.title} · {data.product_label} ({data.channel}) · Mupen64</title>
-	<meta
-		name="description"
-		content={`${data.title} — ${data.channel} documentation for ${data.product_label}.`}
-	/>
-</svelte:head>
+<SocialMetadata
+	title={`${data.title} · ${data.product_label} (${data.channel}) · Mupen64`}
+	description={`${data.title} — ${data.channel} documentation for ${data.product_label}.`}
+/>
 
 <main>
 	<section id="wiki" class="mx-auto max-w-6xl p-4 py-16">
@@ -130,22 +125,21 @@
 					style:background-color={data.product === 'mupen64' ? '#dc2626' : '#64748b'}
 				></span>
 				<h1 class="mt-4 text-3xl font-bold">{data.title}</h1>
-
 			</div>
 
-				<div
-					class="inline-flex overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
-				>
-					{#each data.channel_links as link, i (i)}
-						<a
-							href={resolve(link.href as `/docs/${string}`)}
-							class={channelLinkClass(link.channel === data.channel, i)}
-						>
-							{link.channel}
-						</a>
-					{/each}
-				</div>
+			<div
+				class="inline-flex overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700"
+			>
+				{#each data.channel_links as link, i (i)}
+					<a
+						href={resolve(link.href as `/docs/${string}`)}
+						class={channelLinkClass(link.channel === data.channel, i)}
+					>
+						{link.channel}
+					</a>
+				{/each}
 			</div>
+		</div>
 
 		<div
 			bind:this={content_ref}
