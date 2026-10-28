@@ -1,21 +1,13 @@
 <script lang="ts">
-	import { Button, Card, Dropdown, DropdownItem } from 'flowbite-svelte';
-	import { ChevronDownOutline, QuestionCircleSolid, WindowsSolid } from 'flowbite-svelte-icons';
+	import { Card } from 'flowbite-svelte';
+	import RepackDownloadButton from '$lib/components/RepackDownloadButton.svelte';
 	import mupen64 from '$lib/assets/mupen64.svg';
 	import GithubLogo from '$lib/assets/GithubLogo.svelte';
 	import lua from '$lib/assets/lua.svg';
 	import demo from '$lib/assets/demo.webp';
 	import Hero from '$lib/components/Hero.svelte';
 	import Title from '$lib/components/Title.svelte';
-	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import {
-		downloadUrls,
-		startDownloadFromChannel,
-		type Channel
-	} from '$lib/helpers/RepackDownloadHelper';
-	import ChannelPill from '$lib/components/ChannelPill.svelte';
-	import Pill from '$lib/components/Pill.svelte';
 	import versions from '$lib/assets/versions.json';
 	import StarBeg from '$lib/components/StarBeg.svelte';
 	import redux from '$lib/assets/sm64luaredux.webp';
@@ -33,17 +25,6 @@
 
 	const released_150 = true; //
 	let nightly_hovered = $state(false);
-
-	function handle_download(event: MouseEvent, channel: Channel) {
-		event.preventDefault();
-
-		const cleanup = startDownloadFromChannel(channel);
-
-		setTimeout(() => {
-			goto(resolve(`/downloaded/${channel}`));
-			setTimeout(() => cleanup(), 1000);
-		}, 300);
-	}
 </script>
 
 <svelte:head>
@@ -68,109 +49,12 @@
 		dark={true}
 	>
 		{#snippet button(dark: boolean)}
-			<div class="flex w-full flex-nowrap items-stretch justify-center gap-2 md:w-auto">
-				{#if released_150}
-					<Button
-						href={downloadUrls['stable-windows-x64']}
-						color="blue"
-						class="inline-flex w-fit max-w-full items-center justify-start gap-2 border-b-4 border-b-blue-900 text-left active:mt-1 active:border-b-0"
-						onclick={(event: MouseEvent) => handle_download(event, 'stable-windows-x64')}
-					>
-						<WindowsSolid class="h-5 w-5 shrink-0" />
-						<span>Download 64-bit for Windows</span>
-					</Button>
-				{:else}
-					<Button
-						href={downloadUrls['stable-windows-x86']}
-						color="blue"
-						class="inline-flex w-fit max-w-full items-center justify-start gap-2 border-b-4 border-b-blue-900 text-left active:mt-1 active:border-b-0"
-						onclick={(event: MouseEvent) => handle_download(event, 'stable-windows-x86')}
-					>
-						<WindowsSolid class="h-5 w-5 shrink-0" />
-						<span>Download 32-bit for Windows</span>
-					</Button>
-				{/if}
-				<Button
-					type="button"
-					aria-label="More download options"
-					color="blue"
-					class="inline-flex items-center gap-2 self-stretch border-b-4 border-b-blue-900 active:mt-1 active:border-b-0"
-				>
-					<ChevronDownOutline class="h-5 w-5" />
-				</Button>
-
-				<Dropdown placement="bottom-end" class="list-none">
-					{#if released_150}
-						<DropdownItem
-							href={downloadUrls['stable-windows-x86']}
-							onclick={(event) => handle_download(event, 'stable-windows-x86')}
-						>
-							<div class="flex w-full flex-col items-start text-left leading-tight">
-								<div class="flex flex-row items-center gap-1">
-									<WindowsSolid class="mb-px h-4 w-4" />
-									<p class="text-base">Windows (32-bit)</p>
-									<ChannelPill channel="stable" />
-								</div>
-								<p class="text-xs font-light opacity-70">
-									Compatible with Jabo's plugins. Not recommended for general use.
-								</p>
-							</div>
-						</DropdownItem>
-					{/if}
-
-					<DropdownItem
-						class="group/nightly"
-						href={downloadUrls['nightly-windows-x86']}
-						onmouseenter={() => (nightly_hovered = true)}
-						onmouseleave={() => (nightly_hovered = false)}
-						onclick={(event) => handle_download(event, 'nightly-windows-x86')}
-					>
-						<div class="flex w-full flex-col items-start text-left leading-tight">
-							<div class="flex flex-row items-center gap-1">
-								<WindowsSolid class="mb-px h-4 w-4" />
-								<p class="text-base">Download (32-bit)</p>
-								<ChannelPill channel="nightly" />
-							</div>
-							<p class="text-xs font-light opacity-70">
-								Bleeding-edge features with potential instability
-							</p>
-						</div>
-					</DropdownItem>
-					<DropdownItem
-						class="group/nightly"
-						href={downloadUrls['nightly-windows-x64']}
-						onmouseenter={() => (nightly_hovered = true)}
-						onmouseleave={() => (nightly_hovered = false)}
-						onclick={(event) => handle_download(event, 'nightly-windows-x64')}
-					>
-						<div class="flex w-full flex-col items-start text-left leading-tight">
-							<div class="flex flex-row items-center gap-1">
-								<WindowsSolid class="mb-px h-4 w-4" />
-								<p class="text-base">Download (64-bit)</p>
-								<ChannelPill channel="nightly" />
-							</div>
-							<p class="text-xs font-light opacity-70">
-								Bleeding-edge features with potential instability
-							</p>
-						</div>
-					</DropdownItem>
-					<DropdownItem>
-						<div class="flex w-full flex-col items-start text-left leading-tight">
-							<div class="flex flex-row items-center gap-1">
-								<QuestionCircleSolid class="mb-px h-4 w-4" />
-								<p class="text-base">Download for Linux</p>
-								<Pill color="gray" text="Unavailable" />
-							</div>
-							<p class="text-xs font-light opacity-70">
-								To run Mupen64 on Linux, use <a class="app-link" href="https://usebottles.com/"
-									>Bottles</a
-								>.<br />
-								Linux builds coming soon.
-							</p>
-						</div>
-					</DropdownItem>
-				</Dropdown>
-			</div>
+			<RepackDownloadButton
+				channels={['stable', 'nightly']}
+				variant="home"
+				released150={released_150}
+				onNightlyHover={(hovered) => (nightly_hovered = hovered)}
+			/>
 		{/snippet}
 	</Hero>
 
