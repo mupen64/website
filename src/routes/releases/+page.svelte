@@ -6,9 +6,19 @@
 
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
+	import { resolve } from '$app/paths';
+	import { Button, Dropdown, DropdownItem } from 'flowbite-svelte';
+	import { ChevronDownOutline, WindowsSolid } from 'flowbite-svelte-icons';
+	import {
+		downloadUrls,
+		startDownloadFromChannel,
+		type Channel as DownloadChannel
+	} from '$lib/helpers/RepackDownloadHelper';
+	import { onMount, tick } from 'svelte';
+	import { SvelteURL } from 'svelte/reactivity';
 	import ReleaseDate from '$lib/components/ReleaseDate.svelte';
 	import ChannelPill from '$lib/components/ChannelPill.svelte';
+	import Pill from '$lib/components/Pill.svelte';
 	import CollapsibleReleaseNotes from '$lib/components/CollapsibleReleaseNotes.svelte';
 
 	let { data }: { data: PageData } = $props();
@@ -62,6 +72,35 @@
 		// eslint-disable-next-line svelte/no-navigation-without-resolve
 		goto(url, { replaceState: true, noScroll: true, keepFocus: true, state: page.state });
 	}
+
+	const latestStableMupen = $derived(
+		data.releases.find((release) => release.product === 'mupen64' && release.channel === 'stable')
+	);
+
+	async function showRepack(event: MouseEvent, channel: Channel, id: string) {
+		if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+			return;
+		event.preventDefault();
+		const url = new SvelteURL(page.url);
+		url.searchParams.delete('product');
+		if (channel === 'nightly') url.searchParams.set('channel', 'nightly');
+		else url.searchParams.delete('channel');
+		url.hash = id;
+		// eslint-disable-next-line svelte/no-navigation-without-resolve
+		await goto(url, { noScroll: true, keepFocus: true });
+		await tick();
+		document.getElementById(id)?.scrollIntoView();
+	}
+
+	function handleDownload(event: MouseEvent, channel: DownloadChannel) {
+		event.preventDefault();
+		const cleanup = startDownloadFromChannel(channel);
+		setTimeout(() => {
+			goto(resolve(`/downloaded/${channel}`));
+			setTimeout(() => cleanup(), 1000);
+		}, 300);
+	}
+
 	const filteredReleases = $derived(
 		data.releases.filter(
 			(release) =>
@@ -175,6 +214,14 @@
 	<div class="flex flex-col gap-6">
 		{#each filteredReleases as release (release.id)}
 			{@const product = products.find((product) => product.id === release.product)!}
+			{@const hasRepack =
+				release.product === 'mupen64' &&
+				(release.channel === 'nightly' || release.id === latestStableMupen?.id)}
+			{@const repackRelease = data.releases.find(
+				(candidate) => candidate.product === 'mupen64' && candidate.channel === release.channel
+			)}
+			{@const download64 = `${release.channel}-windows-x64` as DownloadChannel}
+			{@const download32 = `${release.channel}-windows-x86` as DownloadChannel}
 			<article
 				id={release.id}
 				class={`scroll-mt-28 overflow-hidden rounded-2xl border bg-white/80 shadow-sm dark:bg-slate-900/80 ${release.channel === 'nightly' ? 'border-red-300 dark:border-red-800' : 'border-slate-300 dark:border-slate-700'}`}
@@ -198,6 +245,15 @@
 							</h2>
 							<div class="flex flex-wrap items-center gap-1.5">
 								<ChannelPill channel={release.channel} />
+								{#if release.product === 'ugui'}
+									<button
+										type="button"
+										title="This is just a library, you should only care about it if you're developing using it."
+										class="inline-flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+									>
+										<Pill color="gray" text="library" />
+									</button>
+								{/if}
 								{#if release.date}
 									<ReleaseDate
 										date={release.date}
@@ -219,10 +275,47 @@
 					<footer
 						class="mt-7 flex flex-wrap items-center gap-4 border-t border-slate-200 pt-5 dark:border-slate-800"
 					>
-						<a
-							href={release.href}
-							class="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600"
-						>
+						{#if hasRepack}
+							<div class="flex items-stretch gap-2">
+								<Button
+									href={downloadUrls[download64]}
+									color={release.channel === 'nightly' ? 'red' : 'green'}
+									class={`inline-flex h-9 items-center gap-2 border-b-4 active:mt-1 active:border-b-0 ${release.channel === 'nightly' ? 'border-b-red-900' : 'border-b-green-900'}`}
+									onclick={(event: MouseEvent) => handleDownload(event, download64)}
+								>
+									<WindowsSolid class="h-5 w-5 shrink-0" />
+									<span>Download 64-bit for Windows</span>
+								</Button>
+								<Button
+									type="button"
+									aria-label="More download options"
+									color={release.channel === 'nightly' ? 'red' : 'green'}
+									class={`inline-flex h-9 items-center self-stretch border-b-4 active:mt-1 active:border-b-0 ${release.channel === 'nightly' ? 'border-b-red-900' : 'border-b-green-900'}`}
+								>
+									<ChevronDownOutline class="h-5 w-5" />
+								</Button>
+								<Dropdown placement="bottom-end" class="list-none">
+									<DropdownItem
+										href={downloadUrls[download32]}
+										onclick={(event) => handleDownload(event, download32)}
+									>
+										<div class="flex flex-col items-start text-left leading-tight">
+											<div class="flex items-center gap-1">
+												<WindowsSolid class="h-4 w-4" /><span>Windows (32-bit)</span><ChannelPill
+													channel={release.channel}
+												/>
+											</div>
+											<p class="text-xs font-light opacity-70">
+												{release.channel === 'stable'
+													? "Compatible with Jabo's plugins. Not recommended for general use."
+													: 'Bleeding-edge features with potential instability'}
+											</p>
+										</div>
+									</DropdownItem>
+								</Dropdown>
+							</div>
+						{/if}
+						<a href={release.href} class="app-link text-sm">
 							{release.channel === 'nightly'
 								? release.product === 'ugui'
 									? 'View source'
@@ -232,6 +325,14 @@
 						</a>
 						{#if release.sourceHref}
 							<a href={release.sourceHref} class="app-link text-sm">Changelog</a>
+						{/if}
+						{#if release.product === 'redux' && repackRelease}
+							<a
+								href={`${resolve('/releases')}${release.channel === 'nightly' ? '?channel=nightly' : ''}#${repackRelease.id}`}
+								class="app-link text-sm"
+								onclick={(event) => showRepack(event, release.channel, repackRelease.id)}
+								>Get it from the repack</a
+							>
 						{/if}
 					</footer>
 					<!-- eslint-enable svelte/no-navigation-without-resolve -->
