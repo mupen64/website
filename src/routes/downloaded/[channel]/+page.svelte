@@ -18,11 +18,9 @@
 </script>
 
 <svelte:head>
+	<meta name="robots" content="noindex" />
 	<title>Download {page.params.channel} · Mupen64</title>
-	<meta
-		name="description"
-		content={`Thank you for downloading Mupen64 ${page.params.channel}.`}
-	/>
+	<meta name="description" content={`Thank you for downloading Mupen64 ${page.params.channel}.`} />
 </svelte:head>
 
 <main>

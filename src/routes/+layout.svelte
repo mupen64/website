@@ -6,6 +6,8 @@
 	import stroop from '$lib/assets/stroop.svg';
 	import org from '$lib/assets/org.svg';
 	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
+	import { SITE_ORIGIN } from '$lib/site';
 	import { NavBrand, Navbar, Button } from 'flowbite-svelte';
 	import { ChevronDownOutline, DiscordSolid, HeartSolid } from 'flowbite-svelte-icons';
 	import DocsSearch from '$lib/components/DocsSearch.svelte';
@@ -23,6 +25,7 @@
 
 	let { children, data }: { children: Snippet; data: { docs_search: DocsSearchItem[] } } = $props();
 
+	const canonicalUrl = $derived(`${SITE_ORIGIN}${page.url.pathname}`);
 	const maintenance = false;
 	const navItemClass =
 		'!text-slate-900 hover:!bg-slate-200/70 hover:!text-primary-600 dark:!text-slate-100 dark:hover:!bg-slate-800/70 dark:hover:!text-primary-400';
@@ -47,6 +50,7 @@
 </script>
 
 <svelte:head>
+	<link rel="canonical" href={canonicalUrl} />
 	<link rel="icon" href={mupen64} />
 </svelte:head>
 
