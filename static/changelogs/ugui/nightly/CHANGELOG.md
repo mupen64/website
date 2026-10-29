@@ -1,8 +1,18 @@
-# Unreleased
+# 7.0.1
 
-Nothing yet.
+This is a development version of ugui.
 
-# 7.0.0 
+### ✨ Features
+
+- Added `scoped` parameter to transitions
+
+### ⛔ Breaking changes
+
+#### Default transition behavior changed
+
+`scoped` defaults to `true` now, which means that enter/exit transitions will only play when the control itself - and not any parent up the control tree - enters or exits the scene. Set `scoped = false` to revert to the old behavior.
+
+# 7.0.0
 
 ### ✨ Features
 
