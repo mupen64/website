@@ -2,6 +2,7 @@
 
 ## ✨ Features
 
+- Overhauled the statusbar.
 - Added F3DEX3 microcode support to TASVideo
 - Added Lua script-owned window API.
 - Added scoped hotkeys (with Lua API).
@@ -17,10 +18,12 @@
 - Fixed missing dpad down button in piano roll
 - Fixed Mupen sometimes staying around as a zombie process after closing.
 - Fixed multi-line subtitles in toasts causing them to fill the window horizontally
+- Fixed captures started too early or right after savestate loads having buggy audio
 
 ## ⚡ Performance
 
 - Improved Pure Interpreter core performance when breakpoints are present
+- Improved statusbar performance
 
 # 1.5.0-8
 
