@@ -1,6 +1,8 @@
-# 7.0.1
+# next
 
 This is a development version of ugui.
+
+# 7.0.1
 
 ### ✨ Features
 
